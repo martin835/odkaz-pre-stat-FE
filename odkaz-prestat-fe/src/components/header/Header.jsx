@@ -1,6 +1,7 @@
 import { useState } from "react";
 import HeaderCaption from "./HeaderCaption";
 import WarningBar from "./WarningBar";
+import profilePic from "../../assets/images/header-web/profile.svg";
 
 function Header() {
   return (
@@ -86,10 +87,7 @@ function Header() {
                     data-text-for-show="Rozbaliť menu"
                     data-text-for-hide="Skryť menu"
                   >
-                    <img
-                      src="/public/assets/images/header-web//profile.svg"
-                      alt="Electronic service menu icon"
-                    />
+                    <img src={profilePic} alt="Electronic service menu icon" />
                     <div className="idsk-header-web__menu-close"></div>
                   </button>
                 </div>
@@ -109,7 +107,7 @@ function Header() {
                       <div className="idsk-header-web__main--login-action">
                         <img
                           className="idsk-header-web__main--login-action-profile-img"
-                          src="/public/assets/images/header-web/profile.svg"
+                          src={profilePic}
                           alt="Profile image"
                         />
                         <div className="idsk-header-web__main--login-action-text">
@@ -177,7 +175,7 @@ function Header() {
                     <div className="idsk-header-web__main--login-action">
                       <img
                         className="idsk-header-web__main--login-action-profile-img"
-                        src="/public/assets/images/header-web/profile.svg"
+                        src={profilePic}
                         alt="Profile image"
                       />
                       <div className="idsk-header-web__main--login-action-text">
