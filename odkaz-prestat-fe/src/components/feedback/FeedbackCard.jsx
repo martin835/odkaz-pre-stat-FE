@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 function FeedbackCard() {
+  const [showTextArea, setShowTextArea] = useState(false);
+
   return (
     <div data-module="idsk-feedback">
       <div className="govuk-width-container">
@@ -18,6 +22,7 @@ function FeedbackCard() {
                 name="example"
                 type="radio"
                 value="1"
+                onChange={() => setShowTextArea(true)}
               />
               <label className="govuk-label govuk-radios__label" for="1">
                 Veľmi nespokojný
@@ -30,6 +35,7 @@ function FeedbackCard() {
                 name="example"
                 type="radio"
                 value="2"
+                onChange={() => setShowTextArea(true)}
               />
               <label className="govuk-label govuk-radios__label" for="2">
                 Nespokojný
@@ -42,6 +48,7 @@ function FeedbackCard() {
                 name="example"
                 type="radio"
                 value="3"
+                onChange={() => setShowTextArea(true)}
               />
               <label className="govuk-label govuk-radios__label" for="3">
                 Ani spokojný ani nespokojný
@@ -54,6 +61,7 @@ function FeedbackCard() {
                 name="example"
                 type="radio"
                 value="4"
+                onChange={() => setShowTextArea(false)}
               />
               <label className="govuk-label govuk-radios__label" for="4">
                 Spokojný
@@ -66,6 +74,7 @@ function FeedbackCard() {
                 name="example"
                 type="radio"
                 value="5"
+                onChange={() => setShowTextArea(false)}
               />
               <label className="govuk-label govuk-radios__label" for="5">
                 Veľmi spokojný
@@ -75,7 +84,11 @@ function FeedbackCard() {
           </div>
           <div
             id="idsk-feedback__question-bar"
-            className="idsk-feedback--animation idsk-feedback--invisible"
+            className={
+              showTextArea
+                ? `idsk-feedback--animation idsk-feedback--open`
+                : `idsk-feedback--animation idsk-feedback--invisible`
+            }
           >
             <h3 className="govuk-heading-m">
               Ako by sme mohli túto službu zlepšiť?
