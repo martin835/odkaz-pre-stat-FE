@@ -1,4 +1,3 @@
-import Feedback from "react-bootstrap/esm/Feedback";
 import "./App.css";
 import FeedbackCard from "./components/feedback/FeedbackCard";
 import Header from "./components/header/Header";
