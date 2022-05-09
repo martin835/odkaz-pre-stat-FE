@@ -2,6 +2,13 @@ import { useState } from "react";
 
 function FeedbackCard() {
   const [showTextArea, setShowTextArea] = useState(false);
+  const [feedbackText, setFeedbackText] = useState("");
+  const [charsLeft, setCharsLeft] = useState(200);
+
+  const computeCharsLeft = (chars) => {
+    let left = 200 - parseInt(chars.length);
+    setCharsLeft(left);
+  };
 
   return (
     <div data-module="idsk-feedback">
@@ -82,6 +89,7 @@ function FeedbackCard() {
             </div>{" "}
             <br />
           </div>
+          {/*Conditional rendering*/}
           <div
             id="idsk-feedback__question-bar"
             className={
@@ -103,49 +111,99 @@ function FeedbackCard() {
               >
                 <div className="govuk-form-group">
                   <span id="feedback-hint" className="govuk-hint"></span>
+                  {/*Conditional rendering*/}
                   <textarea
-                    className="govuk-textarea govuk-js-character-count"
+                    className={
+                      charsLeft < 0
+                        ? `govuk-textarea govuk-js-character-count govuk-textarea--error`
+                        : `govuk-textarea govuk-js-character-count `
+                    }
                     id="feedback"
                     name="feedback"
                     rows="5"
                     aria-describedby="feedback-info feedback-hint"
+                    value={feedbackText}
+                    onChange={(e) => {
+                      setFeedbackText(e.target.value);
+                      computeCharsLeft(e.target.value);
+                    }}
                   ></textarea>
+                  {/*Conditional rendering*/}
                   <span
                     id="feedback-info"
-                    className="govuk-hint govuk-character-count__message"
+                    className={
+                      charsLeft < 0
+                        ? `govuk-error-message govuk-character-count__message`
+                        : `govuk-hint govuk-character-count__message`
+                    }
                     aria-live="polite"
                   >
-                    Zostáva Vám 200 znakov{" "}
+                    {/*Conditional rendering*/}
+                    {charsLeft < 0
+                      ? `Prekročili ste maximálny počet znakov`
+                      : ` Zostáva Vám ${charsLeft} znakov`}
                   </span>
                 </div>
               </div>
             </div>
           </div>
           <div className="idsk-feedback__buttons">
-            <button id="idsk-feedback__send-button" className="govuk-button">
-              Odoslať
-              <svg
-                width="15"
-                height="15"
-                viewBox="0 0 15 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+            {/*Conditional rendering*/}
+            {charsLeft < 0 ? (
+              <button
+                id="idsk-feedback__send-button"
+                className="govuk-button"
+                disabled
               >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M9.4016 10L0 0H5.59826L15 10H9.4016Z"
-                  fill="white"
-                ></path>
-                <path
-                  opacity="0.5"
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M5.5984 20L15 10H9.40174L0 20H5.5984Z"
-                  fill="white"
-                ></path>
-              </svg>
-            </button>
+                Odoslať
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 15 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M9.4016 10L0 0H5.59826L15 10H9.4016Z"
+                    fill="white"
+                  ></path>
+                  <path
+                    opacity="0.5"
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M5.5984 20L15 10H9.40174L0 20H5.5984Z"
+                    fill="white"
+                  ></path>
+                </svg>
+              </button>
+            ) : (
+              <button id="idsk-feedback__send-button" className="govuk-button">
+                Odoslať
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 15 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M9.4016 10L0 0H5.59826L15 10H9.4016Z"
+                    fill="white"
+                  ></path>
+                  <path
+                    opacity="0.5"
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M5.5984 20L15 10H9.40174L0 20H5.5984Z"
+                    fill="white"
+                  ></path>
+                </svg>
+              </button>
+            )}
             <button
               className="govuk-button govuk-button--secondary"
               onclick="location.href='/';"
