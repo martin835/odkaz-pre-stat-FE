@@ -10,7 +10,9 @@ function WarningBar() {
           <div class="govuk-grid-row">
             <div class="govuk-grid-column-full">
               <div class="govuk-body-s idsk-header-web__banner-title">
-                Aplikácia vo vývoji.
+                <strong class="govuk-tag govuk-phase-banner__content__tag">
+                  Aplikácia vo vývoji.
+                </strong>
               </div>
               <button
                 class="idsk-header-web__banner-close"
