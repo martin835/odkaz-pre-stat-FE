@@ -10,7 +10,7 @@ function HeaderCaption() {
           {" "}
           <div className="idsk-header-web__brand-gestor">
             <span className="govuk-body-s idsk-header-web__brand-gestor-text">
-              Oficiálna stránka
+              Oficiálna stránka &nbsp;
               <button
                 className="idsk-header-web__brand-gestor-button"
                 aria-label="Zobraziť informácie o stránke"
@@ -81,7 +81,7 @@ function HeaderCaption() {
           {" "}
           <div className="idsk-header-web__brand-gestor">
             <span className="govuk-body-s idsk-header-web__brand-gestor-text">
-              Oficiálna stránka
+              Oficiálna stránka &nbsp;
               <button
                 className="idsk-header-web__brand-gestor-button idsk-header-web__brand-gestor-button--active"
                 aria-label="Skryť informácie o stránke"

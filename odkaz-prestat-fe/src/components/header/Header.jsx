@@ -74,9 +74,7 @@ function Header() {
             <div className="govuk-grid-column-full govuk-grid-column-one-third-from-desktop">
               <div className="idsk-header-web__main-headline">
                 <a href="/" title="Odkaz na úvodnú stránku">
-                  <h2 className="govuk-heading-m">
-                    Ministerstvo investícií - odkaz pre štát
-                  </h2>
+                  <h2 className="govuk-heading-m">Odkaz pre štát</h2>
                 </a>
 
                 <button
