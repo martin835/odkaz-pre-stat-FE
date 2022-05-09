@@ -1,16 +1,26 @@
 import { useState } from "react";
+import { ImHeart } from "react-icons/im";
 
 function FeedbackCard() {
   const [showTextArea, setShowTextArea] = useState(false);
   const [feedbackText, setFeedbackText] = useState("");
   const [charsLeft, setCharsLeft] = useState(200);
+  const [showThankYou, setShowThankYou] = useState(false);
 
   const computeCharsLeft = (chars) => {
     let left = 200 - parseInt(chars.length);
     setCharsLeft(left);
   };
 
-  return (
+  return showThankYou ? (
+    <div className="govuk-width-container">
+      <div id="idsk-feedback__thanks" className="">
+        <h2 className="govuk-heading-l">
+          Ďakujeme za spätnú väzbu. <ImHeart />
+        </h2>
+      </div>
+    </div>
+  ) : (
     <div data-module="idsk-feedback">
       <div className="govuk-width-container">
         <div id="idsk-feedback__content">
@@ -179,7 +189,11 @@ function FeedbackCard() {
                 </svg>
               </button>
             ) : (
-              <button id="idsk-feedback__send-button" className="govuk-button">
+              <button
+                id="idsk-feedback__send-button"
+                className="govuk-button"
+                onClick={() => setShowThankYou(true)}
+              >
                 Odoslať
                 <svg
                   width="15"
@@ -211,9 +225,6 @@ function FeedbackCard() {
               Odísť
             </button>
           </div>
-        </div>
-        <div id="idsk-feedback__thanks" className="idsk-feedback--hidden">
-          <h2 className="govuk-heading-l">Ďakujeme za spätnú väzbu.</h2>
         </div>
       </div>
     </div>

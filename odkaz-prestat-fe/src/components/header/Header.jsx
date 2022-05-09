@@ -2,11 +2,15 @@ import { useState } from "react";
 import HeaderCaption from "./HeaderCaption";
 import WarningBar from "./WarningBar";
 import profilePic from "../../assets/images/header-web/profile.svg";
+import { VscFeedback } from "react-icons/vsc";
 
 function Header() {
   return (
     <>
-      <header className="idsk-header-web " data-module="idsk-header-web">
+      <header
+        className="idsk-header-web govuk-!-margin-bottom-9 "
+        data-module="idsk-header-web"
+      >
         <WarningBar />
         <div className="idsk-header-web__tricolor"></div>
         <div className="idsk-header-web__brand ">
@@ -77,7 +81,10 @@ function Header() {
               <div className="govuk-grid-column-full govuk-grid-column-one-third-from-desktop">
                 <div className="idsk-header-web__main-headline">
                   <a href="/" title="Odkaz na úvodnú stránku">
-                    <h2 className="govuk-heading-m">Odkaz pre štát</h2>
+                    <h2 className="govuk-heading-m">
+                      {" "}
+                      Odkaz pre štát <VscFeedback />
+                    </h2>
                   </a>
 
                   <button
