@@ -45,6 +45,7 @@ function Header() {
                         className="idsk-header-web__brand-language-list-item  "
                         onClick={(e) => {
                           setLangSelected(e.target.innerText);
+                          i18next.changeLanguage("en");
                           setLangMenuOpen(false);
                         }}
                       >
@@ -64,6 +65,7 @@ function Header() {
                         className="idsk-header-web__brand-language-list-item  "
                         onClick={(e) => {
                           setLangSelected(e.target.innerText);
+                          i18next.changeLanguage("sk");
                           setLangMenuOpen(false);
                         }}
                       >
@@ -152,7 +154,7 @@ function Header() {
                         className="idsk-button idsk-header-web__main--login-loginbtn"
                         data-module="idsk-button"
                       >
-                        Prihlásiť sa
+                        {t("log_in")}
                       </button>
                       <div className="idsk-header-web__main--login-action">
                         <img

@@ -24,8 +24,8 @@ i18n
     //   escapeValue: false, // react already safes from xss
     // },
     detection: {
-      order: ["cookie", "htmlTag", "localStorage", "path", "subdomain"], // more options here: https://github.com/i18next/i18next-browser-languageDetector
-      caches: ["cookie"],
+      order: ["htmlTag"], // more options here: https://github.com/i18next/i18next-browser-languageDetector
+      //caches: ["cookie"],
     },
     backend: {
       loadPath: "/assets/locales/{{lng}}/translation.json",
