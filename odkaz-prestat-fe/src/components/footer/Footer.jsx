@@ -20,11 +20,11 @@ function Footer() {
                         Cookies
                       </a>
                     </li> */}
-                    <li className="idsk-footer-extended-inline-list-item">
+                    {/* <li className="idsk-footer-extended-inline-list-item">
                       <a className="govuk-link" title="Kontakty" href="#">
                         Kontakty
                       </a>
-                    </li>
+                    </li> */}
                     {/* <li className="idsk-footer-extended-inline-list-item">
                       <a className="govuk-link" title="Mapa Stránky" href="#">
                         Mapa Stránky
