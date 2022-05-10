@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 import HeaderCaption from "./HeaderCaption";
 import WarningBar from "./WarningBar";
 import profilePic from "../../assets/images/header-web/profile.svg";
@@ -8,6 +10,7 @@ import "./header.css";
 function Header() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const [langSelected, setLangSelected] = useState("Slovenčina");
+  const { t } = useTranslation();
 
   return (
     <>
@@ -42,6 +45,7 @@ function Header() {
                         className="idsk-header-web__brand-language-list-item  "
                         onClick={(e) => {
                           setLangSelected(e.target.innerText);
+                          i18next.changeLanguage("en");
                           setLangMenuOpen(false);
                         }}
                       >
@@ -61,6 +65,7 @@ function Header() {
                         className="idsk-header-web__brand-language-list-item  "
                         onClick={(e) => {
                           setLangSelected(e.target.innerText);
+                          i18next.changeLanguage("sk");
                           setLangMenuOpen(false);
                         }}
                       >
@@ -123,7 +128,7 @@ function Header() {
                   <a href="/" title="Odkaz na úvodnú stránku">
                     <h2 className="govuk-heading-m">
                       {" "}
-                      Odkaz pre štát <VscFeedback />
+                      {t("app_name")} <VscFeedback />
                     </h2>
                   </a>
 
@@ -149,7 +154,7 @@ function Header() {
                         className="idsk-button idsk-header-web__main--login-loginbtn"
                         data-module="idsk-button"
                       >
-                        Prihlásiť sa
+                        {t("log_in")}
                       </button>
                       <div className="idsk-header-web__main--login-action">
                         <img
