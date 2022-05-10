@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 import HeaderCaption from "./HeaderCaption";
 import WarningBar from "./WarningBar";
 import profilePic from "../../assets/images/header-web/profile.svg";
@@ -8,6 +10,7 @@ import "./header.css";
 function Header() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const [langSelected, setLangSelected] = useState("Slovenčina");
+  const { t } = useTranslation();
 
   return (
     <>
@@ -123,7 +126,7 @@ function Header() {
                   <a href="/" title="Odkaz na úvodnú stránku">
                     <h2 className="govuk-heading-m">
                       {" "}
-                      Odkaz pre štát <VscFeedback />
+                      {t("app_name")} <VscFeedback />
                     </h2>
                   </a>
 
