@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import { Link } from "react-router-dom";
 import HeaderCaption from "./HeaderCaption";
 import WarningBar from "./WarningBar";
 import profilePic from "../../assets/images/header-web/profile.svg";
 import { VscFeedback } from "react-icons/vsc";
-import "./header.css";
+import "../../styles/header.css";
 
 function Header() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
@@ -38,7 +39,7 @@ function Header() {
                       onClick={() => setLangMenuOpen(!langMenuOpen)}
                     >
                       {langSelected}
-                      <div class="idsk-header-web__link-arrow"></div>
+                      <div className="idsk-header-web__link-arrow"></div>
                     </button>
                     <ul className="idsk-header-web__brand-language-list">
                       <li
@@ -125,12 +126,11 @@ function Header() {
             <div className="govuk-grid-row">
               <div className="govuk-grid-column-full govuk-grid-column-one-third-from-desktop">
                 <div className="idsk-header-web__main-headline">
-                  <a href="/" title="Odkaz na úvodnú stránku">
+                  <Link to="/" title="Odkaz na úvodnú stránku">
                     <h2 className="govuk-heading-m">
-                      {" "}
                       {t("app_name")} <VscFeedback />
                     </h2>
-                  </a>
+                  </Link>
 
                   <button
                     className="idsk-button idsk-header-web__main-headline-menu-button idsk-header-web__main-headline-menu-button-service"

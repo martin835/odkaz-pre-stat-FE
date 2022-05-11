@@ -1,4 +1,5 @@
 import { BiSearch } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 function SearchBlock() {
   return (
@@ -12,9 +13,13 @@ function SearchBlock() {
             <p className="govuk-body">
               {" "}
               Zadajte názov služby do vyhľadánia alebo vyberte zo{" "}
-              <a className="govuk-link" href="#" title="zoznam služieb">
-                zoznamu služieb
-              </a>
+              <Link
+                to="/organizations"
+                className="govuk-link"
+                title="zoznam služieb"
+              >
+                zoznamu poskytovateľov služieb
+              </Link>
               .{" "}
             </p>
             <div

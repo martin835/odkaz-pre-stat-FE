@@ -25,11 +25,10 @@ function FeedbackCard() {
       <div className="govuk-width-container">
         <div id="idsk-feedback__content">
           <h2 className="govuk-heading-l">
-            Spätná väzba na službu Podávanie žiadosti o nenávratný príspevok na
-            opravu bicykla
+            Spätná väzba na službu Vybavenie nového pasu
           </h2>
           <h3 className="govuk-heading-m idsk-feedback__subtitle">
-            Ako ste spokojný so službou, ktorú ste práve využili?
+            Ako ste spokojný so službou ?
           </h3>
           <div className="govuk-radios">
             <div className="govuk-radios__item">
