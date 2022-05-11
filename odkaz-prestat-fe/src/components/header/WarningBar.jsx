@@ -7,21 +7,21 @@ function WarningBar() {
 
   return (
     showWarningBar && (
-      <div class="idsk-header-web__banner ">
-        <div class="govuk-width-container">
-          <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
-              <div class="govuk-body-s idsk-header-web__banner-title">
-                <strong class="govuk-tag govuk-phase-banner__content__tag">
+      <div className="idsk-header-web__banner ">
+        <div className="govuk-width-container">
+          <div className="govuk-grid-row">
+            <div className="govuk-grid-column-full">
+              <div className="govuk-body-s idsk-header-web__banner-title">
+                <strong className="govuk-tag govuk-phase-banner__content__tag">
                   {t("test_version")}
                 </strong>
               </div>
               <button
-                class="idsk-header-web__banner-close"
+                className="idsk-header-web__banner-close"
                 aria-label="Zavrieť banner"
                 onClick={() => setShowWarningBar(false)}
               >
-                <span class="idsk-header-web__menu-close"></span>
+                <span className="idsk-header-web__menu-close"></span>
               </button>
             </div>
           </div>
