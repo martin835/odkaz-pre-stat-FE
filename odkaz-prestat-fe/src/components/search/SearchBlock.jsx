@@ -21,9 +21,7 @@ function SearchBlock() {
               data-module="idsk-search-component"
               className="idsk-search-component   "
             >
-              <label className="" for="intro-block-search">
-                Zadajte hľadaný výraz
-              </label>
+              <label htmlFor="intro-block-search">Zadajte hľadaný výraz</label>
               <input
                 className="govuk-input govuk-input--width-30 idsk-search-component__input "
                 id="intro-block-search"

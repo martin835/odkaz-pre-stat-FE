@@ -95,9 +95,9 @@ function Header() {
                       {langSelected}
                       <div className="idsk-header-web__link-arrow"></div>
                     </button>
-                    <ul class="idsk-header-web__brand-language-list">
+                    <ul className="idsk-header-web__brand-language-list">
                       <li
-                        class="idsk-header-web__brand-language-list-item"
+                        className="idsk-header-web__brand-language-list-item"
                         onClick={(e) => setLangSelected(e.target.value)}
                       >
                         English
