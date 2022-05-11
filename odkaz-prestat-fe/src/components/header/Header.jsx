@@ -1,10 +1,17 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 import HeaderCaption from "./HeaderCaption";
 import WarningBar from "./WarningBar";
 import profilePic from "../../assets/images/header-web/profile.svg";
 import { VscFeedback } from "react-icons/vsc";
+import "./header.css";
 
 function Header() {
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
+  const [langSelected, setLangSelected] = useState("Slovenčina");
+  const { t } = useTranslation();
+
   return (
     <>
       <header
@@ -19,57 +26,95 @@ function Header() {
               <div className="govuk-grid-column-full">
                 <HeaderCaption />
 
-                {/* 
-              <div className="idsk-header-web__brand-language">
-                <button
-                  className="idsk-header-web__brand-language-button"
-                  aria-label="Rozbaliť jazykové menu"
-                  aria-expanded="false"
-                  data-text-for-hide="Skryť jazykové menu"
-                  data-text-for-show="Rozbaliť jazykové menu"
-                >
-                  Slovenčina
-                  <div className="idsk-header-web__link-arrow"></div>
-                </button>
-                <ul className="idsk-header-web__brand-language-list">
-                  <li className="idsk-header-web__brand-language-list-item">
-                    <a
-                      className="govuk-link idsk-header-web__brand-language-list-item-link "
-                      title="Deutsch"
-                      href="#"
+                {/* Conditional Rendering */}
+                {langMenuOpen ? (
+                  <div className="idsk-header-web__brand-language idsk-header-web__brand-language--active">
+                    <button
+                      className="idsk-header-web__brand-language-button"
+                      aria-label="Skryť jazykové menu"
+                      aria-expanded="true"
+                      data-text-for-hide="Skryť jazykové menu"
+                      data-text-for-show="Rozbaliť jazykové menu"
+                      onClick={() => setLangMenuOpen(!langMenuOpen)}
                     >
-                      Deutsch
-                    </a>
-                  </li>
-                  <li className="idsk-header-web__brand-language-list-item">
-                    <a
-                      className="govuk-link idsk-header-web__brand-language-list-item-link "
-                      title="English"
-                      href="#"
+                      {langSelected}
+                      <div class="idsk-header-web__link-arrow"></div>
+                    </button>
+                    <ul className="idsk-header-web__brand-language-list">
+                      <li
+                        className="idsk-header-web__brand-language-list-item  "
+                        onClick={(e) => {
+                          setLangSelected(e.target.innerText);
+                          i18next.changeLanguage("en");
+                          setLangMenuOpen(false);
+                        }}
+                      >
+                        {/* Conditional Rendering */}
+                        <span
+                          className={
+                            langSelected === "English"
+                              ? `idsk-header-web__brand-language-list-item-link govuk-body lang-item idsk-header-web__brand-language-list-item-link--selected  `
+                              : `idsk-header-web__brand-language-list-item-link govuk-body lang-item`
+                          }
+                        >
+                          English
+                        </span>
+                      </li>
+
+                      <li
+                        className="idsk-header-web__brand-language-list-item  "
+                        onClick={(e) => {
+                          setLangSelected(e.target.innerText);
+                          i18next.changeLanguage("sk");
+                          setLangMenuOpen(false);
+                        }}
+                      >
+                        {/* Conditional Rendering */}
+                        <span
+                          className={
+                            langSelected === "Slovenčina"
+                              ? `idsk-header-web__brand-language-list-item-link govuk-body lang-item idsk-header-web__brand-language-list-item-link--selected  `
+                              : `idsk-header-web__brand-language-list-item-link govuk-body lang-item`
+                          }
+                        >
+                          Slovenčina
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                ) : (
+                  <div className="idsk-header-web__brand-language">
+                    <button
+                      className="idsk-header-web__brand-language-button"
+                      aria-label="Rozbaliť jazykové menu"
+                      aria-expanded="false"
+                      data-text-for-hide="Skryť jazykové menu"
+                      data-text-for-show="Rozbaliť jazykové menu"
+                      onClick={() => setLangMenuOpen(!langMenuOpen)}
                     >
-                      English
-                    </a>
-                  </li>
-                  <li className="idsk-header-web__brand-language-list-item">
-                    <a
-                      className="govuk-link idsk-header-web__brand-language-list-item-link "
-                      title="Español"
-                      href="#"
-                    >
-                      Español
-                    </a>
-                  </li>
-                  <li className="idsk-header-web__brand-language-list-item">
-                    <a
-                      className="govuk-link idsk-header-web__brand-language-list-item-link idsk-header-web__brand-language-list-item-link--selected"
-                      title="Slovenčina"
-                      href="#"
-                    >
-                      Slovenčina
-                    </a>
-                  </li>
-                </ul>
-              </div> */}
+                      {langSelected}
+                      <div className="idsk-header-web__link-arrow"></div>
+                    </button>
+                    <ul class="idsk-header-web__brand-language-list">
+                      <li
+                        class="idsk-header-web__brand-language-list-item"
+                        onClick={(e) => setLangSelected(e.target.value)}
+                      >
+                        English
+                      </li>
+
+                      <li
+                        className="idsk-header-web__brand-language-list-item"
+                        onClick={(e) => {
+                          setLangSelected(e.target.value);
+                          console.log(e.target.value);
+                        }}
+                      >
+                        Slovenčina
+                      </li>
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -83,7 +128,7 @@ function Header() {
                   <a href="/" title="Odkaz na úvodnú stránku">
                     <h2 className="govuk-heading-m">
                       {" "}
-                      Odkaz pre štát <VscFeedback />
+                      {t("app_name")} <VscFeedback />
                     </h2>
                   </a>
 
@@ -109,7 +154,7 @@ function Header() {
                         className="idsk-button idsk-header-web__main--login-loginbtn"
                         data-module="idsk-button"
                       >
-                        Prihlásiť sa
+                        {t("log_in")}
                       </button>
                       <div className="idsk-header-web__main--login-action">
                         <img

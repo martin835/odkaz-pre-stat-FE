@@ -1,0 +1,12 @@
+.lang-item:hover {
+  cursor: pointer;
+}
+
+.lang-item:active {
+  outline: 3px solid transparent;
+  color: #0b0c0c;
+  background-color: #ffdf0f;
+  -webkit-box-shadow: 0 -2px #ffdf0f, 0 4px #0b0c0c;
+  box-shadow: 0 -2px #ffdf0f, 0 4px #0b0c0c;
+  text-decoration: none;
+}

@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function WarningBar() {
   const [showWarningBar, setShowWarningBar] = useState(true);
+  const { t } = useTranslation();
 
   return (
     showWarningBar && (
@@ -11,7 +13,7 @@ function WarningBar() {
             <div class="govuk-grid-column-full">
               <div class="govuk-body-s idsk-header-web__banner-title">
                 <strong class="govuk-tag govuk-phase-banner__content__tag">
-                  Aplikácia vo vývoji.
+                  {t("test_version")}
                 </strong>
               </div>
               <button
