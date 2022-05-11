@@ -1,6 +1,6 @@
 function RecentReportsOverview() {
   return (
-    <div className="govuk-width-container">
+    <div className="govuk-width-container govuk-!-margin-top-7 ">
       <h2 className="govuk-heading-m heading-bigger-margin">
         Nedávne podnety:
       </h2>

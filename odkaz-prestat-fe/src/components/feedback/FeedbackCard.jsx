@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { ImHeart } from "react-icons/im";
 
 function FeedbackCard() {
@@ -6,6 +7,7 @@ function FeedbackCard() {
   const [feedbackText, setFeedbackText] = useState("");
   const [charsLeft, setCharsLeft] = useState(200);
   const [showThankYou, setShowThankYou] = useState(false);
+  const { provider } = useLocation().state;
 
   const computeCharsLeft = (chars) => {
     let left = 200 - parseInt(chars.length);
@@ -24,11 +26,9 @@ function FeedbackCard() {
     <div data-module="idsk-feedback">
       <div className="govuk-width-container">
         <div id="idsk-feedback__content">
-          <h2 className="govuk-heading-l">
-            Spätná väzba na službu Vybavenie nového pasu
-          </h2>
+          <h2 className="govuk-heading-l">Spätná väzba pre {provider}</h2>
           <h3 className="govuk-heading-m idsk-feedback__subtitle">
-            Ako ste spokojný so službou ?
+            Ako ste spokojný so službami klientského centra ?
           </h3>
           <div className="govuk-radios">
             <div className="govuk-radios__item">
