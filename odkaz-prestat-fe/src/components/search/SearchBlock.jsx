@@ -47,7 +47,7 @@ function SearchBlock() {
             </p>
           </div>
           <Link
-            to="/organizations"
+            to="/organizations/bb"
             state={{ region: "banskobystrickom", numberOfCenters: 13 }}
           >
             <div className="govuk-grid-column-one-quarter org-panel-info ">
@@ -57,7 +57,7 @@ function SearchBlock() {
             </div>
           </Link>
           <Link
-            to="/organizations"
+            to="/organizations/ba"
             state={{ region: "bratislavskom", numberOfCenters: 4 }}
           >
             <div className="govuk-grid-column-one-quarter org-panel-info ">
@@ -65,7 +65,7 @@ function SearchBlock() {
             </div>
           </Link>
           <Link
-            to="/organizations"
+            to="/organizations/ke"
             state={{ region: "košickom", numberOfCenters: 8 }}
           >
             <div className="govuk-grid-column-one-quarter org-panel-info ">
@@ -73,7 +73,7 @@ function SearchBlock() {
             </div>
           </Link>
           <Link
-            to="/organizations"
+            to="/organizations/nr"
             state={{ region: "nitrianskom", numberOfCenters: 7 }}
           >
             <div className="govuk-grid-column-one-quarter org-panel-info ">
@@ -83,7 +83,7 @@ function SearchBlock() {
         </div>
         <div className="govuk-grid-row">
           <Link
-            to="/organizations"
+            to="/organizations/po"
             state={{ region: "prešovskom", numberOfCenters: 13 }}
           >
             <div className="govuk-grid-column-one-quarter org-panel-info ">
@@ -91,7 +91,7 @@ function SearchBlock() {
             </div>
           </Link>
           <Link
-            to="/organizations"
+            to="/organizations/tn"
             state={{ region: "trenčianskom", numberOfCenters: 9 }}
           >
             <div className="govuk-grid-column-one-quarter org-panel-info ">
@@ -99,7 +99,7 @@ function SearchBlock() {
             </div>
           </Link>
           <Link
-            to="/organizations"
+            to="/organizations/tt"
             state={{ region: "trnavskom", numberOfCenters: 7 }}
           >
             <div className="govuk-grid-column-one-quarter org-panel-info ">
@@ -108,7 +108,7 @@ function SearchBlock() {
           </Link>
           <Link
             to="/organizations"
-            state={{ region: "žilinskom", numberOfCenters: 11 }}
+            state={{ region: "žilinskom/za", numberOfCenters: 11 }}
           >
             <div className="govuk-grid-column-one-quarter org-panel-info ">
               <div className="govuk-!-font-weight-bold">Žilinský kraj</div>

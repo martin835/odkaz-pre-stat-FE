@@ -1,11 +1,43 @@
+import { useEffect } from "react";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../../styles/organizations.css";
+import ResultLink from "../search/ResultLink";
 
 function Organizations(props) {
   const { region, numberOfCenters } = useLocation().state;
+  const { district } = useParams();
+  // console.log("params: ", district);
   const [clientCentersinDistrict, setClientCentersinDistrict] = useState(null);
+  const URL = process.env.BE_DEV_URL;
+
+  useEffect(() => {
+    getclientCentersinDistrict();
+  }, []);
+
+  const getclientCentersinDistrict = async (event) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/clientCenters`
+        // {
+        //   credentials: "include",
+        // }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        //console.log(data);
+        setClientCentersinDistrict(
+          data.filter((c) => c.district.toLowerCase() === district)
+        );
+      } else {
+        console.log("error on fetching users");
+        setClientCentersinDistrict(undefined);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -25,75 +57,18 @@ function Organizations(props) {
               className="gem-c-big-number govuk-!-margin-bottom-3"
               aria-hidden="true"
             >
-              <span className="gem-c-big-number__value">{numberOfCenters}</span>
+              <span className="gem-c-big-number__value">
+                {clientCentersinDistrict && clientCentersinDistrict.length}
+              </span>
             </div>
           </div>
           <div className="govuk-grid-column-two-thirds">
-            {/* One Org Card Start */}
-            <div className="idsk-card idsk-card-basic-variant govuk-!-display-block">
-              <div className="idsk-card-content idsk-card-content-basic-variant">
-                <div className="idsk-heading idsk-heading-basic-variant">
-                  <Link
-                    to="/feedback/ba"
-                    state={{ provider: "klientske centrum Bratislava" }}
-                    className="idsk-card-title govuk-link"
-                    title="Klientske centrum Bratislava"
-                  >
-                    Klientske centrum Bratislava
-                  </Link>
-                </div>
-              </div>
-            </div>
-            {/* One Org Card End */}
-            {/* One Org Card Start */}
-            <div className="idsk-card idsk-card-basic-variant govuk-!-display-block">
-              <div className="idsk-card-content idsk-card-content-basic-variant">
-                <div className="idsk-heading idsk-heading-basic-variant">
-                  <Link
-                    to="/feedback/sc"
-                    state={{ provider: "klientske centrum Senec" }}
-                    className="idsk-card-title govuk-link"
-                    title="Klientske centrum Senec"
-                  >
-                    Klientske centrum Senec
-                  </Link>
-                </div>
-              </div>
-            </div>
-            {/* One Org Card End */}
-            {/* One Org Card Start */}
-            <div className="idsk-card idsk-card-basic-variant govuk-!-display-block">
-              <div className="idsk-card-content idsk-card-content-basic-variant">
-                <div className="idsk-heading idsk-heading-basic-variant">
-                  <Link
-                    to="/feedback/ma"
-                    state={{ provider: "klientske centrum Malacky" }}
-                    className="idsk-card-title govuk-link"
-                    title="Klientske centrum Malacky"
-                  >
-                    Klientske centrum Malacky
-                  </Link>
-                </div>
-              </div>
-            </div>
-            {/* One Org Card End */}
-
-            {/* One Org Card Start */}
-            <div className="idsk-card idsk-card-basic-variant govuk-!-display-block">
-              <div className="idsk-card-content idsk-card-content-basic-variant">
-                <div className="idsk-heading idsk-heading-basic-variant">
-                  <Link
-                    to="/feedback/pk"
-                    state={{ provider: "okresný úrad Pezinok" }}
-                    className="idsk-card-title govuk-link"
-                    title="Okresný úrad Pezinok"
-                  >
-                    Okresný úrad Pezinok
-                  </Link>
-                </div>
-              </div>
-            </div>
-            {/* One Org Card End */}
+            {/* MAP RESULTS HERE Start */}
+            {clientCentersinDistrict &&
+              clientCentersinDistrict.map((clientCenter) => (
+                <ResultLink clientCenter={clientCenter} />
+              ))}
+            {/* MAP RESULTS HERE END */}
           </div>
         </div>
         {/* ROW END */}

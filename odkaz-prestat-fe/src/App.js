@@ -18,7 +18,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/organizations" element={<Organizations />} />
+        <Route path="/organizations/:district" element={<Organizations />} />
 
         <Route path="/feedback/:orgId" element={<FeedbackCard />} />
       </Routes>
