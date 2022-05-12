@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../../styles/organizations.css";
 
 function Organizations(props) {
   const { region, numberOfCenters } = useLocation().state;
+  const [clientCentersinDistrict, setClientCentersinDistrict] = useState(null);
 
   return (
     <>
