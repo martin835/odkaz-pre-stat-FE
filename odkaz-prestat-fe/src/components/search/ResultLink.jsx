@@ -7,7 +7,7 @@ function ResultLink({ clientCenter }) {
         <div className="idsk-heading idsk-heading-basic-variant">
           <Link
             to={`/feedback/${clientCenter.district.toLowerCase()}`}
-            state={{ provider: `${clientCenter.name}` }}
+            state={{ clientCenter: clientCenter }}
             className="idsk-card-title govuk-link"
             title={clientCenter.name}
           >
