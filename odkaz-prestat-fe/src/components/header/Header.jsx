@@ -149,13 +149,15 @@ function Header() {
                 <div className="idsk-header-web__main-action">
                   <div className="idsk-header-web__main--buttons">
                     <div className="idsk-header-web__main--login ">
-                      <button
-                        type="button"
-                        className="idsk-button idsk-header-web__main--login-loginbtn"
-                        data-module="idsk-button"
-                      >
-                        {t("log_in")}
-                      </button>
+                      <a href="http://localhost:3001/users/googleLogin">
+                        <button
+                          type="button"
+                          className="idsk-button idsk-header-web__main--login-loginbtn"
+                          data-module="idsk-button"
+                        >
+                          {t("log_in")}
+                        </button>
+                      </a>
                       <div className="idsk-header-web__main--login-action">
                         <img
                           className="idsk-header-web__main--login-action-profile-img"
@@ -217,13 +219,9 @@ function Header() {
               <div className="govuk-grid-column-full">
                 <div className="idsk-header-web__main--buttons">
                   <div className="idsk-header-web__main--login ">
-                    <button
-                      type="button"
-                      className="idsk-button idsk-header-web__main--login-loginbtn"
-                      data-module="idsk-button"
-                    >
+                    <Link to="http://localhost:3001/users/googleLogin">
                       Prihlásiť sa
-                    </button>
+                    </Link>
                     <div className="idsk-header-web__main--login-action">
                       <img
                         className="idsk-header-web__main--login-action-profile-img"

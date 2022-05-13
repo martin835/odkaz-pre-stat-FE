@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -13,13 +14,23 @@ import Home from "./components/views/Home";
 import Organizations from "./components/views/Organizations";
 
 function App() {
+  useEffect(() => {
+    // Do we have an access token in the URL?
+    const token = new URLSearchParams(window.location.search).get(
+      "accessToken"
+    );
+    if (token) {
+      localStorage.setItem("token", token);
+      Navigate(window.location.pathname);
+    }
+  }, []);
+
   return (
     <>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/organizations/:district" element={<Organizations />} />
-
         <Route path="/feedback/:orgId" element={<FeedbackCard />} />
       </Routes>
 
