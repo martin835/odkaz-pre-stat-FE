@@ -9,12 +9,12 @@ function FeedbackCard() {
   const [showThankYou, setShowThankYou] = useState(false);
   const [reqObj, setReqObj] = useState({
     rating: null,
-    review: null,
-    service: "627d0f093ef056d58df33bc7",
+    review: "",
+    service: "",
     user: "627cd701189a4e4cf788c1ec",
   });
   const { clientCenter } = useLocation().state;
-  console.log(" ", clientCenter);
+  //console.log(" ", clientCenter);
   const computeCharsLeft = (chars) => {
     let left = 200 - parseInt(chars.length);
     setCharsLeft(left);
@@ -31,7 +31,7 @@ function FeedbackCard() {
         },
       });
       if (response.ok) {
-        console.log(response);
+        //console.log(response);
       } else {
         console.log("login failed");
         if (response.status === 400) {
@@ -69,7 +69,15 @@ function FeedbackCard() {
             <label className="govuk-label" htmlFor="select-dd1">
               Vyberte službu:
             </label>
-            <select className="govuk-select" id="select-dd1" name="select-1">
+            <select
+              className="govuk-select"
+              id="select-dd1"
+              name="select-1"
+              onChange={(e) => {
+                setReqObj({ ...reqObj, service: e.target.value });
+              }}
+            >
+              <option value=""></option>
               {clientCenter.services.map((service, i) => (
                 <option key={`service-${i}`} value={service._id}>
                   {service.type}
@@ -81,12 +89,17 @@ function FeedbackCard() {
             Ako ste spokojný so službami klientského centra ?
           </h3>
 
-          <div className="govuk-radios">
+          <div
+            className="govuk-radios"
+            onChange={(e) =>
+              setReqObj({ ...reqObj, rating: parseInt(e.target.value) })
+            }
+          >
             <div className="govuk-radios__item">
               <input
                 className="govuk-radios__input idsk-feedback__radio-button idsk-feedback-textarea--show"
                 id="1"
-                name="example"
+                name="basicFeedback"
                 type="radio"
                 value="1"
                 onChange={() => setShowTextArea(true)}
@@ -99,7 +112,7 @@ function FeedbackCard() {
               <input
                 className="govuk-radios__input idsk-feedback__radio-button idsk-feedback-textarea--show"
                 id="2"
-                name="example"
+                name="basicFeedback"
                 type="radio"
                 value="2"
                 onChange={() => setShowTextArea(true)}
@@ -112,7 +125,7 @@ function FeedbackCard() {
               <input
                 className="govuk-radios__input idsk-feedback__radio-button idsk-feedback-textarea--show"
                 id="3"
-                name="example"
+                name="basicFeedback"
                 type="radio"
                 value="3"
                 onChange={() => setShowTextArea(true)}
@@ -125,7 +138,7 @@ function FeedbackCard() {
               <input
                 className="govuk-radios__input idsk-feedback__radio-button "
                 id="4"
-                name="example"
+                name="basicFeedback"
                 type="radio"
                 value="4"
                 onChange={() => setShowTextArea(false)}
@@ -138,7 +151,7 @@ function FeedbackCard() {
               <input
                 className="govuk-radios__input idsk-feedback__radio-button "
                 id="5"
-                name="example"
+                name="basicFeedback"
                 type="radio"
                 value="5"
                 onChange={() => setShowTextArea(false)}
@@ -186,6 +199,7 @@ function FeedbackCard() {
                     onChange={(e) => {
                       setFeedbackText(e.target.value);
                       computeCharsLeft(e.target.value);
+                      setReqObj({ ...reqObj, review: e.target.value });
                     }}
                   ></textarea>
                   {/*Conditional rendering*/}
