@@ -9,11 +9,11 @@ function SearchBlock() {
         <div className="idsk-intro-block ">
           <div className="govuk-grid-row ">
             <div className="govuk-grid-column-full govuk-width-container">
-              <h1 className="govuk-heading-xl heading-bigger-margin">
-                Ohodnoďte prácu klientského centra vo Vašom okrese.
+              <h1 className="govuk-heading-xl heading-bigger-margin govuk-!-margin-bottom-6">
+                Ohodnoďte prácu klientského centra vo Vašom kraji.
               </h1>
 
-              <div
+              {/* <div
                 data-module="idsk-search-component"
                 className="idsk-search-component   "
               >
@@ -33,8 +33,8 @@ function SearchBlock() {
                   <BiSearch />
 
                   <span className="govuk-visually-hidden">Vyhľadávanie</span>
-                </button>
-              </div>
+                </button> 
+              </div> */}
             </div>
           </div>
         </div>
@@ -42,9 +42,9 @@ function SearchBlock() {
       <div className="govuk-width-container">
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-full">
-            <p className="govuk-body govuk-!-font-weight-bold">
+            {/* <p className="govuk-body govuk-!-font-weight-bold">
               ...alebo vyberte zo zoznamu krajov:
-            </p>
+            </p> */}
           </div>
           <Link
             to="/organizations/bb"

@@ -1,0 +1,7 @@
+.card-img-user {
+  height: 50px;
+  width: 50px;
+  overflow: hidden;
+  object-fit: cover;
+  border-radius: 25px;
+}
