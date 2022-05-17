@@ -65,8 +65,8 @@ function Organizations(props) {
           <div className="govuk-grid-column-two-thirds">
             {/* MAP RESULTS HERE Start */}
             {clientCentersinDistrict &&
-              clientCentersinDistrict.map((clientCenter) => (
-                <ResultLink clientCenter={clientCenter} />
+              clientCentersinDistrict.map((clientCenter, i) => (
+                <ResultLink key={`${i}-kc`} clientCenter={clientCenter} />
               ))}
             {/* MAP RESULTS HERE END */}
           </div>
