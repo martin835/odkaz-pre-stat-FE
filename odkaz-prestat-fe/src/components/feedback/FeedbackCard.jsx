@@ -25,7 +25,7 @@ function FeedbackCard() {
       let response = await fetch(`http://localhost:3001/reviews`, {
         method: "POST",
         body: JSON.stringify(reqObj),
-        //credentials: "include",
+        credentials: "include",
         headers: {
           "Content-type": "application/json",
         },

@@ -4,7 +4,6 @@ import {
   Routes,
   Route,
   Navigate,
-  useNavigate,
 } from "react-router-dom";
 import FeedbackCard from "./components/feedback/FeedbackCard";
 import Footer from "./components/footer/Footer";
@@ -20,9 +19,9 @@ function App() {
     const token = new URLSearchParams(window.location.search).get(
       "accessToken"
     );
+    console.log(token);
     if (token) {
-      localStorage.setItem("token", token);
-      Navigate(window.location.pathname);
+      localStorage.setItem("accessToken", token);
     }
   }, []);
 
