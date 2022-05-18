@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import HeaderCaption from "./HeaderCaption";
 import WarningBar from "./WarningBar";
 import profilePic from "../../assets/images/header-web/profile.svg";
@@ -13,6 +13,7 @@ function Header(props) {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const [langSelected, setLangSelected] = useState("Slovenčina");
   const [showMobileLogin, setShowMobileLogin] = useState(false);
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   return (
@@ -196,13 +197,13 @@ function Header(props) {
                               Odhlásiť
                             </a>
                             <span> | </span>
-                            <a
-                              className="govuk-link idsk-header-web__main--login-action-text-profile idsk-header-web__main--login-profilebtn"
-                              href="#"
+                            <Link
+                              to="/profil"
                               title="profil"
+                              className="govuk-link idsk-header-web__main--login-action-text-profile idsk-header-web__main--login-profilebtn"
                             >
                               Profil
-                            </a>
+                            </Link>
                           </div>
                         </div>
                       </div>
@@ -210,6 +211,7 @@ function Header(props) {
                         type="button"
                         className="idsk-button idsk-header-web__main--login-profilebtn"
                         data-module="idsk-button"
+                        onClick={() => navigate("/profil")}
                       >
                         Profil
                       </button>
@@ -282,13 +284,13 @@ function Header(props) {
                             Odhlásiť
                           </a>
                           <span> | </span>
-                          <a
-                            className="govuk-link idsk-header-web__main--login-action-text-profile idsk-header-web__main--login-profilebtn"
-                            href="#"
+                          <Link
+                            to="/profil"
                             title="profil"
+                            className="govuk-link idsk-header-web__main--login-action-text-profile idsk-header-web__main--login-profilebtn"
                           >
                             Profil
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -296,6 +298,10 @@ function Header(props) {
                       type="button"
                       className="idsk-button idsk-header-web__main--login-profilebtn"
                       data-module="idsk-button"
+                      onClick={() => {
+                        navigate("/profil");
+                        setShowMobileLogin(false);
+                      }}
                     >
                       Profil
                     </button>

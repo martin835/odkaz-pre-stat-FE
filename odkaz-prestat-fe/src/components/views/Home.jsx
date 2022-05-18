@@ -1,6 +1,5 @@
-import RecentReportsOverview from "../reports/RecentReportsOverview";
-import SearchBlock from "../search/SearchBlock";
 import UserReviewCard from "../feedback/UserReviewCard";
+import SearchBlock from "../search/SearchBlock";
 
 function Home() {
   return (

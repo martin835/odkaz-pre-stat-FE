@@ -15,6 +15,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./components/views/Login";
 import useDidUpdateEffect from "./utils/useDidUpdateEffect";
 import { useState } from "react";
+import UserProfile from "./components/views/UserProfile";
 
 function App() {
   //This is just to make component re-render correctly after token is set to LS. Token should be always taken from the Local Storage!!!
@@ -71,6 +72,15 @@ function App() {
           path="/feedback/:orgId"
           element={
             localStorage.getItem("accessToken") ? <FeedbackCard /> : <Login />
+          }
+        />
+        <Route
+          path="/profil"
+          element={
+            <UserProfile
+              loggedUser={loggedUser}
+              setLoggedUser={setLoggedUser}
+            />
           }
         />
       </Routes>
