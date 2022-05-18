@@ -186,8 +186,12 @@ function Header(props) {
                           <div className="govuk-!-margin-bottom-1">
                             <a
                               className="govuk-link idsk-header-web__main--login-action-text-logout idsk-header-web__main--login-logoutbtn"
-                              href="#"
                               title="odhlásiť"
+                              href="#"
+                              onClick={() => {
+                                props.setLoggedUser(null);
+                                localStorage.removeItem("accessToken");
+                              }}
                             >
                               Odhlásiť
                             </a>
@@ -213,6 +217,10 @@ function Header(props) {
                         type="button"
                         className="idsk-button idsk-header-web__main--login-logoutbtn"
                         data-module="idsk-button"
+                        onClick={() => {
+                          props.setLoggedUser(null);
+                          localStorage.removeItem("accessToken");
+                        }}
                       >
                         Odhlásiť sa
                       </button>
@@ -295,6 +303,10 @@ function Header(props) {
                       type="button"
                       className="idsk-button idsk-header-web__main--login-logoutbtn"
                       data-module="idsk-button"
+                      onClick={() => {
+                        props.setLoggedUser(null);
+                        localStorage.removeItem("accessToken");
+                      }}
                     >
                       Odhlásiť sa
                     </button>
