@@ -10,3 +10,9 @@
   box-shadow: 0 -2px #ffdf0f, 0 4px #0b0c0c;
   text-decoration: none;
 }
+
+.header-profile-pic {
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+}

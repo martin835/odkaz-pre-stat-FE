@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
@@ -8,7 +9,7 @@ import profilePic from "../../assets/images/header-web/profile.svg";
 import { VscFeedback } from "react-icons/vsc";
 import "../../styles/header.css";
 
-function Header() {
+function Header(props) {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const [langSelected, setLangSelected] = useState("Slovenčina");
   const { t } = useTranslation();
@@ -139,7 +140,11 @@ function Header() {
                     data-text-for-show="Rozbaliť menu"
                     data-text-for-hide="Skryť menu"
                   >
-                    <img src={profilePic} alt="Electronic service menu icon" />
+                    <img
+                      src={props.loggedUser?.avatar}
+                      alt="Electronic service menu icon"
+                      className="header-profile-pic"
+                    />
                     <div className="idsk-header-web__menu-close"></div>
                   </button>
                 </div>
@@ -148,7 +153,13 @@ function Header() {
               <div className="govuk-grid-column-two-thirds">
                 <div className="idsk-header-web__main-action">
                   <div className="idsk-header-web__main--buttons">
-                    <div className="idsk-header-web__main--login ">
+                    <div
+                      className={
+                        props.loggedUser
+                          ? `idsk-header-web__main--login  idsk-header-web__main--login--loggedIn`
+                          : `idsk-header-web__main--login`
+                      }
+                    >
                       <a href="http://localhost:3001/users/googleLogin">
                         <button
                           type="button"
@@ -158,15 +169,15 @@ function Header() {
                           {t("log_in")}
                         </button>
                       </a>
-                      <div className="idsk-header-web__main--login-action">
+                      <div className="idsk-header-web__main--login-action ">
                         <img
-                          className="idsk-header-web__main--login-action-profile-img"
-                          src={profilePic}
+                          className="header-profile-pic"
+                          src={props.loggedUser?.avatar}
                           alt="Profile image"
                         />
                         <div className="idsk-header-web__main--login-action-text">
                           <span className="govuk-body-s idsk-header-web__main--login-action-text-user-name">
-                            Ing. Jožko Veľký M.A
+                            {props.loggedUser?.name} {props.loggedUser?.surname}
                           </span>
                           <div className="govuk-!-margin-bottom-1">
                             <a
@@ -224,8 +235,8 @@ function Header() {
                     </Link>
                     <div className="idsk-header-web__main--login-action">
                       <img
-                        className="idsk-header-web__main--login-action-profile-img"
-                        src={profilePic}
+                        className="header-profile-pic"
+                        src={props.loggedUser?.avatar}
                         alt="Profile image"
                       />
                       <div className="idsk-header-web__main--login-action-text">
