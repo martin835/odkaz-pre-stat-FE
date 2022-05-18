@@ -12,6 +12,7 @@ import "../../styles/header.css";
 function Header(props) {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const [langSelected, setLangSelected] = useState("Slovenčina");
+  const [showMobileLogin, setShowMobileLogin] = useState(false);
   const { t } = useTranslation();
 
   return (
@@ -139,9 +140,12 @@ function Header(props) {
                     aria-expanded="false"
                     data-text-for-show="Rozbaliť menu"
                     data-text-for-hide="Skryť menu"
+                    onClick={() => setShowMobileLogin(!showMobileLogin)}
                   >
                     <img
-                      src={props.loggedUser?.avatar}
+                      src={
+                        props.loggedUser ? props.loggedUser.avatar : profilePic
+                      }
                       alt="Electronic service menu icon"
                       className="header-profile-pic"
                     />
@@ -219,8 +223,14 @@ function Header(props) {
             </div>
           </div>
         </div>
-
-        <div className="idsk-header-web__nav idsk-header-web__nav--mobile ">
+        {/* TOGGLE CLASS FOR MOBILE VIEW HERE idsk-header-web__nav--mobile */}
+        <div
+          className={
+            showMobileLogin
+              ? `idsk-header-web__nav`
+              : `idsk-header-web__nav idsk-header-web__nav--mobile`
+          }
+        >
           <div className="govuk-width-container">
             <div className="govuk-grid-row">
               <div className="govuk-grid-column-full"></div>
@@ -229,10 +239,22 @@ function Header(props) {
             <div className="govuk-grid-row">
               <div className="govuk-grid-column-full">
                 <div className="idsk-header-web__main--buttons">
-                  <div className="idsk-header-web__main--login ">
-                    <Link to="http://localhost:3001/users/googleLogin">
-                      Prihlásiť sa
-                    </Link>
+                  <div
+                    className={
+                      props.loggedUser
+                        ? `idsk-header-web__main--login  idsk-header-web__main--login--loggedIn`
+                        : `idsk-header-web__main--login`
+                    }
+                  >
+                    <a href="http://localhost:3001/users/googleLogin">
+                      <button
+                        type="button"
+                        className="idsk-button idsk-header-web__main--login-loginbtn"
+                        data-module="idsk-button"
+                      >
+                        {t("log_in")}
+                      </button>
+                    </a>
                     <div className="idsk-header-web__main--login-action">
                       <img
                         className="header-profile-pic"
@@ -241,7 +263,7 @@ function Header(props) {
                       />
                       <div className="idsk-header-web__main--login-action-text">
                         <span className="govuk-body-s idsk-header-web__main--login-action-text-user-name">
-                          Ing. Jožko Veľký M.A
+                          {props.loggedUser?.name} {props.loggedUser?.surname}
                         </span>
                         <div className="govuk-!-margin-bottom-1">
                           <a
