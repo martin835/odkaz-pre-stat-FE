@@ -165,7 +165,9 @@ function Header(props) {
                           : `idsk-header-web__main--login`
                       }
                     >
-                      <a href="http://localhost:3001/users/googleLogin">
+                      <a
+                        href={`${process.env.REACT_APP_BE_URL}/users/googleLogin`}
+                      >
                         <button
                           type="button"
                           className="idsk-button idsk-header-web__main--login-loginbtn"
@@ -256,7 +258,9 @@ function Header(props) {
                         : `idsk-header-web__main--login`
                     }
                   >
-                    <a href="http://localhost:3001/users/googleLogin">
+                    <a
+                      href={`${process.env.REACT_APP_BE_URL}/users/googleLogin`}
+                    >
                       <button
                         type="button"
                         className="idsk-button idsk-header-web__main--login-loginbtn"

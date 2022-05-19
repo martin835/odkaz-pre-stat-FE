@@ -19,7 +19,7 @@ function Organizations(props) {
   const getclientCentersinDistrict = async (event) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/clientCenters`
+        `${process.env.REACT_APP_BE_URL}/clientCenters`
         // {
         //   credentials: "include",
         // }

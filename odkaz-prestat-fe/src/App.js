@@ -37,7 +37,7 @@ function App() {
 
   const loadLoggedUser = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/users/me`, {
+      const response = await fetch(`${process.env.REACT_APP_BE_URL}/users/me`, {
         method: "GET",
         headers: {
           "Content-type": "application/json",

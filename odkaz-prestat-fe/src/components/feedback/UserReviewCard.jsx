@@ -12,7 +12,7 @@ function UserReviewCard(props) {
   const fetchProvider = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/services/${props.review.service._id}`,
+        `${process.env.REACT_APP_BE_URL}/services/${props.review.service._id}`,
         {
           method: "GET",
           //   headers: {
