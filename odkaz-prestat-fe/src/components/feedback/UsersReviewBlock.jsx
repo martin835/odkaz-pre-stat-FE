@@ -13,7 +13,7 @@ function UsersReviewBlock() {
 
   const fetchReviews = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/reviews`, {
+      const response = await fetch(`${process.env.REACT_APP_BE_URL}/reviews`, {
         method: "GET",
         //   headers: {
         //     "Content-type": "application/json",

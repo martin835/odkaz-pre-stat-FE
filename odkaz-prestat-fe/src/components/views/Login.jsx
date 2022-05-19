@@ -10,7 +10,7 @@ function Login() {
           <h2 className=" govuk-heading-m">
             Aby ste mohli hodnotiť služby musíte sa prihlásiť
           </h2>
-          <a href="http://localhost:3001/users/googleLogin">
+          <a href={`${process.env.REACT_APP_BE_URL}/users/googleLogin`}>
             <button
               type="button"
               className="idsk-button idsk-header-web__main--login-loginbtn"

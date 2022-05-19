@@ -21,7 +21,7 @@ function FeedbackCard() {
 
   const postReview = async () => {
     try {
-      let response = await fetch(`http://localhost:3001/reviews`, {
+      let response = await fetch(`${process.env.REACT_APP_BE_URL}/reviews`, {
         method: "POST",
         body: JSON.stringify(reqObj),
         //credentials: "include",
