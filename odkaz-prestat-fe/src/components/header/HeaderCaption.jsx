@@ -10,7 +10,7 @@ function HeaderCaption() {
           {" "}
           <div className="idsk-header-web__brand-gestor">
             <span className="govuk-body-s idsk-header-web__brand-gestor-text">
-              Oficiálna stránka &nbsp;
+              Táto stránka slúži ako koncept. &nbsp;
               <button
                 className="idsk-header-web__brand-gestor-button"
                 aria-label="Zobraziť informácie o stránke"
@@ -19,12 +19,11 @@ function HeaderCaption() {
                 data-text-for-show="Zobraziť informácie o stránke"
                 onClick={() => setHeaderCaption(!headerCaption)}
               >
-                verejnej správy SR
+                Viac o našich cieľoch:
                 <span className="idsk-header-web__link-arrow"></span>
               </button>
             </span>
             <span className="govuk-body-s idsk-header-web__brand-gestor-text--mobile">
-              SK
               <button
                 className="idsk-header-web__brand-gestor-button"
                 aria-label="Zobraziť informácie o stránke"
@@ -33,7 +32,7 @@ function HeaderCaption() {
                 data-text-for-show="Zobraziť informácie o stránke"
                 onClick={() => setHeaderCaption(!headerCaption)}
               >
-                e-gov
+                O projekte:
                 <span className="idsk-header-web__link-arrow"></span>
               </button>
             </span>
@@ -42,32 +41,25 @@ function HeaderCaption() {
               <div className="govuk-width-container">
                 <div className="govuk-grid-row">
                   <div className="govuk-grid-column-one-half">
-                    <h3 className="govuk-body-s">Doména gov.sk je oficálna</h3>
+                    <h3 className="govuk-body-s">
+                      Našim cieľom je sprostredkovať spätnú väzbu pre verejnú
+                      správu.
+                    </h3>
                     <p className="govuk-body-s">
-                      Toto je oficiálna webová stránka orgánu verejnej moci
-                      Slovenskej republiky. Oficiálne stránky využívajú najmä
-                      doménu gov.sk.{" "}
-                      <a
-                        className="govuk-link"
-                        href="https://www.slovensko.sk/sk/agendy/agenda/_organy-verejnej-moci"
-                        target="_blank"
-                        title="odkazy na webové sídla orgánov verejnej moci"
-                      >
-                        Odkazy na jednotlivé webové sídla orgánov verejnej moci
-                        nájdete na tomto odkaze
-                      </a>
-                      .
+                      Chceme aby sa orgány verejnej moci dozvedeli ako sú
+                      občania spokojní so službami, ktoré poskytujú a mohli na
+                      základe spätnej väzby zlepšovať svoje fungovanie.
                     </p>
                   </div>
                   <div className="govuk-grid-column-one-half">
                     <h3 className="govuk-body-s">
-                      Táto stránka je zabezpečená
+                      Chceme aby občania mali možnosť zmeniť fungovanie verejnej
+                      správy k lepšiemu.
                     </h3>
                     <p className="govuk-body-s">
-                      Buďte pozorní a vždy sa uistite, že zdieľate informácie
-                      iba cez zabezpečenú webovú stránku verejnej správy SR.
-                      Zabezpečená stránka vždy začína https:// pred názvom
-                      domény webového sídla.
+                      Cieľom je primäť orgány verejnej moci aby sa spätnou
+                      väzbou od občanou reálne zaoberali a odovzdané podnenty
+                      riešili.
                     </p>
                   </div>
                 </div>
@@ -81,7 +73,7 @@ function HeaderCaption() {
           {" "}
           <div className="idsk-header-web__brand-gestor">
             <span className="govuk-body-s idsk-header-web__brand-gestor-text">
-              Oficiálna stránka &nbsp;
+              Táto stránka slúži ako koncept. &nbsp;
               <button
                 className="idsk-header-web__brand-gestor-button idsk-header-web__brand-gestor-button--active"
                 aria-label="Skryť informácie o stránke"
@@ -90,12 +82,11 @@ function HeaderCaption() {
                 data-text-for-show="Zobraziť informácie o stránke"
                 onClick={() => setHeaderCaption(!headerCaption)}
               >
-                verejnej správy SR
+                Menej o našich cieľoch:
                 <span className="idsk-header-web__link-arrow"></span>
               </button>
             </span>
             <span className="govuk-body-s idsk-header-web__brand-gestor-text--mobile">
-              SK
               <button
                 className="idsk-header-web__brand-gestor-button idsk-header-web__brand-gestor-button--active"
                 aria-label="Skryť informácie o stránke"
@@ -104,7 +95,7 @@ function HeaderCaption() {
                 data-text-for-show="Zobraziť informácie o stránke"
                 onClick={() => setHeaderCaption(!headerCaption)}
               >
-                e-gov
+                O projekte:
                 <span className="idsk-header-web__link-arrow"></span>
               </button>
             </span>
@@ -113,32 +104,25 @@ function HeaderCaption() {
               <div className="govuk-width-container">
                 <div className="govuk-grid-row">
                   <div className="govuk-grid-column-one-half">
-                    <h3 className="govuk-body-s">Doména gov.sk je oficálna</h3>
+                    <h3 className="govuk-body-s">
+                      Našim cieľom je sprostredkovať spätnú väzbu pre verejnú
+                      správu.
+                    </h3>
                     <p className="govuk-body-s">
-                      Toto je oficiálna webová stránka orgánu verejnej moci
-                      Slovenskej republiky. Oficiálne stránky využívajú najmä
-                      doménu gov.sk.{" "}
-                      <a
-                        className="govuk-link"
-                        href="https://www.slovensko.sk/sk/agendy/agenda/_organy-verejnej-moci"
-                        target="_blank"
-                        title="odkazy na webové sídla orgánov verejnej moci"
-                      >
-                        Odkazy na jednotlivé webové sídla orgánov verejnej moci
-                        nájdete na tomto odkaze
-                      </a>
-                      .
+                      Chceme aby sa orgány verejnej moci dozvedeli ako sú
+                      občania spokojní so službami, ktoré poskytujú a mohli na
+                      základe spätnej väzby zlepšovať svoje fungovanie.
                     </p>
                   </div>
                   <div className="govuk-grid-column-one-half">
                     <h3 className="govuk-body-s">
-                      Táto stránka je zabezpečená
+                      Chceme aby občania mali možnosť zmeniť fungovanie verejnej
+                      správy k lepšiemu.
                     </h3>
                     <p className="govuk-body-s">
-                      Buďte pozorní a vždy sa uistite, že zdieľate informácie
-                      iba cez zabezpečenú webovú stránku verejnej správy SR.
-                      Zabezpečená stránka vždy začína https:// pred názvom
-                      domény webového sídla.
+                      Cieľom je primäť orgány verejnej moci aby sa spätnou
+                      väzbou od občanou reálne zaoberali a odovzdané podnenty
+                      riešili.
                     </p>
                   </div>
                 </div>

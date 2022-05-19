@@ -1,11 +1,12 @@
-import RecentReportsOverview from "../reports/RecentReportsOverview";
+import UserReviewCard from "../feedback/UserReviewCard";
+import UsersReviewBlock from "../feedback/UsersReviewBlock";
 import SearchBlock from "../search/SearchBlock";
 
 function Home() {
   return (
     <>
       <SearchBlock />
-      <RecentReportsOverview />
+      <UsersReviewBlock />
     </>
   );
 }

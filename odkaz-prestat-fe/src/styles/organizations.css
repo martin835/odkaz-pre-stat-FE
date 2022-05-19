@@ -78,7 +78,7 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   margin-bottom: 1px;
-  padding: 35px;
+  padding: 35px !important;
   border: 5px solid transparent;
   text-align: center;
   background: rgb(0, 48, 120);
