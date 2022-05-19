@@ -1,5 +1,7 @@
+import Login from "./Login";
+
 function UserProfile(props) {
-  return (
+  return props.loggedUser ? (
     <div className="govuk-width-container">
       <div className="govuk-grid-row ">
         <div className="govuk-grid-column-full">
@@ -63,6 +65,8 @@ function UserProfile(props) {
         </div>
       </div>
     </div>
+  ) : (
+    <Login />
   );
 }
 
