@@ -22,7 +22,7 @@ function UsersReviewBlock() {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        //console.log(data);
         setreviews(data);
         setRow1(data.slice(0, 3));
         setRow2(data.slice(3));
