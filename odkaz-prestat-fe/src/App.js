@@ -19,7 +19,7 @@ function App() {
   const token = new URLSearchParams(window.location.search).get("accessToken");
 
   useDidUpdateEffect(() => {
-    //console.log(token);
+    console.log(token);
     if (token) {
       localStorage.setItem("accessToken", token);
       setTokenInLocalStorage(token);
@@ -32,7 +32,7 @@ function App() {
       loadLoggedUser();
       setTokenInLocalStorage(localStorage.getItem("accessToken"));
     }
-    //console.log(localStorage.getItem("accessToken"));
+    console.log(localStorage.getItem("accessToken"));
   }, [token]);
 
   const loadLoggedUser = async () => {
