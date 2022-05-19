@@ -13,40 +13,13 @@ function SearchBlock() {
               <h1 className="govuk-heading-xl heading-bigger-margin govuk-!-margin-bottom-6">
                 Ohodnoďte prácu klientského centra vo Vašom kraji.
               </h1>
-
-              {/* <div
-                data-module="idsk-search-component"
-                className="idsk-search-component   "
-              >
-                <label htmlFor="intro-block-search">
-                  Zadajte názov okresu...
-                </label>
-                <input
-                  className="govuk-input govuk-input--width-30 idsk-search-component__input "
-                  id="intro-block-search"
-                  name="search"
-                  type="search"
-                />
-                <button
-                  type="submit"
-                  className="idsk-button idsk-search-component__button "
-                >
-                  <BiSearch />
-
-                  <span className="govuk-visually-hidden">Vyhľadávanie</span>
-                </button> 
-              </div> */}
             </div>
           </div>
         </div>
       </div>
       <div className="govuk-width-container">
         <div className="govuk-grid-row">
-          <div className="govuk-grid-column-full">
-            {/* <p className="govuk-body govuk-!-font-weight-bold">
-              ...alebo vyberte zo zoznamu krajov:
-            </p> */}
-          </div>
+          <div className="govuk-grid-column-full"></div>
           <Link
             to="/organizations/bb"
             state={{ region: "banskobystrickom", numberOfCenters: 13 }}

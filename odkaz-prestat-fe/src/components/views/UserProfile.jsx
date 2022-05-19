@@ -9,54 +9,56 @@ function UserProfile(props) {
             Váš aktuálny profil
           </h1>
 
-          <dl class="govuk-summary-list">
+          <dl className="govuk-summary-list">
             {/* ROW START */}
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">Meno</dt>
-              <dd class="govuk-summary-list__value">{props.loggedUser.name}</dd>
-              <dd class="govuk-summary-list__actions">
-                <a class="govuk-link" href="#">
-                  Zmeniť<span class="govuk-visually-hidden"> name</span>
+            <div className="govuk-summary-list__row">
+              <dt className="govuk-summary-list__key">Meno</dt>
+              <dd className="govuk-summary-list__value">
+                {props.loggedUser.name}
+              </dd>
+              <dd className="govuk-summary-list__actions">
+                <a className="govuk-link" href="#">
+                  Zmeniť<span className="govuk-visually-hidden"> name</span>
                 </a>
               </dd>
             </div>
             {/* ROW END */}
             {/* ROW START */}
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">Priezvisko</dt>
-              <dd class="govuk-summary-list__value">
+            <div className="govuk-summary-list__row">
+              <dt className="govuk-summary-list__key">Priezvisko</dt>
+              <dd className="govuk-summary-list__value">
                 {" "}
                 {props.loggedUser.surname}
               </dd>
-              <dd class="govuk-summary-list__actions">
-                <a class="govuk-link" href="#">
-                  Zmeniť<span class="govuk-visually-hidden"> name</span>
+              <dd className="govuk-summary-list__actions">
+                <a className="govuk-link" href="#">
+                  Zmeniť<span className="govuk-visually-hidden"> name</span>
                 </a>
               </dd>
             </div>
             {/* ROW END */}
             {/* ROW START */}
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">E-mail</dt>
-              <dd class="govuk-summary-list__value">
+            <div className="govuk-summary-list__row">
+              <dt className="govuk-summary-list__key">E-mail</dt>
+              <dd className="govuk-summary-list__value">
                 {" "}
                 {props.loggedUser.email}
               </dd>
-              <dd class="govuk-summary-list__actions"></dd>
+              <dd className="govuk-summary-list__actions"></dd>
             </div>
             {/* ROW END */}
             {/* ROW START */}
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">Avatar</dt>
-              <dd class="govuk-summary-list__value">
+            <div className="govuk-summary-list__row">
+              <dt className="govuk-summary-list__key">Avatar</dt>
+              <dd className="govuk-summary-list__value">
                 <img
                   src={props.loggedUser.avatar}
                   className="header-profile-pic"
                 ></img>
               </dd>
-              <dd class="govuk-summary-list__actions">
-                <a class="govuk-link" href="#">
-                  Zmeniť<span class="govuk-visually-hidden"> name</span>
+              <dd className="govuk-summary-list__actions">
+                <a className="govuk-link" href="#">
+                  Zmeniť<span className="govuk-visually-hidden"> name</span>
                 </a>
               </dd>
             </div>

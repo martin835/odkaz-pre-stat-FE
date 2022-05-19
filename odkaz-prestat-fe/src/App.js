@@ -1,21 +1,15 @@
-import { useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
 import FeedbackCard from "./components/feedback/FeedbackCard";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
 import Home from "./components/views/Home";
-import Organizations from "./components/views/Organizations";
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./components/views/Login";
-import useDidUpdateEffect from "./utils/useDidUpdateEffect";
-import { useState } from "react";
+import Organizations from "./components/views/Organizations";
 import UserProfile from "./components/views/UserProfile";
+import useDidUpdateEffect from "./utils/useDidUpdateEffect";
 
 function App() {
   //This is just to make component re-render correctly after token is set to LS. Token should be always taken from the Local Storage!!!
