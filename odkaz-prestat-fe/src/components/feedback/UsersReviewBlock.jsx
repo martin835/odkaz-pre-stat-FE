@@ -4,6 +4,8 @@ import UsersReviewRow3 from "./UsersReviewRow3";
 
 function UsersReviewBlock() {
   const [reviews, setreviews] = useState(null);
+  const [row1, setRow1] = useState(null);
+  const [row2, setRow2] = useState(null);
 
   useEffect(() => {
     fetchReviews();
@@ -22,6 +24,8 @@ function UsersReviewBlock() {
         const data = await response.json();
         console.log(data);
         setreviews(data);
+        setRow1(data.slice(0, 3));
+        setRow2(data.slice(3));
       } else {
         console.log("error on fetching users");
       }
@@ -30,24 +34,18 @@ function UsersReviewBlock() {
     }
   };
 
-  const chunkReviews = () => {
-    let reviewsToChunk = reviews;
-
-    while (reviewsToChunk.length) {
-      let row = reviewsToChunk.splice(0, 3);
-      console.log(row);
-      <UsersReviewRow3 row={row} />;
-    }
-  };
-
   return (
     <div className="govuk-width-container govuk-!-margin-top-8 ">
       <h2 className="govuk-heading-m govuk-!-margin-bottom-7">
         Naposledy hodnotili:
       </h2>
-      {reviews && chunkReviews()}
+      <UsersReviewRow3 row1={row1} />
+      <UsersReviewRow3 row2={row2} />
     </div>
   );
 }
 
 export default UsersReviewBlock;
+
+//NOTE:
+// HOW TO CHUNK ARRAY FROM RESPONSE INTO SMALLER ARRAYS: https://stackoverflow.com/questions/7273668/how-to-split-a-long-array-into-smaller-arrays-with-javascript
