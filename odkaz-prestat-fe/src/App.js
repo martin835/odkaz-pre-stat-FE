@@ -20,7 +20,7 @@ function App() {
   const token = new URLSearchParams(window.location.search).get("accessToken");
 
   useEffect(() => {
-    console.log("useEffect: ", token);
+    //console.log("useEffect: ", token);
     if (token) {
       localStorage.setItem("accessToken", token);
       setTokenInLocalStorage(token);
@@ -33,11 +33,11 @@ function App() {
       loadLoggedUser();
       setTokenInLocalStorage(localStorage.getItem("accessToken"));
     }
-    console.log(localStorage.getItem("accessToken"));
+    //console.log(localStorage.getItem("accessToken"));
   }, []);
 
   useDidUpdateEffect(() => {
-    console.log("useDidUpdateEffect: ", token);
+    //console.log("useDidUpdateEffect: ", token);
     if (token) {
       localStorage.setItem("accessToken", token);
       setTokenInLocalStorage(token);
@@ -50,7 +50,7 @@ function App() {
       loadLoggedUser();
       setTokenInLocalStorage(localStorage.getItem("accessToken"));
     }
-    console.log(localStorage.getItem("accessToken"));
+    //console.log(localStorage.getItem("accessToken"));
   }, [token]);
 
   const loadLoggedUser = async () => {
@@ -64,7 +64,7 @@ function App() {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        //console.log(data);
         setLoggedUser(data);
       } else {
         console.log("error on fetching users");
@@ -76,7 +76,6 @@ function App() {
 
   return (
     <>
-      {console.log("I RENDER")}
       <Header loggedUser={loggedUser} setLoggedUser={setLoggedUser} />
       <Routes>
         <Route path="/" element={<Home />} />
