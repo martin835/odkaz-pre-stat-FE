@@ -23,7 +23,7 @@ function UserReviewCard(props) {
       );
       if (response.ok) {
         const data = await response.json();
-        //console.log(data);
+        console.log(data);
         setservice(data);
       } else {
         console.log("error on fetching users");
