@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useEffect } from "react";
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
@@ -18,8 +19,25 @@ function App() {
   // Do we have an access token in the URL?
   const token = new URLSearchParams(window.location.search).get("accessToken");
 
+  useEffect(() => {
+    console.log("useEffect: ", token);
+    if (token) {
+      localStorage.setItem("accessToken", token);
+      setTokenInLocalStorage(token);
+      loadLoggedUser();
+    } else {
+      setTokenInLocalStorage(null);
+    }
+
+    if (localStorage.getItem("accessToken")) {
+      loadLoggedUser();
+      setTokenInLocalStorage(localStorage.getItem("accessToken"));
+    }
+    console.log(localStorage.getItem("accessToken"));
+  }, []);
+
   useDidUpdateEffect(() => {
-    console.log(token);
+    console.log("useDidUpdateEffect: ", token);
     if (token) {
       localStorage.setItem("accessToken", token);
       setTokenInLocalStorage(token);
@@ -58,6 +76,7 @@ function App() {
 
   return (
     <>
+      {console.log("I RENDER")}
       <Header loggedUser={loggedUser} setLoggedUser={setLoggedUser} />
       <Routes>
         <Route path="/" element={<Home />} />
