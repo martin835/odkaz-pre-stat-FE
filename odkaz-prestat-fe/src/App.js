@@ -5,7 +5,7 @@ import "./App.css";
 import FeedbackCard from "./components/feedback/FeedbackCard";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
-import ClientCenterOverView from "./components/views/ClientCenterOverVIew";
+import ClientCenterOverView from "./components/views/ClientCenterOverView";
 import Home from "./components/views/Home";
 import Login from "./components/views/Login";
 import Organizations from "./components/views/Organizations";

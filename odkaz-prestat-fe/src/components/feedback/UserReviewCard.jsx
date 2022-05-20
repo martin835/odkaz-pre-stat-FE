@@ -1,6 +1,7 @@
 import { format, parseISO } from "date-fns";
 import { useEffect, useState } from "react";
 import { BsStar, BsStarFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 import "../../styles/userReviewCard.css";
 
 function UserReviewCard(props) {
@@ -9,6 +10,7 @@ function UserReviewCard(props) {
     fetchProvider();
   }, []);
 
+  //In reality I am fetching a service here,  but service has a provider in it's model.
   const fetchProvider = async () => {
     try {
       const response = await fetch(
@@ -23,7 +25,7 @@ function UserReviewCard(props) {
       );
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        //console.log(data);
         setservice(data);
       } else {
         console.log("error on fetching users");
@@ -95,11 +97,16 @@ function UserReviewCard(props) {
               {format(parseISO(props.review.createdAt), "PP")} hodnotil
             </span>
             <span className="idsk-card-meta ">
-              <strong>{service?.provider.name}</strong> službu{" "}
-              <strong>{props.review.service.type}</strong>
+              <Link
+                to={`/provider/${service?.provider._id}`}
+                className="govuk-link"
+              >
+                <strong>{service?.provider.name}</strong>
+              </Link>{" "}
+              službu <strong>{props.review.service.type}</strong>
             </span>
           </div>
-          <h3 class="govuk-heading-s">
+          <h3 className="govuk-heading-s">
             {" "}
             {props.review.rating === 1 && "Veľmi nespokojný"}
             {props.review.rating === 2 && "Nespokojný"}
