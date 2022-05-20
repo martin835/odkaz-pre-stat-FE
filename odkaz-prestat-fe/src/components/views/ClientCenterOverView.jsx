@@ -10,9 +10,11 @@ import { Col } from "react-bootstrap";
 function ClientCenterOverView() {
   const { id } = useParams();
   const [clientCenter, setclientCenter] = useState(null);
+  const [reviewsForKC, setreviewsForKC] = useState(null);
 
   useEffect(() => {
     fetchClientCenter();
+    fetchReviewsForClientCenter();
   }, []);
 
   const fetchClientCenter = async () => {
@@ -31,6 +33,30 @@ function ClientCenterOverView() {
         const data = await response.json();
         //console.log("FETCH DATA: ", data);
         setclientCenter(data);
+      } else {
+        console.log("error on fetching users");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchReviewsForClientCenter = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BE_URL}/services/?clientCenterId=${id}`,
+        {
+          method: "GET",
+          //   headers: {
+          //     "Content-type": "application/json",
+          //     Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          //   },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        console.log("FETCH DATA: ", data);
+        setreviewsForKC(data);
       } else {
         console.log("error on fetching users");
       }
