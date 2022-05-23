@@ -44,7 +44,7 @@ function ClientCenterOverView() {
   const fetchReviewsForClientCenter = async () => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BE_URL}/services/?clientCenterId=${id}`,
+        `${process.env.REACT_APP_BE_URL}/reviews/?clientCenterId=${id}`,
         {
           method: "GET",
           //   headers: {

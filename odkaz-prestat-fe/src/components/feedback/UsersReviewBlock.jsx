@@ -1,31 +1,42 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import useDidUpdateEffect from "../../utils/useDidUpdateEffect";
 import UsersReviewRow3 from "./UsersReviewRow3";
 
 function UsersReviewBlock() {
   const [reviews, setreviews] = useState(null);
-  const [row1, setRow1] = useState(null);
-  const [row2, setRow2] = useState(null);
+  const [arrOfRows, setArrOfRows] = useState(null);
 
   useEffect(() => {
-    fetchReviews();
+    fetchReviews(6, 0);
   }, []);
 
-  const fetchReviews = async () => {
+  useDidUpdateEffect(() => {
+    if (reviews) {
+      chunkArrayInGroups(reviews, 3);
+    }
+  }, [reviews]);
+
+  const fetchReviews = async (limit, offset) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_BE_URL}/reviews`, {
-        method: "GET",
-        //   headers: {
-        //     "Content-type": "application/json",
-        //     Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        //   },
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BE_URL}/reviews/?limit=${limit}&offset=${offset}`,
+        {
+          method: "GET",
+          //   headers: {
+          //     "Content-type": "application/json",
+          //     Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          //   },
+        }
+      );
       if (response.ok) {
         const data = await response.json();
-        //console.log(data);
+        console.log(data);
+
         setreviews(data);
-        setRow1(data.slice(0, 3));
-        setRow2(data.slice(3));
+
+        // setRow1(data.slice(0, 3));
+        // setRow2(data.slice(3));
       } else {
         console.log("error on fetching users");
       }
@@ -34,13 +45,23 @@ function UsersReviewBlock() {
     }
   };
 
+  const chunkArrayInGroups = (arr, size) => {
+    let newArr = [];
+    for (let i = 0; i < arr.length; i += size) {
+      newArr.push(arr.slice(i, i + size));
+    }
+    console.log(newArr);
+    setArrOfRows(newArr);
+  };
+
   return (
     <div className="govuk-width-container govuk-!-margin-top-8 ">
       <h2 className="govuk-heading-m govuk-!-margin-bottom-7">
         Naposledy hodnotili:
       </h2>
-      <UsersReviewRow3 row1={row1} />
-      <UsersReviewRow3 row2={row2} />
+
+      {arrOfRows &&
+        arrOfRows.map((row, i) => <UsersReviewRow3 row={row} key={`r-${i}`} />)}
     </div>
   );
 }
