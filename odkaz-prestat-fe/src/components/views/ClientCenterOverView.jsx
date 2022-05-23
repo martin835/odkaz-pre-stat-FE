@@ -6,16 +6,25 @@ import { BsStar, BsStarFill } from "react-icons/bs";
 import { Container } from "react-bootstrap";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
+import useDidUpdateEffect from "../../utils/useDidUpdateEffect";
+import UsersReviewRow3 from "../feedback/UsersReviewRow3";
 
 function ClientCenterOverView() {
   const { id } = useParams();
   const [clientCenter, setclientCenter] = useState(null);
   const [reviewsForKC, setreviewsForKC] = useState(null);
+  const [arrOfRows, setArrOfRows] = useState(null);
 
   useEffect(() => {
     fetchClientCenter();
-    fetchReviewsForClientCenter();
+    fetchReviewsForClientCenter(6, 0);
   }, []);
+
+  useDidUpdateEffect(() => {
+    if (reviewsForKC) {
+      chunkArrayInGroups(reviewsForKC, 3);
+    }
+  }, [reviewsForKC]);
 
   const fetchClientCenter = async () => {
     try {
@@ -41,10 +50,10 @@ function ClientCenterOverView() {
     }
   };
 
-  const fetchReviewsForClientCenter = async () => {
+  const fetchReviewsForClientCenter = async (limit, offset) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BE_URL}/reviews/?clientCenterId=${id}`,
+        `${process.env.REACT_APP_BE_URL}/reviews/?clientCenterId=${id}&limit=${limit}&offset=${offset}`,
         {
           method: "GET",
           //   headers: {
@@ -63,6 +72,15 @@ function ClientCenterOverView() {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const chunkArrayInGroups = (arr, size) => {
+    let newArr = [];
+    for (let i = 0; i < arr.length; i += size) {
+      newArr.push(arr.slice(i, i + size));
+    }
+    //console.log(newArr);
+    setArrOfRows(newArr);
   };
 
   return (
@@ -140,28 +158,13 @@ function ClientCenterOverView() {
       <h2 className=" govuk-heading-m govuk-!-margin-bottom-8 govuk-!-margin-top-8 ">
         Posledné hodnotenia:
       </h2>
+
+      {arrOfRows &&
+        arrOfRows.map((row, i) => (
+          <UsersReviewRow3 row={row} rowid={`r-${i}`} key={`r-${i}`} />
+        ))}
     </div>
   );
 }
 
 export default ClientCenterOverView;
-
-// <ProgressBar now={80} className="govuk-!-margin-bottom-1" />
-//       <ProgressBar now={30} className="govuk-!-margin-bottom-1" />
-//       <ProgressBar now={15} className="govuk-!-margin-bottom-1" />
-//       <ProgressBar now={5} className="govuk-!-margin-bottom-1" />
-//       <ProgressBar now={10} className="govuk-!-margin-bottom-1" />
-
-//  <div>
-//    <span>spokojný</span>
-//    <div className="progress govuk-!-margin-bottom-1">
-//      <div
-//        className="progress-bar  "
-//        role="progressbar"
-//        style={{ width: "95%" }}
-//        aria-valuenow="0"
-//        aria-valuemin="0"
-//        aria-valuemax="100"
-//      ></div>
-//    </div>
-//  </div>;

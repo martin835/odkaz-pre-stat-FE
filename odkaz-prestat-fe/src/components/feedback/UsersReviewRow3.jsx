@@ -5,7 +5,7 @@ function UsersReviewRow3(props) {
     <div className="govuk-grid-row ">
       {props.row &&
         props.row.map((review, i) => (
-          <UserReviewCard review={review} key={`row-${i}`} />
+          <UserReviewCard review={review} key={`${props.rowid}-${i}`} />
         ))}
     </div>
   );

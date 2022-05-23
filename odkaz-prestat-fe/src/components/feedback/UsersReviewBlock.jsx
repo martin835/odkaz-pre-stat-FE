@@ -31,12 +31,13 @@ function UsersReviewBlock() {
       );
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        //console.log(data);
 
-        setreviews(data);
-
-        // setRow1(data.slice(0, 3));
-        // setRow2(data.slice(3));
+        if (!reviews) {
+          setreviews(data);
+        } else {
+          setreviews(reviews.concat(data));
+        }
       } else {
         console.log("error on fetching users");
       }
@@ -50,7 +51,7 @@ function UsersReviewBlock() {
     for (let i = 0; i < arr.length; i += size) {
       newArr.push(arr.slice(i, i + size));
     }
-    console.log(newArr);
+    //console.log(newArr);
     setArrOfRows(newArr);
   };
 
@@ -61,7 +62,17 @@ function UsersReviewBlock() {
       </h2>
 
       {arrOfRows &&
-        arrOfRows.map((row, i) => <UsersReviewRow3 row={row} key={`r-${i}`} />)}
+        arrOfRows.map((row, i) => (
+          <UsersReviewRow3 row={row} rowid={`r-${i}`} key={`r-${i}`} />
+        ))}
+
+      <button
+        className="govuk-button govuk-button--secondary"
+        data-module="govuk-button"
+        onClick={() => fetchReviews(3, reviews.length)}
+      >
+        Načítať viac hodnotení...
+      </button>
     </div>
   );
 }
