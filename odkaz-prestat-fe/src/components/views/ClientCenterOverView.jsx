@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { ProgressBar } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { BsStar, BsStarFill } from "react-icons/bs";
+import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import { Container } from "react-bootstrap";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
@@ -13,6 +13,9 @@ function ClientCenterOverView() {
   const { id } = useParams();
   const [clientCenter, setclientCenter] = useState(null);
   const [reviewsForKC, setreviewsForKC] = useState(null);
+  const [avgRating, setAvgRating] = useState(null);
+  const [reviewsCount, setreviewsCount] = useState(null);
+  const [weights, setWeights] = useState(null);
   const [arrOfRows, setArrOfRows] = useState(null);
 
   useEffect(() => {
@@ -65,7 +68,10 @@ function ClientCenterOverView() {
       if (response.ok) {
         const data = await response.json();
         console.log("FETCH DATA: ", data);
-        setreviewsForKC(data);
+        setreviewsForKC(data.reviews);
+        setAvgRating(data.avgRating);
+        setreviewsCount(data.reviewsCount);
+        setWeights(data.weights);
       } else {
         console.log("error on fetching users");
       }
@@ -96,13 +102,83 @@ function ClientCenterOverView() {
         <Row>
           <Col xs={12} md={2}>
             <div className=" text-center text-md-left">
-              <div className="gem-c-big-number__value mb-3">4,2</div>
-              <div className="d-flex justify-content-center justify-content-md-start  mb-2">
-                <BsStarFill className="mr-2" /> <BsStarFill className="mr-2" />{" "}
-                <BsStarFill className="mr-2" /> <BsStar className="mr-2" />{" "}
-                <BsStar className="mr-2" />
+              <div className="gem-c-big-number__value mb-3">
+                {avgRating && avgRating}
               </div>
-              <div>42 hodnotení</div>
+              <div className="d-flex justify-content-center justify-content-md-start  mb-2">
+                {avgRating < 1.5 && (
+                  <>
+                    <BsStarFill className="mr-2" /> <BsStar className="mr-2" />{" "}
+                    <BsStar className="mr-2" /> <BsStar className="mr-2" />{" "}
+                    <BsStar className="mr-2" />
+                  </>
+                )}
+                {avgRating >= 1.5 && avgRating < 2 && (
+                  <>
+                    <BsStarFill className="mr-2" />{" "}
+                    <BsStarHalf className="mr-2" /> <BsStar className="mr-2" />{" "}
+                    <BsStar className="mr-2" /> <BsStar className="mr-2" />
+                  </>
+                )}
+                {avgRating >= 2 && avgRating < 2.5 && (
+                  <>
+                    <BsStarFill className="mr-2" />{" "}
+                    <BsStarFill className="mr-2" /> <BsStar className="mr-2" />{" "}
+                    <BsStar className="mr-2" /> <BsStar className="mr-2" />
+                  </>
+                )}
+                {avgRating >= 2.5 && avgRating < 3 && (
+                  <>
+                    <BsStarFill className="mr-2" />{" "}
+                    <BsStarFill className="mr-2" />{" "}
+                    <BsStarHalf className="mr-2" /> <BsStar className="mr-2" />{" "}
+                    <BsStar className="mr-2" />
+                  </>
+                )}
+                {avgRating >= 3 && avgRating < 3.5 && (
+                  <>
+                    <BsStarFill className="mr-2" />{" "}
+                    <BsStarFill className="mr-2" />{" "}
+                    <BsStarFill className="mr-2" /> <BsStar className="mr-2" />{" "}
+                    <BsStar className="mr-2" />
+                  </>
+                )}
+                {avgRating >= 3.5 && avgRating < 4 && (
+                  <>
+                    <BsStarFill className="mr-2" />{" "}
+                    <BsStarFill className="mr-2" />{" "}
+                    <BsStarFill className="mr-2" />{" "}
+                    <BsStarHalf className="mr-2" /> <BsStar className="mr-2" />
+                  </>
+                )}
+                {avgRating >= 4 && avgRating < 4.5 && (
+                  <>
+                    <BsStarFill className="mr-2" />{" "}
+                    <BsStarFill className="mr-2" />{" "}
+                    <BsStarFill className="mr-2" />{" "}
+                    <BsStarFill className="mr-2" /> <BsStar className="mr-2" />
+                  </>
+                )}
+                {avgRating >= 4.5 && avgRating < 4.8 && (
+                  <>
+                    <BsStarFill className="mr-2" />{" "}
+                    <BsStarFill className="mr-2" />{" "}
+                    <BsStarFill className="mr-2" />{" "}
+                    <BsStarFill className="mr-2" />{" "}
+                    <BsStarHalf className="mr-2" />
+                  </>
+                )}
+                {avgRating > 4.8 && (
+                  <>
+                    <BsStarFill className="mr-2" />{" "}
+                    <BsStarFill className="mr-2" />{" "}
+                    <BsStarFill className="mr-2" />{" "}
+                    <BsStarFill className="mr-2" />{" "}
+                    <BsStarFill className="mr-2" />
+                  </>
+                )}
+              </div>
+              <div>{reviewsCount && reviewsCount} hodnotení</div>
             </div>
           </Col>
           <Col xs={12} md={10}>
@@ -112,7 +188,10 @@ function ClientCenterOverView() {
               </Col>
               <Col xs={10}>
                 {" "}
-                <ProgressBar now={90} className="mt-1" />
+                <ProgressBar
+                  now={weights && weights.weight5}
+                  className="mt-1"
+                />
               </Col>
             </Row>
             <Row className="mb-2">
@@ -121,7 +200,10 @@ function ClientCenterOverView() {
               </Col>
               <Col xs={10}>
                 {" "}
-                <ProgressBar now={60} className="mt-1" />
+                <ProgressBar
+                  now={weights && weights.weight4}
+                  className="mt-1"
+                />
               </Col>
             </Row>
             <Row className="mb-2">
@@ -130,7 +212,10 @@ function ClientCenterOverView() {
               </Col>
               <Col xs={10}>
                 {" "}
-                <ProgressBar now={75} className="mt-1" />
+                <ProgressBar
+                  now={weights && weights.weight3}
+                  className="mt-1"
+                />
               </Col>
             </Row>
             <Row className="mb-2">
@@ -139,7 +224,10 @@ function ClientCenterOverView() {
               </Col>
               <Col xs={10}>
                 {" "}
-                <ProgressBar now={30} className="mt-1" />
+                <ProgressBar
+                  now={weights && weights.weight2}
+                  className="mt-1"
+                />
               </Col>
             </Row>
             <Row className="mb-2">
@@ -148,7 +236,10 @@ function ClientCenterOverView() {
               </Col>
               <Col xs={10}>
                 {" "}
-                <ProgressBar now={10} className="mt-1" />
+                <ProgressBar
+                  now={weights && weights.weight1}
+                  className="mt-1"
+                />
               </Col>
             </Row>
           </Col>
