@@ -1,9 +1,17 @@
+import { Badge } from "react-bootstrap";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 
 function RankingRow(props) {
   return (
     <tr className="idsk-table__row">
-      <td className="idsk-table__cell">{props.ranking.Provider[0].name}</td>
+      <td className="idsk-table__cell">
+        {" "}
+        <Badge variant="secondary" className="mr-2 ">
+          {props.rank}
+          {"."}
+        </Badge>
+        {props.ranking.Provider[0].name}
+      </td>
       <td className="idsk-table__cell">
         {Math.round(props.ranking.avgRating * 10) / 10}{" "}
         {props.ranking.avgRating < 1.5 && (

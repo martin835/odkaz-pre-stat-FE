@@ -6,14 +6,12 @@ function SearchBlock() {
   return (
     <>
       {" "}
-      <div data-module="idsk-intro-block">
-        <div className="idsk-intro-block ">
-          <div className="govuk-grid-row ">
-            <div className="govuk-grid-column-full govuk-width-container">
-              <h1 className="govuk-heading-xl heading-bigger-margin govuk-!-margin-bottom-6">
-                Ohodnoďte prácu klientského centra vo Vašom kraji.
-              </h1>
-            </div>
+      <div className="govuk-width-container">
+        <div className="govuk-grid-row ">
+          <div className="govuk-grid-column-full-width ">
+            <h1 className="govuk-heading-l  govuk-!-margin-bottom-6">
+              Ohodnoďte prácu klientského centra vo Vašom kraji.
+            </h1>
           </div>
         </div>
       </div>

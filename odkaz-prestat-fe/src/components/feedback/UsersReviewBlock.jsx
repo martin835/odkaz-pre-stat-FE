@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { GrValidate } from "react-icons/gr";
 import useDidUpdateEffect from "../../utils/useDidUpdateEffect";
 import UsersReviewRow3 from "./UsersReviewRow3";
 
@@ -57,9 +58,13 @@ function UsersReviewBlock() {
 
   return (
     <div className="govuk-width-container govuk-!-margin-top-8 ">
-      <h2 className="govuk-heading-m govuk-!-margin-bottom-7">
-        Naposledy hodnotili:
-      </h2>
+      <div className="govuk-grid-row ">
+        <div className="govuk-grid-column-full-width">
+          <h2 className="govuk-heading-m govuk-!-margin-bottom-7">
+            Naposledy hodnotili <GrValidate />
+          </h2>
+        </div>
+      </div>
 
       {arrOfRows &&
         arrOfRows.map((row, i) => (

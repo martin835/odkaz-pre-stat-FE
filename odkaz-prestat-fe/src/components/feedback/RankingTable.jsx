@@ -1,10 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import {
-  AiOutlineArrowUp,
-  AiOutlineArrowRight,
-  AiOutlineArrowDown,
-} from "react-icons/ai";
+import { BsLadder } from "react-icons/bs";
 import RankingRow from "./RankingRow";
 
 function RankingTable() {
@@ -43,7 +39,7 @@ function RankingTable() {
       <div className="govuk-grid-row ">
         <div className="govuk-grid-column-full-width">
           <h2 className="govuk-heading-m govuk-!-margin-bottom-7">
-            Rebríček hodnotení:
+            Rebríček hodnotení <BsLadder />
           </h2>
 
           <table className="idsk-table">
@@ -63,7 +59,11 @@ function RankingTable() {
             <tbody className="idsk-table__body">
               {rankings &&
                 rankings.map((ranking, i) => (
-                  <RankingRow ranking={ranking} key={`RankingRow-${i}`} />
+                  <RankingRow
+                    ranking={ranking}
+                    rank={i + 1}
+                    key={`RankingRow-${i}`}
+                  />
                 ))}
             </tbody>
           </table>
