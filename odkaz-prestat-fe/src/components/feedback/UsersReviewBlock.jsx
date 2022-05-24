@@ -59,7 +59,7 @@ function UsersReviewBlock() {
   return (
     <div className="govuk-width-container govuk-!-margin-top-8 ">
       <div className="govuk-grid-row ">
-        <div className="govuk-grid-column-full-width">
+        <div className="govuk-grid-column-full">
           <h2 className="govuk-heading-m govuk-!-margin-bottom-7">
             Naposledy hodnotili <GrValidate />
           </h2>
