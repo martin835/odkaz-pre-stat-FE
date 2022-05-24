@@ -1,11 +1,11 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import FeedbackCard from "./components/feedback/FeedbackCard";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
+import ClientCenterOverView from "./components/views/ClientCenterOverView";
 import Home from "./components/views/Home";
 import Login from "./components/views/Login";
 import Organizations from "./components/views/Organizations";
@@ -79,13 +79,6 @@ function App() {
       <Header loggedUser={loggedUser} setLoggedUser={setLoggedUser} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/organizations/:district" element={<Organizations />} />
-        <Route
-          path="/feedback/:orgId"
-          element={
-            localStorage.getItem("accessToken") ? <FeedbackCard /> : <Login />
-          }
-        />
         <Route
           path="/profil"
           element={
@@ -95,6 +88,14 @@ function App() {
             />
           }
         />
+        <Route path="/organizations/:district" element={<Organizations />} />
+        <Route
+          path="/feedback/:orgId"
+          element={
+            localStorage.getItem("accessToken") ? <FeedbackCard /> : <Login />
+          }
+        />
+        <Route path="/provider/:id" element={<ClientCenterOverView />} />
       </Routes>
       <Footer />
     </>

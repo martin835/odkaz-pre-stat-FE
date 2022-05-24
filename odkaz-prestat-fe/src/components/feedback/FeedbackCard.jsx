@@ -13,7 +13,7 @@ function FeedbackCard() {
     service: "",
   });
   const { clientCenter } = useLocation().state;
-  //console.log(" ", clientCenter);
+  console.log(" CLIENT CENTER:  ", clientCenter);
   const computeCharsLeft = (chars) => {
     let left = 200 - parseInt(chars.length);
     setCharsLeft(left);
@@ -23,7 +23,7 @@ function FeedbackCard() {
     try {
       let response = await fetch(`${process.env.REACT_APP_BE_URL}/reviews`, {
         method: "POST",
-        body: JSON.stringify(reqObj),
+        body: JSON.stringify({ ...reqObj, provider: clientCenter._id }),
         //credentials: "include",
         headers: {
           "Content-type": "application/json",
