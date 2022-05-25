@@ -1,9 +1,15 @@
 import briskLogo from "../../assets/images/brisk-logo.png";
 
+//used this article to make footer sticked to the bottom:
+//https://radu.link/make-footer-stay-bottom-page-bootstrap/
+
 function Footer() {
   return (
-    <div data-module="idsk-footer-extended">
-      <footer className="idsk-footer-extended  " role="contentinfo">
+    <div
+      data-module="idsk-footer-extended "
+      className="d-flex flex-column min-vh-100"
+    >
+      <footer className="idsk-footer-extended mt-auto " role="contentinfo">
         <div className="idsk-footer-extended-main-content">
           <div className="govuk-width-container">
             <div className="govuk-grid-column-full">
