@@ -1,19 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
-// eslint-disable-next-line no-unused-vars
+import App from "./App";
+import "./index.css";
+import { configureStore } from "./redux/store";
+import reportWebVitals from "./reportWebVitals";
 import translator from "./utils/i18n.js";
-import { Route } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <Provider store={configureStore}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
   </React.StrictMode>
 );
 

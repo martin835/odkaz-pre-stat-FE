@@ -49,7 +49,7 @@ function CommentsLikesCardFooter(props) {
   return (
     <>
       <div id="footer-wrapper" className="d-flex justify-content-between mt-4">
-        <Likes defaultLikes={["123"]} />
+        <Likes likes={props.review.likes} />
         <CommentsBtn
           showComments={showComments}
           setShowComments={setShowComments}

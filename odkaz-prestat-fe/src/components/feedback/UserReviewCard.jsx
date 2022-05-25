@@ -122,7 +122,7 @@ function UserReviewCard(props) {
             {props.review.review && '"'}
           </p>
         </div>
-        <CommentsLikesCardFooter />
+        <CommentsLikesCardFooter review={props.review} />
       </div>
     </div>
   );

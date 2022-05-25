@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import "./App.css";
 import FeedbackCard from "./components/feedback/FeedbackCard";
 import Footer from "./components/footer/Footer";
@@ -12,8 +13,10 @@ import Organizations from "./components/views/Organizations";
 import UserProfile from "./components/views/UserProfile";
 import ScrollToTop from "./utils/ScrollToTop";
 import useDidUpdateEffect from "./utils/useDidUpdateEffect";
+import { setLoggedUserAction } from "./redux/actions";
 
 function App() {
+  const dispatch = useDispatch();
   //This is just to make component re-render correctly after token is set to LS. Token should be always taken from the Local Storage!!!
   const [tokenInLocalStorage, setTokenInLocalStorage] = useState(null);
   const [loggedUser, setLoggedUser] = useState(null);
@@ -67,6 +70,7 @@ function App() {
         const data = await response.json();
         //console.log(data);
         setLoggedUser(data);
+        dispatch(setLoggedUserAction(data));
       } else {
         console.log("error on fetching users");
       }

@@ -5,7 +5,7 @@ const CommentsBtn = (props) => {
   return (
     <div>
       <Button
-        variant="link"
+        variant="outline-primary"
         className="mb-2 "
         onClick={() => {
           props.unHideComments();
