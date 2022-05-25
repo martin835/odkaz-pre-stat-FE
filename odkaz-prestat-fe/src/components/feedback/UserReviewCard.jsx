@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { BsStar, BsStarFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import "../../styles/userReviewCard.css";
+import Likes from "./comments/Likes";
+import Comments from "./comments/CommentsBtn";
+import CommentsLikesCardFooter from "./comments/CommentsLikesCardFooter";
 
 function UserReviewCard(props) {
   const [service, setservice] = useState(null);
@@ -85,7 +88,6 @@ function UserReviewCard(props) {
             )}
           </div>
         </div>
-
         <div className="idsk-card-content idsk-card-content-secondary">
           <div className="idsk-card-meta-container govuk-!-margin-top-3 ">
             <span className="idsk-card-meta idsk-card-meta-date">
@@ -120,6 +122,7 @@ function UserReviewCard(props) {
             {props.review.review && '"'}
           </p>
         </div>
+        <CommentsLikesCardFooter />
       </div>
     </div>
   );

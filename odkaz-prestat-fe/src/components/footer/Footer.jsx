@@ -5,10 +5,7 @@ import briskLogo from "../../assets/images/brisk-logo.png";
 
 function Footer() {
   return (
-    <div
-      data-module="idsk-footer-extended "
-      className="d-flex flex-column min-vh-100"
-    >
+    <div className="d-flex flex-column min-vh-100">
       <footer className="idsk-footer-extended mt-auto " role="contentinfo">
         <div className="idsk-footer-extended-main-content">
           <div className="govuk-width-container">
