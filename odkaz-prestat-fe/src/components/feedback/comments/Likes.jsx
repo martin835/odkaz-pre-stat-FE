@@ -3,8 +3,8 @@ import { AiOutlineLike } from "react-icons/ai";
 import { Button } from "react-bootstrap";
 
 const yourUserId = "123";
-export default function Likes({ defaultLikes, onChange }) {
-  const [likes, setLikes] = useState(defaultLikes);
+export default function Likes({ onChange }) {
+  const [likes, setLikes] = useState(["123"]);
   const iLikedThisArticle = likes.includes(yourUserId);
   const toggleLike = () => {
     if (iLikedThisArticle) {

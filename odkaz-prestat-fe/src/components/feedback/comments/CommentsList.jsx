@@ -22,7 +22,7 @@ function CommentsList(props) {
     e.preventDefault();
     console.log("I post");
 
-    newComment.rate = document.getElementById("ratingValue").value;
+    //newComment.rate = document.getElementById("ratingValue").value;
     newComment.comment = document.getElementById("commentValue").value;
     newComment.elementId = props.albumId;
 
@@ -112,26 +112,26 @@ function CommentsList(props) {
                   : setShowAddComment(true)
               }
             >
-              <BiCommentAdd className="mr-2" /> Add Comment
+              <BiCommentAdd className="mr-2" /> Pridať komentár
             </Button>
           </ListGroupItem>
           {showAddComment && (
             <ListGroupItem className="px-0">
               <Form onSubmit={postComment}>
-                <Form.Group className="mb-3" controlId="ratingValue">
+                {/* <Form.Group className="mb-3" controlId="ratingValue">
                   <Form.Label>Rating:</Form.Label>
                   <Form.Control
                     type="number"
                     placeholder="add rating from 1-5"
                   />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="commentValue">
-                  <Form.Label>Example textarea</Form.Label>
+                </Form.Group> */}
+                <Form.Group className="mb-3 px-2" controlId="commentValue">
+                  <Form.Label>Napíšte komentár: </Form.Label>
                   <Form.Control as="textarea" rows={3} />
                 </Form.Group>
                 <Button variant="link" type="submit">
                   <RiMailSendLine className="mr-2" />
-                  Send Comment
+                  Publikovať komentár
                 </Button>
               </Form>
             </ListGroupItem>
