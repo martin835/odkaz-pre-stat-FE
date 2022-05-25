@@ -10,6 +10,7 @@ import Home from "./components/views/Home";
 import Login from "./components/views/Login";
 import Organizations from "./components/views/Organizations";
 import UserProfile from "./components/views/UserProfile";
+import ScrollToTop from "./utils/ScrollToTop";
 import useDidUpdateEffect from "./utils/useDidUpdateEffect";
 
 function App() {
@@ -77,26 +78,28 @@ function App() {
   return (
     <>
       <Header loggedUser={loggedUser} setLoggedUser={setLoggedUser} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/profil"
-          element={
-            <UserProfile
-              loggedUser={loggedUser}
-              setLoggedUser={setLoggedUser}
-            />
-          }
-        />
-        <Route path="/organizations/:district" element={<Organizations />} />
-        <Route
-          path="/feedback/:orgId"
-          element={
-            localStorage.getItem("accessToken") ? <FeedbackCard /> : <Login />
-          }
-        />
-        <Route path="/provider/:id" element={<ClientCenterOverView />} />
-      </Routes>
+      <ScrollToTop>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/profil"
+            element={
+              <UserProfile
+                loggedUser={loggedUser}
+                setLoggedUser={setLoggedUser}
+              />
+            }
+          />
+          <Route path="/organizations/:district" element={<Organizations />} />
+          <Route
+            path="/feedback/:orgId"
+            element={
+              localStorage.getItem("accessToken") ? <FeedbackCard /> : <Login />
+            }
+          />
+          <Route path="/provider/:id" element={<ClientCenterOverView />} />
+        </Routes>
+      </ScrollToTop>
       <Footer />
     </>
   );
