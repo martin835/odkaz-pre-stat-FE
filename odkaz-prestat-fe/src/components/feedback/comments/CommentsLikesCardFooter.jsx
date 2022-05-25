@@ -53,6 +53,10 @@ function CommentsLikesCardFooter(props) {
         <CommentsBtn
           showComments={showComments}
           setShowComments={setShowComments}
+          unHideComments={unHideComments}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+          loadComments={loadComments}
         />
       </div>
       <div>

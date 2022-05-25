@@ -1,11 +1,15 @@
+import { useState } from "react";
 import {
-  ListGroup,
   Button,
-  ListGroupItem,
   Form,
+  ListGroup,
+  ListGroupItem,
   Spinner,
 } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { MdOutlineSentimentDissatisfied } from "react-icons/md";
+import { BiCommentAdd } from "react-icons/bi";
+import { RiMailSendLine } from "react-icons/ri";
+
 function CommentsList(props) {
   const [bookComments, setBookComments] = useState([]);
   const [showAddComment, setShowAddComment] = useState(false);
@@ -85,7 +89,10 @@ function CommentsList(props) {
         <ListGroup>
           {props.isLoading && <Spinner animation="border" variant="primary" />}
           {bookComments == 0 ? (
-            <ListGroup.Item>No Comments for this album :( </ListGroup.Item>
+            <ListGroup.Item>
+              Žiadne komentáre pre toto hodnotenie{" "}
+              <MdOutlineSentimentDissatisfied />{" "}
+            </ListGroup.Item>
           ) : (
             bookComments.map((comment) => (
               <ListGroup.Item key={comment._id}>
@@ -105,7 +112,7 @@ function CommentsList(props) {
                   : setShowAddComment(true)
               }
             >
-              <i className="bi bi-plus-lg"></i>Add Comment
+              <BiCommentAdd className="mr-2" /> Add Comment
             </Button>
           </ListGroupItem>
           {showAddComment && (
@@ -123,7 +130,8 @@ function CommentsList(props) {
                   <Form.Control as="textarea" rows={3} />
                 </Form.Group>
                 <Button variant="link" type="submit">
-                  <i className="bi bi-envelope mr-2"></i>Send Comment
+                  <RiMailSendLine className="mr-2" />
+                  Send Comment
                 </Button>
               </Form>
             </ListGroupItem>

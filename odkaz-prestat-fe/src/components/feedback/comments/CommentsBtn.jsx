@@ -1,15 +1,7 @@
-import { Component } from "react";
-import {
-  ListGroup,
-  Button,
-  ListGroupItem,
-  Form,
-  Spinner,
-} from "react-bootstrap";
-import { useState, useEffect } from "react";
-import CommentsList from "./CommentsList";
+import { Button } from "react-bootstrap";
+import { BiCommentDots } from "react-icons/bi";
 
-const Comments = (props) => {
+const CommentsBtn = (props) => {
   return (
     <div>
       <Button
@@ -20,10 +12,11 @@ const Comments = (props) => {
           props.loadComments();
         }}
       >
-        <i className="bi bi-list mr-2"></i>Komentáre
+        <BiCommentDots className="mr-2" />
+        Komentáre
       </Button>
     </div>
   );
 };
 
-export default Comments;
+export default CommentsBtn;
