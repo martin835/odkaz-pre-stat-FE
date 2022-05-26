@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import "./App.css";
 import FeedbackCard from "./components/feedback/FeedbackCard";
 import Footer from "./components/footer/Footer";
@@ -10,12 +11,16 @@ import Home from "./components/views/Home";
 import Login from "./components/views/Login";
 import Organizations from "./components/views/Organizations";
 import UserProfile from "./components/views/UserProfile";
+import ScrollToTop from "./utils/ScrollToTop";
 import useDidUpdateEffect from "./utils/useDidUpdateEffect";
+import { setLoggedUserAction } from "./redux/actions";
 
 function App() {
+  const dispatch = useDispatch();
+  const loggedUser = useSelector((state) => state.loggedUser);
   //This is just to make component re-render correctly after token is set to LS. Token should be always taken from the Local Storage!!!
   const [tokenInLocalStorage, setTokenInLocalStorage] = useState(null);
-  const [loggedUser, setLoggedUser] = useState(null);
+  //const [loggedUser, setLoggedUser] = useState(null);
   // Do we have an access token in the URL?
   const token = new URLSearchParams(window.location.search).get("accessToken");
 
@@ -65,7 +70,8 @@ function App() {
       if (response.ok) {
         const data = await response.json();
         //console.log(data);
-        setLoggedUser(data);
+        //setLoggedUser(data);
+        dispatch(setLoggedUserAction(data));
       } else {
         console.log("error on fetching users");
       }
@@ -76,27 +82,21 @@ function App() {
 
   return (
     <>
-      <Header loggedUser={loggedUser} setLoggedUser={setLoggedUser} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/profil"
-          element={
-            <UserProfile
-              loggedUser={loggedUser}
-              setLoggedUser={setLoggedUser}
-            />
-          }
-        />
-        <Route path="/organizations/:district" element={<Organizations />} />
-        <Route
-          path="/feedback/:orgId"
-          element={
-            localStorage.getItem("accessToken") ? <FeedbackCard /> : <Login />
-          }
-        />
-        <Route path="/provider/:id" element={<ClientCenterOverView />} />
-      </Routes>
+      <Header />
+      <ScrollToTop>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/profil" element={<UserProfile />} />
+          <Route path="/organizations/:district" element={<Organizations />} />
+          <Route
+            path="/feedback/:orgId"
+            element={
+              localStorage.getItem("accessToken") ? <FeedbackCard /> : <Login />
+            }
+          />
+          <Route path="/provider/:id" element={<ClientCenterOverView />} />
+        </Routes>
+      </ScrollToTop>
       <Footer />
     </>
   );

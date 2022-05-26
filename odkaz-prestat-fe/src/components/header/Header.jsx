@@ -8,11 +8,15 @@ import WarningBar from "./WarningBar";
 import profilePic from "../../assets/images/header-web/profile.svg";
 import { VscFeedback } from "react-icons/vsc";
 import "../../styles/header.css";
+import { useDispatch, useSelector } from "react-redux";
+import { removeLoggedUserAction } from "../../redux/actions";
 
 function Header(props) {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const [langSelected, setLangSelected] = useState("Slovenčina");
   const [showMobileLogin, setShowMobileLogin] = useState(false);
+  const loggedUser = useSelector((state) => state.loggedUser);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -144,9 +148,7 @@ function Header(props) {
                     onClick={() => setShowMobileLogin(!showMobileLogin)}
                   >
                     <img
-                      src={
-                        props.loggedUser ? props.loggedUser.avatar : profilePic
-                      }
+                      src={loggedUser ? loggedUser.avatar : profilePic}
                       alt="Electronic service menu icon"
                       className="header-profile-pic"
                     />
@@ -160,7 +162,7 @@ function Header(props) {
                   <div className="idsk-header-web__main--buttons">
                     <div
                       className={
-                        props.loggedUser
+                        loggedUser
                           ? `idsk-header-web__main--login  idsk-header-web__main--login--loggedIn`
                           : `idsk-header-web__main--login`
                       }
@@ -179,12 +181,12 @@ function Header(props) {
                       <div className="idsk-header-web__main--login-action ">
                         <img
                           className="header-profile-pic"
-                          src={props.loggedUser?.avatar}
+                          src={loggedUser?.avatar}
                           alt="Profile image"
                         />
                         <div className="idsk-header-web__main--login-action-text">
                           <span className="govuk-body-s idsk-header-web__main--login-action-text-user-name">
-                            {props.loggedUser?.name} {props.loggedUser?.surname}
+                            {loggedUser?.name} {loggedUser?.surname}
                           </span>
                           <div className="govuk-!-margin-bottom-1">
                             <a
@@ -192,7 +194,7 @@ function Header(props) {
                               title="odhlásiť"
                               href="#"
                               onClick={() => {
-                                props.setLoggedUser(null);
+                                dispatch(removeLoggedUserAction());
                                 localStorage.removeItem("accessToken");
                               }}
                             >
@@ -222,7 +224,7 @@ function Header(props) {
                         className="idsk-button idsk-header-web__main--login-logoutbtn"
                         data-module="idsk-button"
                         onClick={() => {
-                          props.setLoggedUser(null);
+                          dispatch(removeLoggedUserAction());
                           localStorage.removeItem("accessToken");
                         }}
                       >
@@ -253,7 +255,7 @@ function Header(props) {
                 <div className="idsk-header-web__main--buttons">
                   <div
                     className={
-                      props.loggedUser
+                      loggedUser
                         ? `idsk-header-web__main--login  idsk-header-web__main--login--loggedIn`
                         : `idsk-header-web__main--login`
                     }
@@ -272,12 +274,12 @@ function Header(props) {
                     <div className="idsk-header-web__main--login-action">
                       <img
                         className="header-profile-pic"
-                        src={props.loggedUser?.avatar}
+                        src={loggedUser?.avatar}
                         alt="Profile image"
                       />
                       <div className="idsk-header-web__main--login-action-text">
                         <span className="govuk-body-s idsk-header-web__main--login-action-text-user-name">
-                          {props.loggedUser?.name} {props.loggedUser?.surname}
+                          {loggedUser?.name} {loggedUser?.surname}
                         </span>
                         <div className="govuk-!-margin-bottom-1">
                           <a
@@ -314,7 +316,7 @@ function Header(props) {
                       className="idsk-button idsk-header-web__main--login-logoutbtn"
                       data-module="idsk-button"
                       onClick={() => {
-                        props.setLoggedUser(null);
+                        dispatch(removeLoggedUserAction());
                         localStorage.removeItem("accessToken");
                       }}
                     >
