@@ -17,6 +17,7 @@ import { setLoggedUserAction } from "./redux/actions";
 
 function App() {
   const dispatch = useDispatch();
+  const loggedUser = useSelector((state) => state.loggedUser);
   //This is just to make component re-render correctly after token is set to LS. Token should be always taken from the Local Storage!!!
   const [tokenInLocalStorage, setTokenInLocalStorage] = useState(null);
   //const [loggedUser, setLoggedUser] = useState(null);
