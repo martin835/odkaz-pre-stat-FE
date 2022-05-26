@@ -6,7 +6,7 @@ const composeFunctionThatAlwaysWorks =
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const initialState = {
-  loggedUser: {},
+  loggedUser: null,
 };
 
 /* const persistConfig = {

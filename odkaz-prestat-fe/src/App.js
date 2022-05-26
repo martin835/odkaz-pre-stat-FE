@@ -19,7 +19,7 @@ function App() {
   const dispatch = useDispatch();
   //This is just to make component re-render correctly after token is set to LS. Token should be always taken from the Local Storage!!!
   const [tokenInLocalStorage, setTokenInLocalStorage] = useState(null);
-  const [loggedUser, setLoggedUser] = useState(null);
+  //const [loggedUser, setLoggedUser] = useState(null);
   // Do we have an access token in the URL?
   const token = new URLSearchParams(window.location.search).get("accessToken");
 
@@ -69,7 +69,7 @@ function App() {
       if (response.ok) {
         const data = await response.json();
         //console.log(data);
-        setLoggedUser(data);
+        //setLoggedUser(data);
         dispatch(setLoggedUserAction(data));
       } else {
         console.log("error on fetching users");
@@ -81,19 +81,11 @@ function App() {
 
   return (
     <>
-      <Header loggedUser={loggedUser} setLoggedUser={setLoggedUser} />
+      <Header />
       <ScrollToTop>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/profil"
-            element={
-              <UserProfile
-                loggedUser={loggedUser}
-                setLoggedUser={setLoggedUser}
-              />
-            }
-          />
+          <Route path="/profil" element={<UserProfile />} />
           <Route path="/organizations/:district" element={<Organizations />} />
           <Route
             path="/feedback/:orgId"
