@@ -53,6 +53,9 @@ function CommentsLikesCardFooter(props) {
           likes={props.review.likes}
           reviewId={props.review._id}
           userId={props.review.user._id}
+          toggleShowLogInInfo={props.toggleShowLogInInfo}
+          showLogInInfo={props.showLogInInfo}
+          setShowLogInInfo={props.setShowLogInInfo}
         />
         <CommentsBtn
           showComments={showComments}

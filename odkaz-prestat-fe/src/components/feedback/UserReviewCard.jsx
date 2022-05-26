@@ -6,12 +6,17 @@ import "../../styles/userReviewCard.css";
 import Likes from "./comments/Likes";
 import Comments from "./comments/CommentsBtn";
 import CommentsLikesCardFooter from "./comments/CommentsLikesCardFooter";
+import { Toast } from "react-bootstrap";
 
 function UserReviewCard(props) {
   const [service, setservice] = useState(null);
+  const [showLogInInfo, setShowLogInInfo] = useState(false);
+
   useEffect(() => {
     fetchProvider();
   }, []);
+
+  const toggleShowLogInInfo = () => setShowLogInInfo(!showLogInInfo);
 
   //In reality I am fetching a service here,  but service has a provider in it's model.
   const fetchProvider = async () => {
@@ -122,7 +127,27 @@ function UserReviewCard(props) {
             {props.review.review && '"'}
           </p>
         </div>
-        <CommentsLikesCardFooter review={props.review} />
+        <div
+          className={showLogInInfo ? "d-block p-3" : "d-none p-3"}
+          position="top-center"
+        >
+          <Toast show={showLogInInfo} onClose={toggleShowLogInInfo}>
+            <Toast.Header>
+              <strong className="mr-auto">Musíte sa prihlásiť</strong>
+            </Toast.Header>
+            <Toast.Body>
+              Aby ste mohhli pridávať páčiky, komentáre a hodnotenia, musíte sa
+              prihlásiť.
+            </Toast.Body>
+          </Toast>
+        </div>
+
+        <CommentsLikesCardFooter
+          review={props.review}
+          toggleShowLogInInfo={toggleShowLogInInfo}
+          showLogInInfo={showLogInInfo}
+          setShowLogInInfo={setShowLogInInfo}
+        />
       </div>
     </div>
   );

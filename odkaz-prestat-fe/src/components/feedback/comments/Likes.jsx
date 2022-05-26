@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineLike } from "react-icons/ai";
-import { Button } from "react-bootstrap";
+import { Button, Toast } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 export default function Likes(props) {
   const loggedUser = useSelector((state) => state.loggedUser);
   const [likeClicked, setLikeClicked] = useState(false);
   const [updatedReview, setUpdatedReview] = useState(null);
-  let checkIfLikesContainLoggedUser = props.likes.filter(
-    (obj) => obj.userId === loggedUser._id
-  );
 
   useEffect(() => {
     if (!loggedUser) return;
-    console.log(checkIfLikesContainLoggedUser.length > 0);
-    if (checkIfLikesContainLoggedUser.length > 0) {
-      setLikeClicked(true);
-    } else {
-      setLikeClicked(false);
+
+    if (loggedUser) {
+      let checkIfLikesContainLoggedUser = props.likes.filter(
+        (obj) => obj.userId === loggedUser._id
+      );
+
+      console.log(checkIfLikesContainLoggedUser.length > 0);
+      if (checkIfLikesContainLoggedUser.length > 0) {
+        setLikeClicked(true);
+      } else {
+        setLikeClicked(false);
+      }
     }
   }, [props.likes]);
 
@@ -53,20 +57,37 @@ export default function Likes(props) {
     }
   };
 
+  const checkIfUserIsLogged = () => {
+    if (loggedUser) {
+      postLike();
+      setLikeClicked(!likeClicked);
+    } else {
+      props.setShowLogInInfo(true);
+    }
+  };
+
   return (
-    <div>
-      <Button
-        onClick={() => {
-          postLike();
-          setLikeClicked(!likeClicked);
-        }}
-        variant={likeClicked ? "primary" : "outline-primary"}
-      >
-        <AiOutlineLike />{" "}
-        {likeClicked || checkIfLikesContainLoggedUser.length > 0
-          ? `${updatedReview?.likes.length}`
-          : `${props.likes.length}`}
-      </Button>{" "}
-    </div>
+    <>
+      <div>
+        <Button
+          onClick={() => checkIfUserIsLogged()}
+          variant={likeClicked ? "primary" : "outline-primary"}
+        >
+          <AiOutlineLike />{" "}
+          {loggedUser && (
+            <>
+              {likeClicked ||
+              props.likes.filter((obj) => obj.userId === loggedUser._id)
+                .length > 0
+                ? updatedReview
+                  ? `${updatedReview?.likes.length}`
+                  : `${props.likes.length}`
+                : `${props.likes.length}`}
+            </>
+          )}
+          {!loggedUser && `${props.likes.length}`}
+        </Button>{" "}
+      </div>
+    </>
   );
 }
