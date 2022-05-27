@@ -1,15 +1,13 @@
 import { useState } from "react";
-import {
-  Button,
-  Form,
-  ListGroup,
-  ListGroupItem,
-  Spinner,
-} from "react-bootstrap";
+import { Button, Form, ListGroup, Spinner } from "react-bootstrap";
 import { MdOutlineSentimentDissatisfied } from "react-icons/md";
 import { BiCommentAdd } from "react-icons/bi";
 import { RiMailSendLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
+import OneComment from "./OneComment";
+import { Container } from "react-bootstrap";
+import { Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 
 function CommentsList(props) {
   const [showAddComment, setShowAddComment] = useState(false);
@@ -82,37 +80,36 @@ function CommentsList(props) {
   return (
     <>
       {props.showComments && (
-        <ListGroup>
+        <Container fluid>
           {props.isLoading && <Spinner animation="border" variant="primary" />}
           {props.reviewComments == 0 ? (
-            <ListGroup.Item>
-              Žiadne komentáre pre toto hodnotenie{" "}
-              <MdOutlineSentimentDissatisfied />{" "}
-            </ListGroup.Item>
+            <Row>
+              <Col>
+                Žiadne komentáre pre toto hodnotenie{" "}
+                <MdOutlineSentimentDissatisfied />{" "}
+              </Col>
+            </Row>
           ) : (
             props.reviewComments.map((comment) => (
-              <ListGroup.Item key={comment._id}>
-                <i>"{comment.comment}"</i>
-                <Button variant="link" id={comment._id} onClick={deleteComment}>
-                  <i className="bi bi-trash3"></i>Delete
-                </Button>
-              </ListGroup.Item>
+              <OneComment key={comment._id} comment={comment} />
             ))
           )}
-          <ListGroupItem>
-            <Button
-              variant="link"
-              onClick={() =>
-                showAddComment
-                  ? setShowAddComment(false)
-                  : setShowAddComment(true)
-              }
-            >
-              <BiCommentAdd className="mr-2" /> Pridať komentár
-            </Button>
-          </ListGroupItem>
+          <Row className="mt-4">
+            <Col>
+              <Button
+                variant="link"
+                onClick={() =>
+                  showAddComment
+                    ? setShowAddComment(false)
+                    : setShowAddComment(true)
+                }
+              >
+                <BiCommentAdd className="mr-2" /> Pridať komentár
+              </Button>
+            </Col>
+          </Row>
           {showAddComment && (
-            <ListGroupItem className="px-0">
+            <div className="px-0">
               <Form onSubmit={postComment}>
                 <Form.Group className="mb-3 px-2" controlId="commentValue">
                   <Form.Label>Napíšte komentár: </Form.Label>
@@ -130,9 +127,9 @@ function CommentsList(props) {
                   Publikovať komentár
                 </Button>
               </Form>
-            </ListGroupItem>
+            </div>
           )}
-        </ListGroup>
+        </Container>
       )}
     </>
   );
