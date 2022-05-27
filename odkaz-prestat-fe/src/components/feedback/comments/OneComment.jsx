@@ -54,14 +54,14 @@ const OneComment = (props) => {
             {" "}
             {props.comment.comment}
           </div>
-          <Button
+          {/* <Button
             variant="link"
             className="float-right"
             id={props.comment._id}
             onClick={props.deleteComment}
           >
             <i className="bi bi-trash3"></i>Delete
-          </Button>
+          </Button> */}
         </Col>
       </Row>
     </div>
