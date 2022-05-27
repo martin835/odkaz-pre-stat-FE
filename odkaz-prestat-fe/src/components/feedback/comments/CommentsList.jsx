@@ -1,43 +1,37 @@
 import { useState } from "react";
-import {
-  Button,
-  Form,
-  ListGroup,
-  ListGroupItem,
-  Spinner,
-} from "react-bootstrap";
+import { Button, Form, ListGroup, Spinner } from "react-bootstrap";
 import { MdOutlineSentimentDissatisfied } from "react-icons/md";
 import { BiCommentAdd } from "react-icons/bi";
 import { RiMailSendLine } from "react-icons/ri";
+import { useSelector } from "react-redux";
+import OneComment from "./OneComment";
+import { Container } from "react-bootstrap";
+import { Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 
 function CommentsList(props) {
-  const [bookComments, setBookComments] = useState([]);
   const [showAddComment, setShowAddComment] = useState(false);
+  const loggedUser = useSelector((state) => state.loggedUser);
   const [newComment, setNewComment] = useState({
     comment: "",
-    rate: "",
-    elementId: "",
+    userId: loggedUser?._id,
+    commentDate: new Date(),
   });
   const postComment = async (e) => {
     e.preventDefault();
     console.log("I post");
 
-    //newComment.rate = document.getElementById("ratingValue").value;
-    newComment.comment = document.getElementById("commentValue").value;
-    newComment.elementId = props.albumId;
-
     console.log(newComment);
-
     try {
       let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/comments/",
+        `${process.env.REACT_APP_BE_URL}/reviews/${props.reviewId}/comments`,
         {
           method: "POST",
           body: JSON.stringify(newComment),
+          //credentials: "include",
           headers: {
-            "Content-Type": "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWZhNjQ0NTgyZWExZDAwMTViYjAzZWEiLCJpYXQiOjE2NTM0NzAwOTksImV4cCI6MTY1NDY3OTY5OX0.6azm4qJ7UiFPjEXdeuv4UD-uENL1VfUmpGsVBMcp1js",
+            "Content-type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
           },
         }
       );
@@ -86,57 +80,56 @@ function CommentsList(props) {
   return (
     <>
       {props.showComments && (
-        <ListGroup>
+        <Container fluid>
           {props.isLoading && <Spinner animation="border" variant="primary" />}
-          {bookComments == 0 ? (
-            <ListGroup.Item>
-              Žiadne komentáre pre toto hodnotenie{" "}
-              <MdOutlineSentimentDissatisfied />{" "}
-            </ListGroup.Item>
+          {props.reviewComments == 0 ? (
+            <Row>
+              <Col>
+                Žiadne komentáre pre toto hodnotenie{" "}
+                <MdOutlineSentimentDissatisfied />{" "}
+              </Col>
+            </Row>
           ) : (
-            bookComments.map((comment) => (
-              <ListGroup.Item key={comment._id}>
-                <i>"{comment.comment}"</i>
-                <Button variant="link" id={comment._id} onClick={deleteComment}>
-                  <i className="bi bi-trash3"></i>Delete
-                </Button>
-              </ListGroup.Item>
+            props.reviewComments.map((comment) => (
+              <OneComment key={comment._id} comment={comment} />
             ))
           )}
-          <ListGroupItem>
-            <Button
-              variant="link"
-              onClick={() =>
-                showAddComment
-                  ? setShowAddComment(false)
-                  : setShowAddComment(true)
-              }
-            >
-              <BiCommentAdd className="mr-2" /> Pridať komentár
-            </Button>
-          </ListGroupItem>
+          <Row className="mt-4">
+            <Col>
+              <Button
+                variant="link"
+                onClick={() =>
+                  showAddComment
+                    ? setShowAddComment(false)
+                    : setShowAddComment(true)
+                }
+              >
+                <BiCommentAdd className="mr-2" /> Pridať komentár
+              </Button>
+            </Col>
+          </Row>
           {showAddComment && (
-            <ListGroupItem className="px-0">
+            <div className="px-0">
               <Form onSubmit={postComment}>
-                {/* <Form.Group className="mb-3" controlId="ratingValue">
-                  <Form.Label>Rating:</Form.Label>
-                  <Form.Control
-                    type="number"
-                    placeholder="add rating from 1-5"
-                  />
-                </Form.Group> */}
                 <Form.Group className="mb-3 px-2" controlId="commentValue">
                   <Form.Label>Napíšte komentár: </Form.Label>
-                  <Form.Control as="textarea" rows={3} />
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    value={newComment.comment}
+                    onChange={(e) =>
+                      setNewComment({ ...newComment, comment: e.target.value })
+                    }
+                  />
                 </Form.Group>
                 <Button variant="link" type="submit">
                   <RiMailSendLine className="mr-2" />
                   Publikovať komentár
                 </Button>
               </Form>
-            </ListGroupItem>
+            </div>
           )}
-        </ListGroup>
+        </Container>
       )}
     </>
   );
