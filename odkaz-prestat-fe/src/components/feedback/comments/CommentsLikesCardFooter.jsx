@@ -5,22 +5,22 @@ import Likes from "./Likes";
 
 function CommentsLikesCardFooter(props) {
   const [showComments, setShowComments] = useState(false);
-  const [bookComments, setBookComments] = useState([]);
+  const [reviewComments, setReviewComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const loadComments = async () => {
     console.log("i am mounted");
-    let albumId = props.albumId;
 
     try {
       let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/comments/" + albumId,
+        `${process.env.REACT_APP_BE_URL}/reviews/${props.review._id}/comments`,
         {
           method: "GET",
+
+          //credentials: "include",
           headers: {
-            "Content-Type": "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWZhNjQ0NTgyZWExZDAwMTViYjAzZWEiLCJpYXQiOjE2NTM0NzAwOTksImV4cCI6MTY1NDY3OTY5OX0.6azm4qJ7UiFPjEXdeuv4UD-uENL1VfUmpGsVBMcp1js",
+            "Content-type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
           },
         }
       );
@@ -32,7 +32,7 @@ function CommentsLikesCardFooter(props) {
               isLoading: false
             }); */
 
-        setBookComments(data);
+        setReviewComments(data);
         setIsLoading(false);
       } else {
         // alert('something went wrong :(')
@@ -68,9 +68,12 @@ function CommentsLikesCardFooter(props) {
       </div>
       <div>
         <CommentsList
+          reviewId={props.review._id}
           isLoading={isLoading}
           showComments={showComments}
           loadComments={loadComments}
+          reviewComments={reviewComments}
+          setReviewComments={setReviewComments}
         />
       </div>
     </>
