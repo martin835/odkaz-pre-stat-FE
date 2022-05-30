@@ -16,7 +16,7 @@ export default function Likes(props) {
         (obj) => obj.userId === loggedUser._id
       );
 
-      console.log(checkIfLikesContainLoggedUser.length > 0);
+      // console.log(checkIfLikesContainLoggedUser.length > 0);
       if (checkIfLikesContainLoggedUser.length > 0) {
         setLikeClicked(true);
       } else {

@@ -7,6 +7,27 @@
   border-radius: 5px;
 }
 
+.chat-active {
+  width: 20rem;
+  background-color: #f3f2f1;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  border-radius: 5px;
+}
+
+.chat-active-body {
+  height: 25rem;
+  background-color: white;
+  overflow-y: scroll;
+}
+
+.chat-active-footer {
+  width: 20rem;
+  bottom: 0;
+  right: 0;
+}
+
 .chat-button,
 .chat-input[type="submit"],
 .chat-input[type="reset"] {
@@ -26,8 +47,14 @@
   border-radius: 14px;
 }
 
+.chat-message-sender {
+  text-align: end;
+}
+
 @media screen and (min-width: 1650px) {
-  .chat-closed {
+  .chat-closed,
+  .chat-active,
+  .chat-active-footer {
     right: 3rem;
   }
 }
