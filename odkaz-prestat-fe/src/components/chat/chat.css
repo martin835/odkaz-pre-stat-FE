@@ -1,10 +1,29 @@
 .chat-closed {
-  width: 18rem;
-  height: 3rem;
-  background-color: aqua;
+  width: 20rem;
+  background-color: #f3f2f1;
   position: fixed;
   bottom: 0;
   right: 0;
+  border-radius: 5px;
+}
+
+.chat-button,
+.chat-input[type="submit"],
+.chat-input[type="reset"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  width: 28px;
+  height: 28px;
+}
+
+.chat-button:hover {
+  background-color: #bfc1c3;
+  border-radius: 14px;
 }
 
 @media screen and (min-width: 1650px) {
