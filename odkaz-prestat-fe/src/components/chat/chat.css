@@ -1,7 +1,14 @@
 .chat-closed {
   width: 18rem;
-  height: 5rem;
+  height: 3rem;
   background-color: aqua;
-  position: sticky;
-  top: 0;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+@media screen and (min-width: 1650px) {
+  .chat-closed {
+    right: 3rem;
+  }
 }

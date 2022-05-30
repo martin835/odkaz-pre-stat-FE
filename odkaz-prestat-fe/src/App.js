@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import ChatWindow from "./components/chat/chatWindow";
+import ChatWindow from "./components/chat/ChatWindow";
 import FeedbackCard from "./components/feedback/FeedbackCard";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
