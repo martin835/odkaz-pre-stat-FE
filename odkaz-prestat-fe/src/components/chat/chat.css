@@ -1,0 +1,7 @@
+.chat-closed {
+  width: 18rem;
+  height: 5rem;
+  background-color: aqua;
+  position: sticky;
+  top: 0;
+}

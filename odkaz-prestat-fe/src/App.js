@@ -1,8 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import "./App.css";
+import ChatWindow from "./components/chat/chatWindow";
 import FeedbackCard from "./components/feedback/FeedbackCard";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
@@ -11,9 +12,9 @@ import Home from "./components/views/Home";
 import Login from "./components/views/Login";
 import Organizations from "./components/views/Organizations";
 import UserProfile from "./components/views/UserProfile";
+import { setLoggedUserAction } from "./redux/actions";
 import ScrollToTop from "./utils/ScrollToTop";
 import useDidUpdateEffect from "./utils/useDidUpdateEffect";
-import { setLoggedUserAction } from "./redux/actions";
 
 function App() {
   const dispatch = useDispatch();
@@ -96,6 +97,7 @@ function App() {
           />
           <Route path="/provider/:id" element={<ClientCenterOverView />} />
         </Routes>
+        <ChatWindow />
       </ScrollToTop>
       <Footer />
     </>

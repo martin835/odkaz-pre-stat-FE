@@ -1,5 +1,6 @@
 import { Badge } from "react-bootstrap";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 function RankingRow(props) {
   return (
@@ -10,7 +11,9 @@ function RankingRow(props) {
           {props.rank}
           {"."}
         </Badge>
-        {props.ranking.Provider[0].name}
+        <Link to={`/provider/${props.ranking._id}`}>
+          {props.ranking.Provider[0].name}
+        </Link>
       </td>
       <td className="idsk-table__cell">
         {Math.round(props.ranking.avgRating * 10) / 10}{" "}
