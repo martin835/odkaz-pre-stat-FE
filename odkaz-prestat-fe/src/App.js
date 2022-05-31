@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import "./App.css";
 import ChatWindow from "./components/chat/ChatWindow";
 import FeedbackCard from "./components/feedback/FeedbackCard";
@@ -15,6 +15,7 @@ import UserProfile from "./components/views/UserProfile";
 import { setLoggedUserAction } from "./redux/actions";
 import ScrollToTop from "./utils/ScrollToTop";
 import useDidUpdateEffect from "./utils/useDidUpdateEffect";
+import UserRegistration from "./components/login/UserRegistration";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,10 +24,10 @@ function App() {
   const [tokenInLocalStorage, setTokenInLocalStorage] = useState(null);
   //const [loggedUser, setLoggedUser] = useState(null);
   // Do we have an access token in the URL?
+
   const token = new URLSearchParams(window.location.search).get("accessToken");
-  console.log(token);
+  //console.log(token);
   useEffect(() => {
-    //console.log("useEffect: ", token);
     if (token) {
       localStorage.setItem("accessToken", token);
       setTokenInLocalStorage(token);
@@ -88,6 +89,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profil" element={<UserProfile />} />
+          <Route path="/user-registration" element={<UserRegistration />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/organizations/:district" element={<Organizations />} />
           <Route
             path="/feedback/:orgId"

@@ -1,5 +1,7 @@
 {
   "app_name": "Odkaz pre štát",
   "test_version": "APLIKÁCIA VO VÝVOJI",
-  "log_in": "Prihlásiť sa"
+  "log_in": "Prihlásiť sa",
+  "log_in_with_google": "Prihlásiť sa účtom Google",
+  "register": "Zaregistrovať sa"
 }

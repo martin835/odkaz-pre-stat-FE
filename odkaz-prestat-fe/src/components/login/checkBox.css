@@ -1,0 +1,5 @@
+.checkBox-gov-uk-reset,
+::after,
+::before {
+  box-sizing: unset !important;
+}

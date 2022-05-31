@@ -10,6 +10,7 @@ import { VscFeedback } from "react-icons/vsc";
 import "../../styles/header.css";
 import { useDispatch, useSelector } from "react-redux";
 import { removeLoggedUserAction } from "../../redux/actions";
+import { useEffect } from "react";
 
 function Header(props) {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
@@ -19,6 +20,8 @@ function Header(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  useEffect(() => {}, [loggedUser]);
 
   return (
     <>
@@ -167,17 +170,17 @@ function Header(props) {
                           : `idsk-header-web__main--login`
                       }
                     >
-                      <a
-                        href={`${process.env.REACT_APP_BE_URL}/users/googleLogin`}
+                      <button
+                        type="button"
+                        className="idsk-button idsk-header-web__main--login-loginbtn"
+                        onClick={() => {
+                          navigate("/login");
+                          setShowMobileLogin(false);
+                        }}
                       >
-                        <button
-                          type="button"
-                          className="idsk-button idsk-header-web__main--login-loginbtn"
-                          data-module="idsk-button"
-                        >
-                          {t("log_in")}
-                        </button>
-                      </a>
+                        {t("log_in")}
+                      </button>
+
                       <div className="idsk-header-web__main--login-action ">
                         <img
                           className="header-profile-pic"
@@ -260,17 +263,17 @@ function Header(props) {
                         : `idsk-header-web__main--login`
                     }
                   >
-                    <a
-                      href={`${process.env.REACT_APP_BE_URL}/users/googleLogin`}
+                    <button
+                      type="button"
+                      className="idsk-button idsk-header-web__main--login-loginbtn"
+                      onClick={() => {
+                        navigate("/login");
+                        setShowMobileLogin(false);
+                      }}
                     >
-                      <button
-                        type="button"
-                        className="idsk-button idsk-header-web__main--login-loginbtn"
-                        data-module="idsk-button"
-                      >
-                        {t("log_in")}
-                      </button>
-                    </a>
+                      {t("log_in")}
+                    </button>
+
                     <div className="idsk-header-web__main--login-action">
                       <img
                         className="header-profile-pic"
@@ -318,6 +321,7 @@ function Header(props) {
                       onClick={() => {
                         dispatch(removeLoggedUserAction());
                         localStorage.removeItem("accessToken");
+                        setShowMobileLogin(false);
                       }}
                     >
                       Odhlásiť sa

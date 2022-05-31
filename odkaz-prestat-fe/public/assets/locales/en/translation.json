@@ -1,5 +1,7 @@
 {
   "app_name": "Say to State",
   "test_version": "App in development",
-  "log_in": "Log in"
+  "log_in": "Log in",
+  "log_in_with_google": "Login with Google account",
+  "register": "Register"
 }

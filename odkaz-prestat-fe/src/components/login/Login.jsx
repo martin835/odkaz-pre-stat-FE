@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { setLoggedUserAction } from "../../redux/actions";
 import GoogleLoginButton from "./GoogleLoginButton";
 
 function Login() {
@@ -10,6 +14,32 @@ function Login() {
   });
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const loggedUser = useSelector((state) => state.loggedUser);
+
+  const loadLoggedUser = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BE_URL}/users/me`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        //console.log(data);
+        //setLoggedUser(data);
+        dispatch(setLoggedUserAction(data));
+
+        navigate(`/`);
+      } else {
+        console.log("error on fetching users");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const login = async (e) => {
     e.preventDefault();
@@ -29,8 +59,8 @@ function Login() {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        //localStorage.setItem("accessToken", data.accessToken);
-        navigate(`/?accessToken=${data.accessToken}`);
+        localStorage.setItem("accessToken", data.accessToken);
+        loadLoggedUser();
       } else {
         console.log("login failed");
         if (response.status === 400) {
@@ -103,6 +133,10 @@ function Login() {
               {t("log_in")}
             </button>
           </form>
+          <h2 className="govuk-heading-m">Nie ste ešte zaregistrovaný?</h2>
+          <Link to="/user-registration" className="govuk-link">
+            Zaregistrujte sa tu.{" "}
+          </Link>
         </div>
       </div>
     </div>

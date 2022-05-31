@@ -16,7 +16,7 @@ function GoogleLoginButton() {
         />
       </div>
       <p className="btn-text">
-        <b>Prihlásiť sa účtom Google</b>
+        <b>{t("log_in_with_google")}</b>
       </p>
     </div>
   );
