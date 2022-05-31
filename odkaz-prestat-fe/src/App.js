@@ -9,7 +9,7 @@ import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
 import ClientCenterOverView from "./components/views/ClientCenterOverView";
 import Home from "./components/views/Home";
-import Login from "./components/views/Login";
+import Login from "./components/login/Login";
 import Organizations from "./components/views/Organizations";
 import UserProfile from "./components/views/UserProfile";
 import { setLoggedUserAction } from "./redux/actions";
@@ -24,7 +24,7 @@ function App() {
   //const [loggedUser, setLoggedUser] = useState(null);
   // Do we have an access token in the URL?
   const token = new URLSearchParams(window.location.search).get("accessToken");
-
+  console.log(token);
   useEffect(() => {
     //console.log("useEffect: ", token);
     if (token) {
@@ -57,7 +57,7 @@ function App() {
       setTokenInLocalStorage(localStorage.getItem("accessToken"));
     }
     //console.log(localStorage.getItem("accessToken"));
-  }, [token]);
+  }, []);
 
   const loadLoggedUser = async () => {
     try {

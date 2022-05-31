@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import Login from "./Login";
+import Login from "../login/Login";
 
 function UserProfile(props) {
   const loggedUser = useSelector((state) => state.loggedUser);
