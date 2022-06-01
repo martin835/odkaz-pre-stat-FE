@@ -16,6 +16,7 @@ import { setLoggedUserAction } from "./redux/actions";
 import ScrollToTop from "./utils/ScrollToTop";
 import useDidUpdateEffect from "./utils/useDidUpdateEffect";
 import UserRegistration from "./components/login/UserRegistration";
+import EmailVerification from "./components/login/EmailVerification";
 
 function App() {
   const dispatch = useDispatch();
@@ -91,6 +92,7 @@ function App() {
           <Route path="/profil" element={<UserProfile />} />
           <Route path="/user-registration" element={<UserRegistration />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/verify-email" element={<EmailVerification />} />
           <Route path="/organizations/:district" element={<Organizations />} />
           <Route
             path="/feedback/:orgId"
