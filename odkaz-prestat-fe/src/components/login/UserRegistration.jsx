@@ -10,8 +10,33 @@ function UserRegistration() {
     email: "",
     password: "",
   });
+  const [registrationSent, setRegistrationSent] = useState(false);
 
-  const register = async () => {};
+  const register = async (e) => {
+    e.preventDefault();
+    try {
+      let response = await fetch(
+        `${process.env.REACT_APP_BE_URL}/users/register`,
+        {
+          method: "POST",
+          body: JSON.stringify(registrationReq),
+          //credentials: "include",
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        setRegistrationSent(true);
+      } else {
+        console.log("registration failed");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -128,6 +153,16 @@ function UserRegistration() {
                 {t("register")}
               </button>
             </form>
+            {registrationSent && (
+              <div className="govuk-panel govuk-panel--confirmation">
+                <h1 className="govuk-panel__title">Registrácia odoslaná</h1>
+                <div className="govuk-panel__body">
+                  Pre dokončenie registrácie musíte na kliknúť na aktivačný
+                  odkaz, ktorý sme Vám poslali na e-mail:{" "}
+                  {registrationReq.email}.
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
