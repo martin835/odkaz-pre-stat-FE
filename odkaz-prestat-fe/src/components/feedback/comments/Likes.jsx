@@ -41,7 +41,7 @@ export default function Likes(props) {
       );
       if (response.ok) {
         const data = await response.json();
-        console.log("RESPONSE AFTER CLICKING LIKE: ", data);
+        //console.log("RESPONSE AFTER CLICKING LIKE: ", data);
         setUpdatedReview(data);
       } else {
         console.log("login failed");
