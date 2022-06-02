@@ -12,11 +12,13 @@ const ADDRESS = process.env.REACT_APP_BE_ADDRESS || "http://localhost:3001";
 function ChatWindow() {
   const [chatOpened, setChatOpened] = useState(false);
   const loggedUser = useSelector((state) => state.loggedUser);
+  const [adminsOnline, setAdminsOnline] = useState([]);
+  const [usersOnline, setUsersOnline] = useState([]);
 
   const socket = useMemo(() => {
     if (localStorage.getItem("accessToken") && loggedUser) {
       //console.log("ONLY WHEN I AM LOGGED!!!");
-      io(ADDRESS, {
+      return io(ADDRESS, {
         transports: ["websocket"],
         auth: {
           withCredentials: true,
@@ -27,17 +29,33 @@ function ChatWindow() {
   }, [loggedUser]);
 
   useEffect(() => {
-    console.log("socket: ", socket);
     if (socket) {
       socket.on("connect", () => {
         console.log(" 🔛 connected with socket id", socket.id);
 
-        // socket.on("onlineAdmins", (onlineAdmins) => {
-        //   console.table(onlineAdmins);
-        // });
+        socket.on("onlineAdmins", (onlineAdmins) => {
+          console.log("ADMINS ONLINE: ");
+          console.table(onlineAdmins);
+          setAdminsOnline(onlineAdmins);
+        });
+
+        socket.on("onlineUsers", (onlineUsers) => {
+          console.log("USERS ONLINE: ");
+          console.table(onlineUsers);
+          setUsersOnline(onlineUsers);
+        });
       });
+
+      //🚩🚩🚩 ➡️⬇️⬇️⬇️ Not sure if this "disconnection" mechanism is working correctly ?!
+      // console.log(!localStorage.getItem("accessToken"));
+      // console.log(!loggedUser);
+
+      if (!localStorage.getItem("accessToken") && !loggedUser) {
+        socket.disconnect();
+        console.log("disconnected ?");
+      }
     }
-  }, [loggedUser]);
+  }, [socket]);
 
   //CODE HERE:
   //https://github.com/martin835/chatApp-FE/blob/main/src/pages/Homepage.jsx
@@ -66,6 +84,7 @@ function ChatWindow() {
         <ChatWindowActive
           chatOpened={chatOpened}
           setChatOpened={setChatOpened}
+          adminsOnline={adminsOnline}
         />
       ) : (
         <ChatWindowClosed

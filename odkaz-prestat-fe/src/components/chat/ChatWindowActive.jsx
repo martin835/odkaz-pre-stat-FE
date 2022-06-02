@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import { Form } from "react-bootstrap";
 import { CloseButton } from "react-bootstrap";
@@ -9,6 +10,33 @@ import "./chat.css";
 function ChatWindowActive(props) {
   const [chatClosed, setChatClosed] = useState(false);
   const loggedUser = useSelector((state) => state.loggedUser);
+  const [adminsData, setAdminsData] = useState(null);
+
+  useEffect(() => {
+    loadAdminsData();
+  }, [props.adminsOnline]);
+
+  const loadAdminsData = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BE_URL}/users/me`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        //setLoggedUser(data);
+        setAdminsData(data);
+      } else {
+        console.log("error on fetching users");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
