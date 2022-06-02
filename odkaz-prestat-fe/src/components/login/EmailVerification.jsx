@@ -3,10 +3,13 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { Spinner } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { setLoggedUserAction } from "../../redux/actions";
 
 function EmailVerification() {
   const { t } = useTranslation();
   const [regSuccess, setRegSuccess] = useState(null);
+  const dispatch = useDispatch();
 
   const emailVerificationToken = new URLSearchParams(
     window.location.search
@@ -14,7 +17,6 @@ function EmailVerification() {
 
   useEffect(() => {
     console.log("EMAIL TOKEN: ", emailVerificationToken);
-
     validateEmail();
   }, []);
 
@@ -36,6 +38,8 @@ function EmailVerification() {
         const data = await response.json();
         setRegSuccess(true);
         console.log(data);
+        dispatch(setLoggedUserAction(data.verifiedUser));
+        localStorage.setItem("accessToken", data.accessToken);
       } else {
         console.log("login failed");
         setRegSuccess(false);

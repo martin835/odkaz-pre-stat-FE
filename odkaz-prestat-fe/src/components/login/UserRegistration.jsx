@@ -73,7 +73,6 @@ function UserRegistration() {
                   name="surname"
                   id="priezvisko"
                   type="text"
-                  required
                   value={registrationReq.surname}
                   onChange={(e) =>
                     setRegistrationReq({
