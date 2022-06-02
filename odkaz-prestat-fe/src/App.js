@@ -23,9 +23,8 @@ function App() {
   const loggedUser = useSelector((state) => state.loggedUser);
   //This is just to make component re-render correctly after token is set to LS. Token should be always taken from the Local Storage!!!
   const [tokenInLocalStorage, setTokenInLocalStorage] = useState(null);
-  //const [loggedUser, setLoggedUser] = useState(null);
-  // Do we have an access token in the URL?
 
+  // Do we have an access token in the URL?
   const token = new URLSearchParams(window.location.search).get("accessToken");
   //console.log(token);
   useEffect(() => {
