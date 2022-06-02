@@ -5,14 +5,17 @@ import useDidUpdateEffect from "../../utils/useDidUpdateEffect";
 import io from "socket.io-client";
 import { useMemo } from "react";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const ADDRESS = process.env.REACT_APP_BE_ADDRESS || "http://localhost:3001";
 
 function ChatWindow() {
   const [chatOpened, setChatOpened] = useState(false);
+  const loggedUser = useSelector((state) => state.loggedUser);
 
   const socket = useMemo(() => {
-    if (localStorage.getItem("accessToken")) {
+    if (localStorage.getItem("accessToken") && loggedUser) {
+      //console.log("ONLY WHEN I AM LOGGED!!!");
       io(ADDRESS, {
         transports: ["websocket"],
         auth: {
@@ -21,18 +24,20 @@ function ChatWindow() {
         },
       });
     }
-  }, []);
-  // useEffect(() => {
-  //   socket.on("connect", () => {
-  //     console.log(" 🔛 connected with socket id", socket.id);
+  }, [loggedUser]);
 
-  //     socket.on("incomingMessage", ({ newMessage }) => {
-  //       console.table({ newMessage });
-  //       // setMessages((messages) => [...messages, newMessage]);
-  //       // setSocketMess(newMessage);
-  //     });
-  //   });
-  // }, [socket]);
+  useEffect(() => {
+    console.log("socket: ", socket);
+    if (socket) {
+      socket.on("connect", () => {
+        console.log(" 🔛 connected with socket id", socket.id);
+
+        // socket.on("onlineAdmins", (onlineAdmins) => {
+        //   console.table(onlineAdmins);
+        // });
+      });
+    }
+  }, [loggedUser]);
 
   //CODE HERE:
   //https://github.com/martin835/chatApp-FE/blob/main/src/pages/Homepage.jsx
