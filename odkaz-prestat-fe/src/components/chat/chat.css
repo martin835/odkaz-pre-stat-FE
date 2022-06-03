@@ -7,7 +7,7 @@
   border-radius: 5px;
 }
 
-.chat-active {
+.chat-opened {
   width: 20rem;
   background-color: #f3f2f1;
   position: fixed;
@@ -16,16 +16,36 @@
   border-radius: 5px;
 }
 
+.chat-opened-body {
+  height: 25rem;
+  background-color: white;
+  overflow-y: scroll;
+}
+
 .chat-active-body {
   height: 25rem;
   background-color: white;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-opened-footer {
+  width: 20rem;
+  bottom: 0;
+  right: 0;
 }
 
 .chat-active-footer {
   width: 20rem;
   bottom: 0;
   right: 0;
+
+  margin-top: auto;
+}
+
+.chat-contact-card:hover {
+  cursor: pointer;
 }
 
 .chat-button,
@@ -40,6 +60,7 @@
   outline: inherit;
   width: 28px;
   height: 28px;
+  font-size: 1.3rem;
 }
 
 .chat-button:hover {
@@ -47,14 +68,10 @@
   border-radius: 14px;
 }
 
-.chat-message-sender {
-  text-align: end;
-}
-
 @media screen and (min-width: 1650px) {
   .chat-closed,
-  .chat-active,
-  .chat-active-footer {
+  .chat-opened,
+  .chat-opened-footer {
     right: 3rem;
   }
 }

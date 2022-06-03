@@ -1,16 +1,19 @@
 import { useState } from "react";
-import ChatWindowActive from "./ChatWindowActive";
+import ChatWindowOpened from "./ChatWindowOpened";
 import ChatWindowClosed from "./ChatWindowClosed";
 import useDidUpdateEffect from "../../utils/useDidUpdateEffect";
 import io from "socket.io-client";
 import { useMemo } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import ChatActive from "./ChatActive";
 
 const ADDRESS = process.env.REACT_APP_BE_ADDRESS || "http://localhost:3001";
 
 function ChatWindow() {
   const [chatOpened, setChatOpened] = useState(false);
+  const [chatClosed, setChatClosed] = useState(false);
+  const [chatActive, setChatActive] = useState(false);
   const loggedUser = useSelector((state) => state.loggedUser);
   const [adminsOnline, setAdminsOnline] = useState([]);
   const [usersOnline, setUsersOnline] = useState([]);
@@ -49,7 +52,6 @@ function ChatWindow() {
       //🚩🚩🚩 ➡️⬇️⬇️⬇️ Not sure if this "disconnection" mechanism is working correctly ?!
       // console.log(!localStorage.getItem("accessToken"));
       // console.log(!loggedUser);
-
       if (!localStorage.getItem("accessToken") && !loggedUser) {
         socket.disconnect();
         console.log("disconnected ?");
@@ -81,17 +83,35 @@ function ChatWindow() {
   return (
     <>
       {chatOpened ? (
-        <ChatWindowActive
+        <ChatWindowOpened
           chatOpened={chatOpened}
           setChatOpened={setChatOpened}
+          setChatClosed={setChatClosed}
+          chatClosed={chatClosed}
           adminsOnline={adminsOnline}
+          setChatActive={setChatActive}
+          chatActive={chatActive}
         />
       ) : (
         <ChatWindowClosed
           chatOpened={chatOpened}
           setChatOpened={setChatOpened}
+          setChatClosed={setChatClosed}
+          chatClosed={chatClosed}
+          chatActive={chatActive}
         />
       )}
+
+      <>
+        {chatActive && (
+          <ChatActive
+            setChatActive={setChatActive}
+            setChatClosed={setChatClosed}
+            setChatOpened={setChatOpened}
+            chatClosed={chatClosed}
+          />
+        )}
+      </>
     </>
   );
 }

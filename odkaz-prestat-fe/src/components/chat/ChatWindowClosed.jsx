@@ -4,14 +4,13 @@ import { FaChevronUp, FaTimes, FaRegCommentDots } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 function ChatWindowClosed(props) {
-  const [chatClosed, setChatClosed] = useState(false);
   const loggedUser = useSelector((state) => state.loggedUser);
 
   return (
     <>
       <div
         className={
-          chatClosed
+          props.chatClosed || props.chatActive
             ? "d-none"
             : "chat-closed d-flex justify-content-between align-items-center p-2"
         }
@@ -34,7 +33,10 @@ function ChatWindowClosed(props) {
           >
             <FaChevronUp className="mb-1" />
           </button>
-          <button className="chat-button " onClick={() => setChatClosed(true)}>
+          <button
+            className="chat-button "
+            onClick={() => props.setChatClosed(true)}
+          >
             <FaTimes className="mb-1" />
           </button>
         </div>
