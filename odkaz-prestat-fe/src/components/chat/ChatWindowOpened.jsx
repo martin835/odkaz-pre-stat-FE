@@ -23,6 +23,17 @@ function ChatWindowOpened(props) {
         },
       });
       if (response.ok) {
+        const data = await response.json();
+        //If new chat is created I am getting back object with that chat
+        //If there is existing chat (or chats) I am getting back array of chats
+        //In this case, we shouldn't have more than 1 chat in the array (...but in the future it could be - e.g. group chats).
+        console.log("CHAT FROM RESPONSE: ", Array.isArray(data));
+
+        if (Array.isArray(data)) {
+          props.setChat(data[0]._id);
+        } else {
+          props.setChat(data._id);
+        }
       } else {
         console.log("login failed");
         if (response.status === 400) {

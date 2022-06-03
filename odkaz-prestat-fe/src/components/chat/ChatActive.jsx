@@ -13,13 +13,13 @@ function ChatActive(props) {
   const [text, setText] = useState("");
   const [media, setMedia] = useState("");
   const [messages, setMessages] = useState([]);
-  const [socketMess, setSocketMess] = useState(undefined);
-  const { chat } = props.chat; //props.chat wouldn't work in socket.emit()
+
+  const chat = props.chat; //props.chat wouldn't work in socket.emit()
 
   const handleMessage = (e) => {
     e.preventDefault();
-    console.log("handleMessage", text);
-    console.log("props.socket: ", props.socket);
+    // console.log("handleMessage", text);
+    // console.log("props.socket: ", props.socket);
 
     const data = {
       content: { text: text, media: media },
@@ -31,7 +31,6 @@ function ChatActive(props) {
 
     console.log({ data, chat });
     setMessages((m) => [...m, data]);
-    setSocketMess(undefined);
 
     setText("");
   };
