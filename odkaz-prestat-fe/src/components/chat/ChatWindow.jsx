@@ -17,6 +17,11 @@ function ChatWindow() {
   const loggedUser = useSelector((state) => state.loggedUser);
   const [adminsOnline, setAdminsOnline] = useState([]);
   const [usersOnline, setUsersOnline] = useState([]);
+  // 👇👇👇chatRecipient => the one who is supposed to received the message => admin in our case.
+  //chatRecipient is set onClick and used in ChatWindowOpened.jsx and used in ChatActive.jsx
+  // On the other end chatInitiatior  initiates the chat =>  basicUser.
+  const [chatRecipient, setChatRecipient] = useState(null);
+  const [chat, setChat] = useState("");
 
   const socket = useMemo(() => {
     if (localStorage.getItem("accessToken") && loggedUser) {
@@ -91,6 +96,10 @@ function ChatWindow() {
           adminsOnline={adminsOnline}
           setChatActive={setChatActive}
           chatActive={chatActive}
+          chat={chat}
+          setChat={setChat}
+          setChatRecipient={setChatRecipient}
+          chatRecipient={chatRecipient}
         />
       ) : (
         <ChatWindowClosed
@@ -109,6 +118,9 @@ function ChatWindow() {
             setChatClosed={setChatClosed}
             setChatOpened={setChatOpened}
             chatClosed={chatClosed}
+            socket={socket}
+            chat={chat}
+            setChatRecipient={setChatRecipient}
           />
         )}
       </>

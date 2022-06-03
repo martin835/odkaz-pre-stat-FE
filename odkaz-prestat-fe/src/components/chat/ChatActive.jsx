@@ -10,6 +10,31 @@ import "./chat.css";
 
 function ChatActive(props) {
   const loggedUser = useSelector((state) => state.loggedUser);
+  const [text, setText] = useState("");
+  const [media, setMedia] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [socketMess, setSocketMess] = useState(undefined);
+  const { chat } = props.chat; //props.chat wouldn't work in socket.emit()
+
+  const handleMessage = (e) => {
+    e.preventDefault();
+    console.log("handleMessage", text);
+    console.log("props.socket: ", props.socket);
+
+    const data = {
+      content: { text: text, media: media },
+      //timestamp is added by DB
+      //not sending "sender" at all - this will be retrieved at the backend from cookie
+    };
+
+    props.socket.emit("outgoingMessage", { data, chat });
+
+    console.log({ data, chat });
+    setMessages((m) => [...m, data]);
+    setSocketMess(undefined);
+
+    setText("");
+  };
 
   return (
     <>
@@ -48,15 +73,20 @@ function ChatActive(props) {
             </ListGroup.Item>
           </ListGroup>
 
-          <div className="chat-active-footer  d-flex ">
-            <Form.Control
-              type="text"
-              placeholder="Normal text"
-              className="w-75"
-            />{" "}
-            <button className="chat-button ml-2 ">
-              <FiSend />
-            </button>
+          <div className="chat-active-footer   ">
+            <Form className="d-flex" onSubmit={(e) => handleMessage(e)}>
+              <Form.Control
+                type="text"
+                placeholder="Normal text"
+                className="w-75"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+              />
+
+              <button className="chat-button ml-2" type="submit">
+                <FiSend />
+              </button>
+            </Form>
           </div>
         </div>
       </div>

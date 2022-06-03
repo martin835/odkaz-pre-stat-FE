@@ -10,6 +10,33 @@ import "./chat.css";
 function ChatWindowOpened(props) {
   const loggedUser = useSelector((state) => state.loggedUser);
 
+  const createChat = async (e, recipientId) => {
+    e.preventDefault();
+    try {
+      let response = await fetch(`${process.env.REACT_APP_BE_URL}/chats`, {
+        method: "POST",
+        body: JSON.stringify({ recipient: recipientId }),
+        //credentials: "include",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      });
+      if (response.ok) {
+      } else {
+        console.log("login failed");
+        if (response.status === 400) {
+          console.log("bad request");
+        }
+        if (response.status === 404) {
+          console.log("page not found");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div className={props.chatActive ? "d-none" : "chat-opened"}>
@@ -46,7 +73,11 @@ function ChatWindowOpened(props) {
               <ListGroup.Item
                 key={admin._id}
                 className="chat-contact-card"
-                onClick={() => props.setChatActive(true)}
+                onClick={(e) => {
+                  props.setChatActive(true);
+                  props.setChatRecipient(admin._id);
+                  createChat(e, admin._id);
+                }}
               >
                 <img
                   className="card-img-user-comment"
