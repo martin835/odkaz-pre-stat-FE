@@ -66,7 +66,8 @@ function ChatWindowOpened(props) {
       if (response.ok) {
         const data = await response.json();
         console.log("MESSAGES FOR THIS CHAT: ", data);
-        props.setChatMessages(data);
+        props.setChatMessages(data.messages);
+        props.setChatMembers(data.members);
       } else {
         console.log("login failed");
         if (response.status === 400) {
@@ -116,25 +117,27 @@ function ChatWindowOpened(props) {
         </div>
         <div className="chat-opened-body">
           <ListGroup>
-            {props.adminsOnline?.map((admin) => (
-              <ListGroup.Item
-                key={admin._id}
-                className="chat-contact-card"
-                onClick={(e) => {
-                  props.setChatActive(true);
-                  props.setChatOpened(false);
-                  props.setChatRecipient(admin._id);
-                  createChat(e, admin._id);
-                }}
-              >
-                <img
-                  className="card-img-user-comment"
-                  src={admin.avatar}
-                  alt="profile imange"
-                />{" "}
-                <span>🟢 {admin.name} je online</span>
-              </ListGroup.Item>
-            ))}
+            {props.adminsOnline
+              ?.filter((admin) => admin._id !== loggedUser._id)
+              .map((admin) => (
+                <ListGroup.Item
+                  key={admin._id}
+                  className="chat-contact-card"
+                  onClick={(e) => {
+                    props.setChatActive(true);
+                    props.setChatOpened(false);
+                    props.setChatRecipient(admin._id);
+                    createChat(e, admin._id);
+                  }}
+                >
+                  <img
+                    className="card-img-user-comment"
+                    src={admin.avatar}
+                    alt="profile imange"
+                  />{" "}
+                  <span>🟢 {admin.name} je online</span>
+                </ListGroup.Item>
+              ))}
           </ListGroup>
 
           {/* <div className="chat-opened-footer d-flex">

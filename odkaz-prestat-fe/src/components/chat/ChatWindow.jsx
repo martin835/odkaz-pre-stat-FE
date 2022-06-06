@@ -22,6 +22,7 @@ function ChatWindow() {
   // On the other end chatInitiatior  initiates the chat =>  basicUser.
   const [chatRecipient, setChatRecipient] = useState(null);
   const [chat, setChat] = useState("");
+  const [chatMembers, setChatMembers] = useState([]);
   const [chatMessages, setChatMessages] = useState([]);
 
   const socket = useMemo(() => {
@@ -116,6 +117,7 @@ function ChatWindow() {
           setChatRecipient={setChatRecipient}
           chatRecipient={chatRecipient}
           setChatMessages={setChatMessages}
+          setChatMembers={setChatMembers}
         />
       ) : (
         <ChatWindowClosed
@@ -139,6 +141,7 @@ function ChatWindow() {
             chat={chat}
             setChatRecipient={setChatRecipient}
             chatMessages={chatMessages}
+            chatMembers={chatMembers}
           />
         )}
       </>
