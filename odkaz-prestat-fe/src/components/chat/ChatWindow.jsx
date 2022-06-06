@@ -126,6 +126,7 @@ function ChatWindow() {
           setChatClosed={setChatClosed}
           chatClosed={chatClosed}
           chatActive={chatActive}
+          chatMessages={chatMessages}
         />
       )}
 

@@ -116,40 +116,39 @@ function ChatWindowOpened(props) {
           </div>
         </div>
         <div className="chat-opened-body">
-          <ListGroup>
-            {props.adminsOnline
-              ?.filter((admin) => admin._id !== loggedUser._id)
-              .map((admin) => (
-                <ListGroup.Item
-                  key={admin._id}
-                  className="chat-contact-card"
-                  onClick={(e) => {
-                    props.setChatActive(true);
-                    props.setChatOpened(false);
-                    props.setChatRecipient(admin._id);
-                    createChat(e, admin._id);
-                  }}
-                >
-                  <img
-                    className="card-img-user-comment"
-                    src={admin.avatar}
-                    alt="profile imange"
-                  />{" "}
-                  <span>🟢 {admin.name} je online</span>
-                </ListGroup.Item>
-              ))}
-          </ListGroup>
+          {loggedUser.role === "basicUser" && (
+            <ListGroup>
+              {props.adminsOnline
+                ?.filter((admin) => admin._id !== loggedUser._id)
+                .map((admin) => (
+                  <ListGroup.Item
+                    key={admin._id}
+                    className="chat-contact-card"
+                    onClick={(e) => {
+                      props.setChatActive(true);
+                      props.setChatOpened(false);
+                      props.setChatRecipient(admin._id);
+                      createChat(e, admin._id);
+                    }}
+                  >
+                    <img
+                      className="card-img-user-comment"
+                      src={admin.avatar}
+                      alt="profile imange"
+                    />{" "}
+                    <span>🟢 {admin.name} is online</span>
+                  </ListGroup.Item>
+                ))}
+            </ListGroup>
+          )}
 
-          {/* <div className="chat-opened-footer d-flex">
-            <Form.Control
-              type="text"
-              placeholder="Normal text"
-              className="w-75"
-            />{" "}
-            <button className="chat-button ml-2">
-              <FiSend />
-            </button>
-          </div> */}
+          {
+            (loggedUser.role = "admin" && (
+              <ListGroup>
+                {/* PLAN FOR ADMINS IS TO SEND userId in search params and on the backend filter only chats I am member of and display them here  */}
+              </ListGroup>
+            ))
+          }
         </div>
       </div>
     </>

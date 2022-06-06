@@ -23,7 +23,13 @@ function ChatWindowClosed(props) {
             className="card-img-user-comment mr-1"
           />{" "}
           <strong>
-            Chat s adminom <FaRegCommentDots />
+            {props.chatMessages.length === 0 ? (
+              <span>
+                Chat s adminom <FaRegCommentDots />
+              </span>
+            ) : (
+              <span>New messages...</span>
+            )}
           </strong>
         </div>
         <div className="">
