@@ -57,7 +57,7 @@ function ChatWindow() {
 
         socket.on("incomingMessage", ({ newMessage }) => {
           console.table({ newMessage });
-          console.log(chatMessages);
+          console.log("BEFORE SETTING: ", chatMessages);
           if (chatMessages.length > 0) {
             setChatMessages((chatMessages) => [
               ...chatMessages.filter(
@@ -76,6 +76,7 @@ function ChatWindow() {
       socket.disconnect();
       console.log(`❌ socket ${socket.id} disconnected`);
     }
+    console.log("AFTER SETTING: ", chatMessages);
   }, [socket, loggedUser]);
 
   //CODE HERE:

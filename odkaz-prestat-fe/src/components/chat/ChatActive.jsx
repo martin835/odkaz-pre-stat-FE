@@ -12,7 +12,7 @@ function ChatActive(props) {
   const loggedUser = useSelector((state) => state.loggedUser);
   const [text, setText] = useState("");
   const [media, setMedia] = useState("");
-  //const [messages, setMessages] = useState([]);
+  const [chatMembers, setChatMembers] = useState([]);
 
   const chat = props.chat; //props.chat wouldn't work in socket.emit()
 
@@ -34,6 +34,8 @@ function ChatActive(props) {
 
     setText("");
   };
+
+  const loadChatMembers = async () => {};
 
   return (
     <>
@@ -81,7 +83,7 @@ function ChatActive(props) {
                     index === self.findIndex((m) => m._id === message._id)
                 )
                 .map((message) => (
-                  <ListGroup.Item className="">
+                  <ListGroup.Item key={message._id} className="">
                     <span>{message.content.text}</span>
                   </ListGroup.Item>
                 ))}

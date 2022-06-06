@@ -66,7 +66,7 @@ function ChatWindowOpened(props) {
       if (response.ok) {
         const data = await response.json();
         console.log("MESSAGES FOR THIS CHAT: ", data);
-        //props.setChatMessages(data.messages);
+        props.setChatMessages(data);
       } else {
         console.log("login failed");
         if (response.status === 400) {
