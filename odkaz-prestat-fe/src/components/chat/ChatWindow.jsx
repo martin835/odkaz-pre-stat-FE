@@ -12,7 +12,7 @@ const ADDRESS = process.env.REACT_APP_BE_ADDRESS || "http://localhost:3001";
 
 function ChatWindow() {
   const [chatOpened, setChatOpened] = useState(false);
-  const [chatClosed, setChatClosed] = useState(false);
+  const [chatClosed, setChatClosed] = useState(true);
   const [chatActive, setChatActive] = useState(false);
   const loggedUser = useSelector((state) => state.loggedUser);
   const [adminsOnline, setAdminsOnline] = useState([]);
@@ -22,6 +22,7 @@ function ChatWindow() {
   // On the other end chatInitiatior  initiates the chat =>  basicUser.
   const [chatRecipient, setChatRecipient] = useState(null);
   const [chat, setChat] = useState("");
+  const [chatMessages, setChatMessages] = useState([]);
 
   const socket = useMemo(() => {
     if (localStorage.getItem("accessToken") && loggedUser) {
@@ -51,6 +52,11 @@ function ChatWindow() {
           console.log("USERS ONLINE: ");
           console.table(onlineUsers);
           setUsersOnline(onlineUsers);
+        });
+
+        socket.on("incomingMessage", ({ newMessage }) => {
+          console.table({ newMessage });
+          setChatMessages((chatMessages) => [...chatMessages, newMessage]);
         });
       });
 
@@ -121,6 +127,7 @@ function ChatWindow() {
             socket={socket}
             chat={chat}
             setChatRecipient={setChatRecipient}
+            chatMessages={chatMessages}
           />
         )}
       </>

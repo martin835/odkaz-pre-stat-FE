@@ -67,9 +67,11 @@ function ChatActive(props) {
         </div>
         <div className="chat-active-body  ">
           <ListGroup className="">
-            <ListGroup.Item className="">
-              <span>🟢 message 123</span>
-            </ListGroup.Item>
+            {props.chatMessages?.map((message) => (
+              <ListGroup.Item className="">
+                <span>{message.content.text}</span>
+              </ListGroup.Item>
+            ))}
           </ListGroup>
 
           <div className="chat-active-footer   ">

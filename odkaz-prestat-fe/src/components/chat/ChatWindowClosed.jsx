@@ -10,9 +10,9 @@ function ChatWindowClosed(props) {
     <>
       <div
         className={
-          props.chatClosed || props.chatActive
-            ? "d-none"
-            : "chat-closed d-flex justify-content-between align-items-center p-2"
+          props.chatClosed
+            ? "chat-closed d-flex justify-content-between align-items-center p-2"
+            : "d-none"
         }
       >
         <div>
@@ -29,7 +29,11 @@ function ChatWindowClosed(props) {
         <div className="">
           <button
             className="chat-button"
-            onClick={() => props.setChatOpened(true)}
+            onClick={
+              (() => props.setChatOpened(true),
+              () => console.log("PING"),
+              () => props.setChatClosed(false))
+            }
           >
             <FaChevronUp className="mb-1" />
           </button>

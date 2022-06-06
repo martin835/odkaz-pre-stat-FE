@@ -50,7 +50,7 @@ function ChatWindowOpened(props) {
 
   return (
     <>
-      <div className={props.chatActive ? "d-none" : "chat-opened"}>
+      <div className={props.chatOpened ? "chat-opened" : "d-none"}>
         <div className="chat-head d-flex justify-content-between align-items-center p-2">
           <div>
             {" "}
@@ -70,12 +70,12 @@ function ChatWindowOpened(props) {
             >
               <FaChevronDown className="mb-1" />
             </button>
-            <button
+            {/*  <button
               className="chat-button "
               onClick={() => props.setChatClosed(true)}
             >
               <FaTimes className="mb-1" />
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="chat-opened-body">
