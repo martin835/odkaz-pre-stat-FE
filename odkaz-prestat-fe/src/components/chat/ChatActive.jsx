@@ -12,7 +12,7 @@ function ChatActive(props) {
   const loggedUser = useSelector((state) => state.loggedUser);
   const [text, setText] = useState("");
   const [media, setMedia] = useState("");
-  const [messages, setMessages] = useState([]);
+  //const [messages, setMessages] = useState([]);
 
   const chat = props.chat; //props.chat wouldn't work in socket.emit()
 
@@ -30,7 +30,7 @@ function ChatActive(props) {
     props.socket.emit("outgoingMessage", { data, chat });
 
     console.log({ data, chat });
-    setMessages((m) => [...m, data]);
+    //setMessages((m) => [...m, data]);
 
     setText("");
   };
@@ -74,11 +74,17 @@ function ChatActive(props) {
           </div>
           <div className="chat-active-body  ">
             <ListGroup className="">
-              {props.chatMessages?.map((message) => (
-                <ListGroup.Item className="">
-                  <span>{message.content.text}</span>
-                </ListGroup.Item>
-              ))}
+              {/* MESSAGES ARE FOR SOME REASON RENDERING TWICE OR THREE TIMES. With this filter method, I am simply filtering out duplicate values: https://stackoverflow.com/questions/2218999/how-to-remove-all-duplicates-from-an-array-of-objects#:~:text=How%20it%20works%3A-,Array.,duplicates%2C%20it%20is%20using%20Array.  */}
+              {props.chatMessages
+                ?.filter(
+                  (message, index, self) =>
+                    index === self.findIndex((m) => m._id === message._id)
+                )
+                .map((message) => (
+                  <ListGroup.Item className="">
+                    <span>{message.content.text}</span>
+                  </ListGroup.Item>
+                ))}
             </ListGroup>
 
             <div className="chat-active-footer   ">

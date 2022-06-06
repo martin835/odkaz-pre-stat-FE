@@ -37,8 +37,8 @@ function ChatWindow() {
 
   useEffect(() => {
     console.log("🎬 USE EFFECT!");
-    console.log(loggedUser);
-    console.log(socket);
+    console.log("Logged user: ", loggedUser);
+    console.log("Socket ID: ", socket.id);
     if (loggedUser && socket) {
       socket.on("connect", () => {
         console.log(" 🔛 connected with socket id", socket.id);
@@ -57,13 +57,24 @@ function ChatWindow() {
 
         socket.on("incomingMessage", ({ newMessage }) => {
           console.table({ newMessage });
-          setChatMessages((chatMessages) => [...chatMessages, newMessage]);
+          console.log(chatMessages);
+          if (chatMessages.length > 0) {
+            setChatMessages((chatMessages) => [
+              ...chatMessages.filter(
+                (message, index, self) =>
+                  index === self.findIndex((m) => m._id === message._id)
+              ),
+              newMessage,
+            ]);
+          } else if (chatMessages.length === 0) {
+            setChatMessages((chatMessages) => [...chatMessages, newMessage]);
+          }
         });
       });
     } //🚩🚩🚩 ➡️⬇️⬇️⬇️ Not sure if this "disconnection" mechanism is working correctly ?!
     else if (!loggedUser && socket) {
       socket.disconnect();
-      console.log("disconnected ?");
+      console.log(`❌ socket ${socket.id} disconnected`);
     }
   }, [socket, loggedUser]);
 
@@ -103,6 +114,7 @@ function ChatWindow() {
           setChat={setChat}
           setChatRecipient={setChatRecipient}
           chatRecipient={chatRecipient}
+          setChatMessages={setChatMessages}
         />
       ) : (
         <ChatWindowClosed

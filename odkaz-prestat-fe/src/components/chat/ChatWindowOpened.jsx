@@ -27,13 +27,46 @@ function ChatWindowOpened(props) {
         //If new chat is created I am getting back object with that chat
         //If there is existing chat (or chats) I am getting back array of chats
         //In this case, we shouldn't have more than 1 chat in the array (...but in the future it could be - e.g. group chats).
-        console.log("CHAT FROM RESPONSE: ", Array.isArray(data));
+        //console.log("CHAT FROM RESPONSE: ", Array.isArray(data));
 
         if (Array.isArray(data)) {
           props.setChat(data[0]._id);
+          loadMessages(data[0]._id);
         } else {
           props.setChat(data._id);
         }
+      } else {
+        console.log("login failed");
+        if (response.status === 400) {
+          console.log("bad request");
+        }
+        if (response.status === 404) {
+          console.log("page not found");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const loadMessages = async (chatId) => {
+    try {
+      let response = await fetch(
+        `${process.env.REACT_APP_BE_URL}/chats/${chatId}`,
+        {
+          method: "GET",
+
+          //credentials: "include",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        console.log("MESSAGES FOR THIS CHAT: ", data);
+        //props.setChatMessages(data.messages);
       } else {
         console.log("login failed");
         if (response.status === 400) {
