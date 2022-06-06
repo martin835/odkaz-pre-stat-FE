@@ -37,60 +37,68 @@ function ChatActive(props) {
 
   return (
     <>
-      <div className="chat-opened">
-        <div className="chat-head d-flex justify-content-between align-items-center p-2">
-          <div>
-            {" "}
-            <img
-              src={loggedUser?.avatar}
-              alt=""
-              className="card-img-user-comment mr-1"
-            />{" "}
-            <strong>
-              Chat s adminom <FaRegCommentDots />
-            </strong>
-          </div>
-          <div className="">
-            <button
-              className="chat-button"
-              onClick={() => props.setChatClosed(true)}
-            >
-              <FaChevronDown className="mb-1" />
-            </button>
-            <button
-              className="chat-button "
-              onClick={() => props.setChatActive(false)}
-            >
-              <FaTimes className="mb-1" />
-            </button>
-          </div>
-        </div>
-        <div className="chat-active-body  ">
-          <ListGroup className="">
-            {props.chatMessages?.map((message) => (
-              <ListGroup.Item className="">
-                <span>{message.content.text}</span>
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
-
-          <div className="chat-active-footer   ">
-            <Form className="d-flex" onSubmit={(e) => handleMessage(e)}>
-              <Form.Control
-                type="text"
-                placeholder="Normal text"
-                className="w-75"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-              />
-
-              <button className="chat-button ml-2" type="submit">
-                <FiSend />
+      {props.chatActive && (
+        <div className="chat-opened">
+          <div className="chat-head d-flex justify-content-between align-items-center p-2">
+            <div>
+              {" "}
+              <img
+                src={loggedUser?.avatar}
+                alt=""
+                className="card-img-user-comment mr-1"
+              />{" "}
+              <strong>
+                Chat s adminom <FaRegCommentDots />
+              </strong>
+            </div>
+            <div className="">
+              <button
+                className="chat-button"
+                onClick={() => {
+                  props.setChatClosed(true);
+                  props.setChatActive(false);
+                }}
+              >
+                <FaChevronDown className="mb-1" />
               </button>
-            </Form>
+              <button
+                className="chat-button "
+                onClick={() => {
+                  props.setChatActive(false);
+                  props.setChatOpened(true);
+                }}
+              >
+                <FaTimes className="mb-1" />
+              </button>
+            </div>
+          </div>
+          <div className="chat-active-body  ">
+            <ListGroup className="">
+              {props.chatMessages?.map((message) => (
+                <ListGroup.Item className="">
+                  <span>{message.content.text}</span>
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+
+            <div className="chat-active-footer   ">
+              <Form className="d-flex" onSubmit={(e) => handleMessage(e)}>
+                <Form.Control
+                  type="text"
+                  placeholder="Normal text"
+                  className="w-75"
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                />
+
+                <button className="chat-button ml-2" type="submit">
+                  <FiSend />
+                </button>
+              </Form>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

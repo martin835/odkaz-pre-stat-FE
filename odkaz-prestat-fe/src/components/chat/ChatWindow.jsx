@@ -124,6 +124,7 @@ function ChatWindow() {
             setChatClosed={setChatClosed}
             setChatOpened={setChatOpened}
             chatClosed={chatClosed}
+            chatActive={chatActive}
             socket={socket}
             chat={chat}
             setChatRecipient={setChatRecipient}

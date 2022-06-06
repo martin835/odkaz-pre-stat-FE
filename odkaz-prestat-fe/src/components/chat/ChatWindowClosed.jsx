@@ -29,17 +29,16 @@ function ChatWindowClosed(props) {
         <div className="">
           <button
             className="chat-button"
-            onClick={
-              (() => props.setChatOpened(true),
-              () => console.log("PING"),
-              () => props.setChatClosed(false))
-            }
+            onClick={() => {
+              props.setChatOpened(true);
+              props.setChatClosed(false);
+            }}
           >
             <FaChevronUp className="mb-1" />
           </button>
           <button
             className="chat-button "
-            onClick={() => props.setChatClosed(true)}
+            onClick={() => props.setChatClosed(false)}
           >
             <FaTimes className="mb-1" />
           </button>

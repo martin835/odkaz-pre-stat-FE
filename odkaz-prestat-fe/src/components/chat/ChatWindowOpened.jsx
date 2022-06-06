@@ -66,7 +66,10 @@ function ChatWindowOpened(props) {
           <div className="">
             <button
               className="chat-button"
-              onClick={() => props.setChatOpened(false)}
+              onClick={() => {
+                props.setChatOpened(false);
+                props.setChatClosed(true);
+              }}
             >
               <FaChevronDown className="mb-1" />
             </button>
@@ -86,6 +89,7 @@ function ChatWindowOpened(props) {
                 className="chat-contact-card"
                 onClick={(e) => {
                   props.setChatActive(true);
+                  props.setChatOpened(false);
                   props.setChatRecipient(admin._id);
                   createChat(e, admin._id);
                 }}
