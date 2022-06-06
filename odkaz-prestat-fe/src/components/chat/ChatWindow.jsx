@@ -25,20 +25,21 @@ function ChatWindow() {
   const [chatMessages, setChatMessages] = useState([]);
 
   const socket = useMemo(() => {
-    if (localStorage.getItem("accessToken") && loggedUser) {
-      //console.log("ONLY WHEN I AM LOGGED!!!");
-      return io(ADDRESS, {
-        transports: ["websocket"],
-        auth: {
-          withCredentials: true,
-          token: localStorage.getItem("accessToken"),
-        },
-      });
-    }
+    //console.log("ONLY WHEN I AM LOGGED!!!");
+    return io(ADDRESS, {
+      transports: ["websocket"],
+      auth: {
+        withCredentials: true,
+        token: localStorage.getItem("accessToken"),
+      },
+    });
   }, [loggedUser]);
 
   useEffect(() => {
-    if (socket) {
+    console.log("🎬 USE EFFECT!");
+    console.log(loggedUser);
+    console.log(socket);
+    if (loggedUser && socket) {
       socket.on("connect", () => {
         console.log(" 🔛 connected with socket id", socket.id);
 
@@ -59,16 +60,12 @@ function ChatWindow() {
           setChatMessages((chatMessages) => [...chatMessages, newMessage]);
         });
       });
-
-      //🚩🚩🚩 ➡️⬇️⬇️⬇️ Not sure if this "disconnection" mechanism is working correctly ?!
-      // console.log(!localStorage.getItem("accessToken"));
-      // console.log(!loggedUser);
-      if (!localStorage.getItem("accessToken") && !loggedUser) {
-        socket.disconnect();
-        console.log("disconnected ?");
-      }
+    } //🚩🚩🚩 ➡️⬇️⬇️⬇️ Not sure if this "disconnection" mechanism is working correctly ?!
+    else if (!loggedUser && socket) {
+      socket.disconnect();
+      console.log("disconnected ?");
     }
-  }, [socket]);
+  }, [socket, loggedUser]);
 
   //CODE HERE:
   //https://github.com/martin835/chatApp-FE/blob/main/src/pages/Homepage.jsx
