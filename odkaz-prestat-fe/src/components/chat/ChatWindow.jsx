@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import ChatActive from "./ChatActive";
 import { useDispatch } from "react-redux";
-import { setSocket } from "../../redux/actions";
+import { setOnlineAdmins, setSocket } from "../../redux/actions";
 
 const ADDRESS = process.env.REACT_APP_BE_ADDRESS || "http://localhost:3001";
 
@@ -19,8 +19,9 @@ function ChatWindow() {
   const loggedUser = useSelector((state) => state.loggedUser);
   const socketInRedux = useSelector((state) => state.socket);
   const dispatch = useDispatch();
-  const [adminsOnline, setAdminsOnline] = useState([]);
-  const [usersOnline, setUsersOnline] = useState([]);
+  const adminsOnline = useSelector((state) => state.adminsOnline);
+  //const [adminsOnline, setAdminsOnline] = useState([]);
+  //const [usersOnline, setUsersOnline] = useState([]);
   // 👇👇👇chatRecipient => the one who is supposed to received the message => admin in our case.
   //chatRecipient is set onClick and used in ChatWindowOpened.jsx and used in ChatActive.jsx
   // On the other end chatInitiatior  initiates the chat =>  basicUser.
@@ -52,14 +53,15 @@ function ChatWindow() {
         socket.on("onlineAdmins", (onlineAdmins) => {
           console.log("ADMINS ONLINE: ");
           console.table(onlineAdmins);
-          setAdminsOnline(onlineAdmins);
+          //setAdminsOnline(onlineAdmins);
+          dispatch(setOnlineAdmins(onlineAdmins));
         });
 
-        socket.on("onlineUsers", (onlineUsers) => {
-          console.log("USERS ONLINE: ");
-          console.table(onlineUsers);
-          setUsersOnline(onlineUsers);
-        });
+        // socket.on("onlineUsers", (onlineUsers) => {
+        //   console.log("USERS ONLINE: ");
+        //   console.table(onlineUsers);
+        //   setUsersOnline(onlineUsers);
+        // });
 
         socket.on("incomingMessage", ({ newMessage }) => {
           console.table({ newMessage });
@@ -79,22 +81,11 @@ function ChatWindow() {
       });
     } //🚩🚩🚩 ➡️⬇️⬇️⬇️ Not sure if this "disconnection" mechanism is working correctly ?!
     else if (!loggedUser && socket) {
-      socket.on("onlineAdmins", (onlineAdmins) => {
-        console.log("ADMINS ONLINE: ");
-        console.table(onlineAdmins);
-        setAdminsOnline(onlineAdmins);
-      });
       socket.disconnect();
       console.log(`❌ socket ${socket.id} disconnected`);
     }
     //console.log("AFTER SETTING: ", chatMessages);
-  }, [
-    socket,
-    loggedUser,
-    adminsOnline.length,
-    chatMessages.length,
-    socketInRedux,
-  ]);
+  }, [socket]);
 
   //CODE HERE:
   //https://github.com/martin835/chatApp-FE/blob/main/src/pages/Homepage.jsx

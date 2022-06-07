@@ -9,7 +9,11 @@ import profilePic from "../../assets/images/header-web/profile.svg";
 import { VscFeedback } from "react-icons/vsc";
 import "../../styles/header.css";
 import { useDispatch, useSelector } from "react-redux";
-import { removeLoggedUserAction, removeSocket } from "../../redux/actions";
+import {
+  removeLoggedUserAction,
+  removeOnlineAdmin,
+  removeSocket,
+} from "../../redux/actions";
 import { useEffect } from "react";
 
 function Header(props) {
@@ -17,12 +21,28 @@ function Header(props) {
   const [langSelected, setLangSelected] = useState("Slovenčina");
   const [showMobileLogin, setShowMobileLogin] = useState(false);
   const loggedUser = useSelector((state) => state.loggedUser);
+  const adminsOnline = useSelector((state) => state.adminsOnline);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const socket = useSelector((state) => state.socket);
 
-  useEffect(() => {}, [loggedUser]);
+  const onLogout = () => {
+    console.log("👋 Logging out...");
+    if (loggedUser.role === "admin") {
+      socket.emit("updatedOnlineAdmins", loggedUser._id);
+      //dispatch(removeOnlineAdmin(loggedUser._id));
+      dispatch(removeLoggedUserAction());
+      localStorage.removeItem("accessToken");
+      socket.disconnect();
+      dispatch(removeSocket());
+    } else if (loggedUser.role === "basicUser") {
+      dispatch(removeLoggedUserAction());
+      localStorage.removeItem("accessToken");
+      socket.disconnect();
+      dispatch(removeSocket());
+    }
+  };
 
   return (
     <>
@@ -198,10 +218,7 @@ function Header(props) {
                               title="odhlásiť"
                               to="/"
                               onClick={() => {
-                                dispatch(removeLoggedUserAction());
-                                localStorage.removeItem("accessToken");
-                                socket.disconnect();
-                                dispatch(removeSocket());
+                                onLogout();
                               }}
                             >
                               Odhlásiť
@@ -230,10 +247,7 @@ function Header(props) {
                         className="idsk-button idsk-header-web__main--login-logoutbtn"
                         data-module="idsk-button"
                         onClick={() => {
-                          dispatch(removeLoggedUserAction());
-                          localStorage.removeItem("accessToken");
-                          socket.disconnect();
-                          dispatch(removeSocket());
+                          onLogout();
                         }}
                       >
                         Odhlásiť sa
@@ -324,11 +338,8 @@ function Header(props) {
                       className="idsk-button idsk-header-web__main--login-logoutbtn"
                       data-module="idsk-button"
                       onClick={() => {
-                        dispatch(removeLoggedUserAction());
-                        localStorage.removeItem("accessToken");
+                        onLogout();
                         setShowMobileLogin(false);
-                        socket.disconnect();
-                        dispatch(removeSocket());
                       }}
                     >
                       Odhlásiť sa

@@ -4,6 +4,9 @@ import {
   REMOVE_LOGGED_USER,
   SET_SOCKET,
   REMOVE_SOCKET,
+  SET_ADMINS,
+  REMOVE_ADMIN,
+  ADD_ADMIN,
 } from "../actions/index.js";
 
 const mainReducer = (state = initialState, action) => {
@@ -30,6 +33,25 @@ const mainReducer = (state = initialState, action) => {
       return {
         ...state,
         socket: null,
+      };
+
+    case SET_ADMINS:
+      return {
+        ...state,
+        adminsOnline: action.payload,
+      };
+
+    case REMOVE_ADMIN:
+      return {
+        ...state,
+        adminsOnline: state.adminsOnline.filter(
+          (admin) => admin._id !== action.payload
+        ),
+      };
+    case ADD_ADMIN:
+      return {
+        ...state,
+        adminsOnline: state.adminsOnline.concat(action.payload),
       };
 
     default:

@@ -2,7 +2,9 @@ export const SET_LOGGED_USER = "SET_LOGGED_USER";
 export const REMOVE_LOGGED_USER = "REMOVE_LOGGED_USER";
 export const SET_SOCKET = "SET_SOCKET";
 export const REMOVE_SOCKET = "REMOVE_SOCKET";
-// export const SET_LOADING = "SET_LOADING";
+export const SET_ADMINS = "SET_ADMINS";
+export const REMOVE_ADMIN = "REMOVE_ADMIN";
+export const ADD_ADMIN = "ADD_ADMIN";
 
 export const setLoggedUserAction = (user) => ({
   type: SET_LOGGED_USER,
@@ -21,6 +23,20 @@ export const setSocket = (socket) => ({
 
 export const removeSocket = () => ({
   type: REMOVE_SOCKET,
+});
+
+export const setOnlineAdmins = (onlineAdmins) => ({
+  type: SET_ADMINS,
+  payload: onlineAdmins,
+});
+
+export const removeOnlineAdmin = (adminId) => ({
+  type: REMOVE_ADMIN,
+  payload: adminId,
+});
+export const addOnlineAdmin = (adminId) => ({
+  type: ADD_ADMIN,
+  payload: adminId,
 });
 
 // export const fetchSearchedJobsAction = (searchQuery) => {
