@@ -58,7 +58,7 @@ function ChatWindow() {
 
         socket.on("incomingMessage", ({ newMessage }) => {
           console.table({ newMessage });
-          console.log("BEFORE SETTING: ", chatMessages);
+          //console.log("BEFORE SETTING: ", chatMessages);
           if (chatMessages.length > 0) {
             setChatMessages((chatMessages) => [
               ...chatMessages.filter(
@@ -77,8 +77,8 @@ function ChatWindow() {
       socket.disconnect();
       console.log(`❌ socket ${socket.id} disconnected`);
     }
-    console.log("AFTER SETTING: ", chatMessages);
-  }, [socket, loggedUser]);
+    //console.log("AFTER SETTING: ", chatMessages);
+  }, [socket, loggedUser, adminsOnline.length, chatMessages.length]);
 
   //CODE HERE:
   //https://github.com/martin835/chatApp-FE/blob/main/src/pages/Homepage.jsx

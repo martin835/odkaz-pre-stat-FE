@@ -1,14 +1,26 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { ListGroup } from "react-bootstrap";
+import { ListGroupItem } from "react-bootstrap";
 import { CloseButton } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import { FaChevronDown, FaTimes, FaRegCommentDots } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "./chat.css";
 
 function ChatWindowOpened(props) {
+  const navigate = useNavigate();
+  const { t } = useTranslation();
   const loggedUser = useSelector((state) => state.loggedUser);
+  const [chats, setChats] = useState([]);
+
+  useEffect(() => {
+    if (loggedUser && loggedUser.role === "admin") {
+      loadChats();
+    }
+  }, []);
 
   const createChat = async (e, recipientId) => {
     e.preventDefault();
@@ -82,6 +94,35 @@ function ChatWindowOpened(props) {
     }
   };
 
+  const loadChats = async () => {
+    //user._id -> admin id  is getting retrieved from the token at the backend
+    try {
+      let response = await fetch(`${process.env.REACT_APP_BE_URL}/chats`, {
+        method: "GET",
+        //credentials: "include",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log("CHATS FOR THIS ADMIN: ", data);
+        setChats(data);
+      } else {
+        console.log("login failed");
+        if (response.status === 400) {
+          console.log("bad request");
+        }
+        if (response.status === 404) {
+          console.log("page not found");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div className={props.chatOpened ? "chat-opened" : "d-none"}>
@@ -116,7 +157,23 @@ function ChatWindowOpened(props) {
           </div>
         </div>
         <div className="chat-opened-body">
-          {loggedUser.role === "basicUser" && (
+          {!loggedUser && (
+            <div>
+              <button
+                type="button"
+                className="idsk-button idsk-header-web__main--login-loginbtn"
+                onClick={() => {
+                  navigate("/login");
+                  props.setChatOpened(false);
+                  props.setChatClosed(true);
+                }}
+              >
+                {t("log_in")}
+              </button>
+            </div>
+          )}
+
+          {loggedUser?.role === "basicUser" && (
             <ListGroup>
               {props.adminsOnline
                 ?.filter((admin) => admin._id !== loggedUser._id)
@@ -142,13 +199,41 @@ function ChatWindowOpened(props) {
             </ListGroup>
           )}
 
-          {
-            (loggedUser.role = "admin" && (
-              <ListGroup>
-                {/* PLAN FOR ADMINS IS TO SEND userId in search params and on the backend filter only chats I am member of and display them here  */}
-              </ListGroup>
-            ))
-          }
+          {loggedUser?.role === "admin" && (
+            <ListGroup>
+              {chats.map((chat) => (
+                <ListGroup.Item
+                  key={chat._id}
+                  className="chat-contact-card"
+                  onClick={(e) => {
+                    props.setChatActive(true);
+                    props.setChatOpened(false);
+                    loadMessages(chat._id);
+                    props.setChat(chat._id);
+                  }}
+                >
+                  <img
+                    className="card-img-user-comment"
+                    src={
+                      chat.members.filter(
+                        (member) => member._id !== loggedUser._id
+                      )[0].avatar
+                    }
+                    alt="profile imange"
+                  />{" "}
+                  <span>
+                    🟢{" "}
+                    {
+                      chat.members.filter(
+                        (member) => member._id !== loggedUser._id
+                      )[0].name
+                    }{" "}
+                    is online
+                  </span>
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+          )}
         </div>
       </div>
     </>
