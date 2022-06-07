@@ -17,6 +17,7 @@ function ChatWindow() {
   const [chatClosed, setChatClosed] = useState(true);
   const [chatActive, setChatActive] = useState(false);
   const loggedUser = useSelector((state) => state.loggedUser);
+  const socketInRedux = useSelector((state) => state.socket);
   const dispatch = useDispatch();
   const [adminsOnline, setAdminsOnline] = useState([]);
   const [usersOnline, setUsersOnline] = useState([]);
@@ -78,11 +79,22 @@ function ChatWindow() {
       });
     } //🚩🚩🚩 ➡️⬇️⬇️⬇️ Not sure if this "disconnection" mechanism is working correctly ?!
     else if (!loggedUser && socket) {
+      socket.on("onlineAdmins", (onlineAdmins) => {
+        console.log("ADMINS ONLINE: ");
+        console.table(onlineAdmins);
+        setAdminsOnline(onlineAdmins);
+      });
       socket.disconnect();
       console.log(`❌ socket ${socket.id} disconnected`);
     }
     //console.log("AFTER SETTING: ", chatMessages);
-  }, [socket, loggedUser, adminsOnline.length, chatMessages.length]);
+  }, [
+    socket,
+    loggedUser,
+    adminsOnline.length,
+    chatMessages.length,
+    socketInRedux,
+  ]);
 
   //CODE HERE:
   //https://github.com/martin835/chatApp-FE/blob/main/src/pages/Homepage.jsx
