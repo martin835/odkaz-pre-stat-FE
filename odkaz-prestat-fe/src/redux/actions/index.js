@@ -1,7 +1,7 @@
 export const SET_LOGGED_USER = "SET_LOGGED_USER";
 export const REMOVE_LOGGED_USER = "REMOVE_LOGGED_USER";
-// export const FETCHED_JOBS = "FETCHED_JOBS";
-// export const THROW_ERROR = "THROW_ERROR";
+export const SET_SOCKET = "SET_SOCKET";
+export const REMOVE_SOCKET = "REMOVE_SOCKET";
 // export const SET_LOADING = "SET_LOADING";
 
 export const setLoggedUserAction = (user) => ({
@@ -12,6 +12,15 @@ export const setLoggedUserAction = (user) => ({
 export const removeLoggedUserAction = () => ({
   type: REMOVE_LOGGED_USER,
   //payload: i,
+});
+
+export const setSocket = (socket) => ({
+  type: SET_SOCKET,
+  payload: socket,
+});
+
+export const removeSocket = () => ({
+  type: REMOVE_SOCKET,
 });
 
 // export const fetchSearchedJobsAction = (searchQuery) => {

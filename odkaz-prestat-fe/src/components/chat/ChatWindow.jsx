@@ -7,6 +7,8 @@ import { useMemo } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import ChatActive from "./ChatActive";
+import { useDispatch } from "react-redux";
+import { setSocket } from "../../redux/actions";
 
 const ADDRESS = process.env.REACT_APP_BE_ADDRESS || "http://localhost:3001";
 
@@ -15,6 +17,7 @@ function ChatWindow() {
   const [chatClosed, setChatClosed] = useState(true);
   const [chatActive, setChatActive] = useState(false);
   const loggedUser = useSelector((state) => state.loggedUser);
+  const dispatch = useDispatch();
   const [adminsOnline, setAdminsOnline] = useState([]);
   const [usersOnline, setUsersOnline] = useState([]);
   // 👇👇👇chatRecipient => the one who is supposed to received the message => admin in our case.
@@ -40,6 +43,7 @@ function ChatWindow() {
     console.log("🎬 USE EFFECT!");
     console.log("Logged user: ", loggedUser);
     console.log("Socket ID: ", socket.id);
+    dispatch(setSocket(socket));
     if (loggedUser && socket) {
       socket.on("connect", () => {
         console.log(" 🔛 connected with socket id", socket.id);

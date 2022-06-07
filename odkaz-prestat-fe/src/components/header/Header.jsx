@@ -9,7 +9,7 @@ import profilePic from "../../assets/images/header-web/profile.svg";
 import { VscFeedback } from "react-icons/vsc";
 import "../../styles/header.css";
 import { useDispatch, useSelector } from "react-redux";
-import { removeLoggedUserAction } from "../../redux/actions";
+import { removeLoggedUserAction, removeSocket } from "../../redux/actions";
 import { useEffect } from "react";
 
 function Header(props) {
@@ -20,6 +20,7 @@ function Header(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const socket = useSelector((state) => state.socket);
 
   useEffect(() => {}, [loggedUser]);
 
@@ -192,17 +193,19 @@ function Header(props) {
                             {loggedUser?.name} {loggedUser?.surname}
                           </span>
                           <div className="govuk-!-margin-bottom-1">
-                            <a
+                            <Link
                               className="govuk-link idsk-header-web__main--login-action-text-logout idsk-header-web__main--login-logoutbtn"
                               title="odhlásiť"
-                              href="#"
+                              to="/"
                               onClick={() => {
                                 dispatch(removeLoggedUserAction());
                                 localStorage.removeItem("accessToken");
+                                socket.disconnect();
+                                dispatch(removeSocket());
                               }}
                             >
                               Odhlásiť
-                            </a>
+                            </Link>
                             <span> | </span>
                             <Link
                               to="/profil"
@@ -229,6 +232,8 @@ function Header(props) {
                         onClick={() => {
                           dispatch(removeLoggedUserAction());
                           localStorage.removeItem("accessToken");
+                          socket.disconnect();
+                          dispatch(removeSocket());
                         }}
                       >
                         Odhlásiť sa
@@ -322,6 +327,8 @@ function Header(props) {
                         dispatch(removeLoggedUserAction());
                         localStorage.removeItem("accessToken");
                         setShowMobileLogin(false);
+                        socket.disconnect();
+                        dispatch(removeSocket());
                       }}
                     >
                       Odhlásiť sa
