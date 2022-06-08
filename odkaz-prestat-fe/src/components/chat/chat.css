@@ -67,6 +67,50 @@
   background-color: #bfc1c3;
   border-radius: 14px;
 }
+/* CSS INSPIRATION FOR CHAT BUBBLES: https://codepen.io/StevenDark/pen/qpgxwv */
+.balon1,
+.balon2 {
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+
+.balon1 span {
+  background: #42a5f5;
+  color: #fff !important;
+  border-radius: 20px 20px 3px 20px;
+  display: block;
+  max-width: 75%;
+  padding: 7px 13px 7px 13px;
+}
+
+.balon1:before {
+  content: attr(data-is);
+  position: absolute;
+  right: 15px;
+  bottom: -0.8em;
+  display: block;
+  font-size: 0.75rem;
+  color: rgba(84, 110, 122, 1);
+}
+
+.balon2 span {
+  background: #f1f1f1;
+  color: #000 !important;
+  border-radius: 20px 20px 20px 3px;
+  display: block;
+  max-width: 75%;
+  padding: 7px 13px 7px 13px;
+}
+
+.balon2:before {
+  content: attr(data-is);
+  position: absolute;
+  left: 13px;
+  bottom: -0.8em;
+  display: block;
+  font-size: 0.75rem;
+  color: rgba(84, 110, 122, 1);
+}
 
 @media screen and (min-width: 1650px) {
   .chat-closed,

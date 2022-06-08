@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { ListGroup } from "react-bootstrap";
 import { Form } from "react-bootstrap";
+
 import { CloseButton } from "react-bootstrap";
 import { FaChevronDown, FaTimes, FaRegCommentDots } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
@@ -42,12 +43,21 @@ function ChatActive(props) {
             <div>
               {" "}
               <img
-                src={loggedUser?.avatar}
+                src={
+                  props.chatMembers.filter(
+                    (member) => member._id !== loggedUser._id
+                  )[0]?.avatar
+                }
                 alt=""
                 className="card-img-user-comment mr-1"
               />{" "}
               <strong>
-                Chat s adminom <FaRegCommentDots />
+                {
+                  props.chatMembers.filter(
+                    (member) => member._id !== loggedUser._id
+                  )[0]?.name
+                }{" "}
+                <FaRegCommentDots className="ml-2" />
               </strong>
             </div>
             <div className="">
@@ -72,7 +82,10 @@ function ChatActive(props) {
             </div>
           </div>
           <div className="chat-active-body  ">
-            <ListGroup className="">
+            <div
+              className="card border-0 m-0 p-0 position-relative bg-transparent"
+              style={{ overflowY: "auto", height: "100vh" }}
+            >
               {/* MESSAGES ARE FOR SOME REASON RENDERING TWICE OR THREE TIMES. With this filter method, I am simply filtering out duplicate values: https://stackoverflow.com/questions/2218999/how-to-remove-all-duplicates-from-an-array-of-objects#:~:text=How%20it%20works%3A-,Array.,duplicates%2C%20it%20is%20using%20Array.  */}
               {props.chatMessages
                 ?.filter(
@@ -81,23 +94,37 @@ function ChatActive(props) {
                 )
                 .map((message) =>
                   message.sender === loggedUser._id ? (
-                    <ListGroup.Item key={message._id} className="text-right">
-                      <span className="">{message.content.text}</span>
-                    </ListGroup.Item>
+                    //this is me so text right
+                    <div
+                      key={message._id}
+                      className="balon1 p-2 m-0 position-relative"
+                      data-is="You - 3:20 pm"
+                    >
+                      <span className="float-right">
+                        {message.content.text}
+                      </span>
+                    </div>
                   ) : (
-                    <ListGroup.Item key={message._id} className="">
-                      <span className="">{message.content.text}</span>
-                    </ListGroup.Item>
+                    <div
+                      key={message._id}
+                      className="balon2 p-2 m-0 position-relative"
+                      data-is="Odosielateľ - 3:22 pm"
+                    >
+                      <span className="float-left">{message.content.text}</span>
+                    </div>
+                    // <ListGroup.Item key={message._id} className="">
+                    //   <span className="">{message.content.text}</span>
+                    // </ListGroup.Item>
                   )
                 )}
-            </ListGroup>
+            </div>
 
             <div className="chat-active-footer   ">
               <Form className="d-flex" onSubmit={(e) => handleMessage(e)}>
                 <Form.Control
                   type="text"
-                  placeholder="Normal text"
-                  className="w-75"
+                  placeholder="Type message"
+                  className="w-75 pl-2 ml-2"
                   value={text}
                   onChange={(e) => setText(e.target.value)}
                 />
