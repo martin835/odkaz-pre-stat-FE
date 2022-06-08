@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { ListGroup } from "react-bootstrap";
 import { Form } from "react-bootstrap";
-
+import { format } from "date-fns";
 import { CloseButton } from "react-bootstrap";
 import { FaChevronDown, FaTimes, FaRegCommentDots } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
@@ -98,7 +98,10 @@ function ChatActive(props) {
                     <div
                       key={message._id}
                       className="balon1 p-2 m-0 position-relative"
-                      data-is="You - 3:20 pm"
+                      data-is={`You - ${format(
+                        new Date(message.createdAt),
+                        "p"
+                      )} `}
                     >
                       <span className="float-right">
                         {message.content.text}
@@ -108,13 +111,14 @@ function ChatActive(props) {
                     <div
                       key={message._id}
                       className="balon2 p-2 m-0 position-relative"
-                      data-is="Odosielateľ - 3:22 pm"
+                      data-is={`${
+                        props.chatMembers.filter(
+                          (member) => member._id !== loggedUser._id
+                        )[0]?.name
+                      } - ${format(new Date(message.createdAt), "p")} `}
                     >
                       <span className="float-left">{message.content.text}</span>
                     </div>
-                    // <ListGroup.Item key={message._id} className="">
-                    //   <span className="">{message.content.text}</span>
-                    // </ListGroup.Item>
                   )
                 )}
             </div>
