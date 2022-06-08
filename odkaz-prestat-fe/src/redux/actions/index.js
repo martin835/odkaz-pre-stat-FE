@@ -5,6 +5,7 @@ export const REMOVE_SOCKET = "REMOVE_SOCKET";
 export const SET_ADMINS = "SET_ADMINS";
 export const REMOVE_ADMIN = "REMOVE_ADMIN";
 export const ADD_ADMIN = "ADD_ADMIN";
+export const SET_USERS = "SET_USERS";
 
 export const setLoggedUserAction = (user) => ({
   type: SET_LOGGED_USER,
@@ -28,6 +29,10 @@ export const removeSocket = () => ({
 export const setOnlineAdmins = (onlineAdmins) => ({
   type: SET_ADMINS,
   payload: onlineAdmins,
+});
+export const setOnlineUsers = (onlineUsers) => ({
+  type: SET_USERS,
+  payload: onlineUsers,
 });
 
 //This actions are probably not needed.

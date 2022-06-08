@@ -38,6 +38,7 @@ function Header(props) {
       dispatch(removeLoggedUserAction());
       localStorage.removeItem("accessToken");
     } else if (loggedUser.role === "basicUser") {
+      socket.emit("updatedOnlineUsers", 0, loggedUser._id);
       dispatch(removeLoggedUserAction());
       localStorage.removeItem("accessToken");
       socket.disconnect();

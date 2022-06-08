@@ -14,6 +14,8 @@ function ChatWindowOpened(props) {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const loggedUser = useSelector((state) => state.loggedUser);
+  const adminsOnline = useSelector((state) => state.adminsOnline);
+  const usersOnline = useSelector((state) => state.usersOnline);
   const [chats, setChats] = useState([]);
 
   useEffect(() => {
@@ -175,27 +177,32 @@ function ChatWindowOpened(props) {
 
           {loggedUser?.role === "basicUser" && (
             <ListGroup>
-              {props.adminsOnline
-                ?.filter((admin) => admin._id !== loggedUser._id)
-                .map((admin) => (
-                  <ListGroup.Item
-                    key={admin._id}
-                    className="chat-contact-card"
-                    onClick={(e) => {
-                      props.setChatActive(true);
-                      props.setChatOpened(false);
-                      props.setChatRecipient(admin._id);
-                      createChat(e, admin._id);
-                    }}
-                  >
-                    <img
-                      className="card-img-user-comment"
-                      src={admin.avatar}
-                      alt="profile imange"
-                    />{" "}
-                    <span>🟢 {admin.name} is online</span>
-                  </ListGroup.Item>
-                ))}
+              {adminsOnline.length > 0 &&
+                adminsOnline
+                  ?.filter((admin) => admin._id !== loggedUser._id)
+                  .map((admin) => (
+                    <ListGroup.Item
+                      key={admin._id}
+                      className="chat-contact-card"
+                      onClick={(e) => {
+                        props.setChatActive(true);
+                        props.setChatOpened(false);
+                        props.setChatRecipient(admin._id);
+                        createChat(e, admin._id);
+                      }}
+                    >
+                      <img
+                        className="card-img-user-comment"
+                        src={admin.avatar}
+                        alt="profile imange"
+                      />{" "}
+                      <span>🟢 {admin.name} is online</span>
+                    </ListGroup.Item>
+                  ))}
+
+              {adminsOnline.length === 0 && (
+                <div className="p-4 mt-5">Žiadny admin nie je online 🤷‍♀️</div>
+              )}
             </ListGroup>
           )}
 
@@ -222,13 +229,21 @@ function ChatWindowOpened(props) {
                     alt="profile imange"
                   />{" "}
                   <span>
-                    🟢{" "}
+                    {usersOnline.filter(
+                      (user) =>
+                        user._id ===
+                        chat.members.filter(
+                          (member) => member._id !== loggedUser._id
+                        )[0]._id
+                    ).length
+                      ? "🟢"
+                      : "🟠"}{" "}
+                    chat with{" "}
                     {
                       chat.members.filter(
                         (member) => member._id !== loggedUser._id
                       )[0].name
                     }{" "}
-                    is online
                   </span>
                 </ListGroup.Item>
               ))}

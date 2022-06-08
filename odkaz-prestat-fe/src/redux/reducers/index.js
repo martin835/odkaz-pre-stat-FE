@@ -5,8 +5,7 @@ import {
   SET_SOCKET,
   REMOVE_SOCKET,
   SET_ADMINS,
-  REMOVE_ADMIN,
-  ADD_ADMIN,
+  SET_USERS,
 } from "../actions/index.js";
 
 const mainReducer = (state = initialState, action) => {
@@ -39,6 +38,11 @@ const mainReducer = (state = initialState, action) => {
       return {
         ...state,
         adminsOnline: action.payload,
+      };
+    case SET_USERS:
+      return {
+        ...state,
+        usersOnline: action.payload,
       };
 
     //Probably not needed:

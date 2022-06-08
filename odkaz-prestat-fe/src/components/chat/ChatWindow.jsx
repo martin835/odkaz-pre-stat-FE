@@ -8,7 +8,11 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import ChatActive from "./ChatActive";
 import { useDispatch } from "react-redux";
-import { setOnlineAdmins, setSocket } from "../../redux/actions";
+import {
+  setOnlineAdmins,
+  setOnlineUsers,
+  setSocket,
+} from "../../redux/actions";
 
 const ADDRESS = process.env.REACT_APP_BE_ADDRESS || "http://localhost:3001";
 
@@ -17,9 +21,9 @@ function ChatWindow() {
   const [chatClosed, setChatClosed] = useState(true);
   const [chatActive, setChatActive] = useState(false);
   const loggedUser = useSelector((state) => state.loggedUser);
-  const socketInRedux = useSelector((state) => state.socket);
+  // const socketInRedux = useSelector((state) => state.socket);
   const dispatch = useDispatch();
-  const adminsOnline = useSelector((state) => state.adminsOnline);
+  // const adminsOnline = useSelector((state) => state.adminsOnline);
   //const [adminsOnline, setAdminsOnline] = useState([]);
   //const [usersOnline, setUsersOnline] = useState([]);
   // 👇👇👇chatRecipient => the one who is supposed to received the message => admin in our case.
@@ -58,11 +62,11 @@ function ChatWindow() {
           dispatch(setOnlineAdmins(onlineAdmins));
         });
 
-        // socket.on("onlineUsers", (onlineUsers) => {
-        //   console.log("USERS ONLINE: ");
-        //   console.table(onlineUsers);
-        //   setUsersOnline(onlineUsers);
-        // });
+        socket.on("onlineUsers", (onlineUsers) => {
+          console.log("USERS ONLINE: ");
+          console.table(onlineUsers);
+          dispatch(setOnlineUsers(onlineUsers));
+        });
 
         socket.on("incomingMessage", ({ newMessage }) => {
           console.table({ newMessage });
@@ -117,7 +121,6 @@ function ChatWindow() {
           setChatOpened={setChatOpened}
           setChatClosed={setChatClosed}
           chatClosed={chatClosed}
-          adminsOnline={adminsOnline}
           setChatActive={setChatActive}
           chatActive={chatActive}
           chat={chat}
