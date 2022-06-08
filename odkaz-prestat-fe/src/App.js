@@ -23,7 +23,7 @@ function App() {
   const loggedUser = useSelector((state) => state.loggedUser);
   //This is just to make component re-render correctly after token is set to LS. Token should be always taken from the Local Storage!!!
   const [tokenInLocalStorage, setTokenInLocalStorage] = useState(null);
-
+  const socket = useSelector((state) => state.socket);
   // Do we have an access token in the URL?
   const token = new URLSearchParams(window.location.search).get("accessToken");
   //console.log(token);
@@ -71,8 +71,9 @@ function App() {
       });
       if (response.ok) {
         const data = await response.json();
-        //console.log(data);
-        //setLoggedUser(data);
+        console.log("loadLoggedUser data: ", data);
+        // 🤙🤙🤙 HERE EMIT CHANGE IN LOGGED ADMINS
+        socket?.emit("updatedOnlineAdmins", 1, data._id);
         dispatch(setLoggedUserAction(data));
       } else {
         console.log("error on fetching users");

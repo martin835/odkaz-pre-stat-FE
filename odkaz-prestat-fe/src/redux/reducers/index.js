@@ -41,18 +41,19 @@ const mainReducer = (state = initialState, action) => {
         adminsOnline: action.payload,
       };
 
-    case REMOVE_ADMIN:
-      return {
-        ...state,
-        adminsOnline: state.adminsOnline.filter(
-          (admin) => admin._id !== action.payload
-        ),
-      };
-    case ADD_ADMIN:
-      return {
-        ...state,
-        adminsOnline: state.adminsOnline.concat(action.payload),
-      };
+    //Probably not needed:
+    // case REMOVE_ADMIN:
+    //   return {
+    //     ...state,
+    //     adminsOnline: state.adminsOnline.filter(
+    //       (admin) => admin._id !== action.payload
+    //     ),
+    //   };
+    // case ADD_ADMIN:
+    //   return {
+    //     ...state,
+    //     adminsOnline: state.adminsOnline.concat(action.payload),
+    //   };
 
     default:
       return state;

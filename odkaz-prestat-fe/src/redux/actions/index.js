@@ -30,14 +30,15 @@ export const setOnlineAdmins = (onlineAdmins) => ({
   payload: onlineAdmins,
 });
 
-export const removeOnlineAdmin = (adminId) => ({
-  type: REMOVE_ADMIN,
-  payload: adminId,
-});
-export const addOnlineAdmin = (adminId) => ({
-  type: ADD_ADMIN,
-  payload: adminId,
-});
+//This actions are probably not needed.
+// export const removeOnlineAdmin = (adminId) => ({
+//   type: REMOVE_ADMIN,
+//   payload: adminId,
+// });
+// export const addOnlineAdmin = (adminId) => ({
+//   type: ADD_ADMIN,
+//   payload: adminId,
+// });
 
 // export const fetchSearchedJobsAction = (searchQuery) => {
 //   //if (e.key !== "Enter") return;

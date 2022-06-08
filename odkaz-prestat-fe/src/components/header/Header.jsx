@@ -30,7 +30,8 @@ function Header(props) {
   const onLogout = () => {
     console.log("👋 Logging out...");
     if (loggedUser.role === "admin") {
-      socket.emit("updatedOnlineAdmins", loggedUser._id);
+      //0 = removing online admin , 1 = adding online admin
+      socket.emit("updatedOnlineAdmins", 0, loggedUser._id);
       //dispatch(removeOnlineAdmin(loggedUser._id));
       socket.disconnect();
       dispatch(removeSocket());
