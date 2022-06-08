@@ -32,10 +32,10 @@ function Header(props) {
     if (loggedUser.role === "admin") {
       socket.emit("updatedOnlineAdmins", loggedUser._id);
       //dispatch(removeOnlineAdmin(loggedUser._id));
-      dispatch(removeLoggedUserAction());
-      localStorage.removeItem("accessToken");
       socket.disconnect();
       dispatch(removeSocket());
+      dispatch(removeLoggedUserAction());
+      localStorage.removeItem("accessToken");
     } else if (loggedUser.role === "basicUser") {
       dispatch(removeLoggedUserAction());
       localStorage.removeItem("accessToken");

@@ -45,10 +45,11 @@ function ChatWindow() {
     console.log("🎬 USE EFFECT!");
     console.log("Logged user: ", loggedUser);
     console.log("Socket ID: ", socket.id);
-    dispatch(setSocket(socket));
     if (loggedUser && socket) {
       socket.on("connect", () => {
         console.log(" 🔛 connected with socket id", socket.id);
+
+        dispatch(setSocket(socket));
 
         socket.on("onlineAdmins", (onlineAdmins) => {
           console.log("ADMINS ONLINE: ");
