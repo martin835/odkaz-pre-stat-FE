@@ -24,6 +24,7 @@ function ChatWindowClosed(props) {
             src={loggedUser?.avatar}
             alt=""
             className="card-img-user-comment mr-1"
+            referrerpolicy="no-referrer"
           />{" "}
           <strong>
             <span>

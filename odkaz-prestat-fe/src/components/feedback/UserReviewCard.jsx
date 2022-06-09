@@ -57,6 +57,7 @@ function UserReviewCard(props) {
               src={props.review.user.avatar}
               alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do"
               aria-hidden="true"
+              referrerpolicy="no-referrer"
             />
           </div>
           <div className="d-flex w-50 justify-content-around">
