@@ -223,7 +223,7 @@ function Header(props) {
                                 onLogout();
                               }}
                             >
-                              Odhlásiť
+                              {t("logout")}
                             </Link>
                             <span> | </span>
                             <Link
@@ -231,7 +231,7 @@ function Header(props) {
                               title="profil"
                               className="govuk-link idsk-header-web__main--login-action-text-profile idsk-header-web__main--login-profilebtn"
                             >
-                              Profil
+                              {t("profile")}
                             </Link>
                           </div>
                         </div>
@@ -242,7 +242,7 @@ function Header(props) {
                         data-module="idsk-button"
                         onClick={() => navigate("/profil")}
                       >
-                        Profil
+                        {t("profile")}
                       </button>
                       <button
                         type="button"
@@ -252,7 +252,7 @@ function Header(props) {
                           onLogout();
                         }}
                       >
-                        Odhlásiť sa
+                        {t("logout")}
                       </button>
                     </div>
                   </div>
@@ -311,7 +311,7 @@ function Header(props) {
                             href="#"
                             title="odhlásiť"
                           >
-                            Odhlásiť
+                            {t("logout")}
                           </a>
                           <span> | </span>
                           <Link
@@ -319,7 +319,7 @@ function Header(props) {
                             title="profil"
                             className="govuk-link idsk-header-web__main--login-action-text-profile idsk-header-web__main--login-profilebtn"
                           >
-                            Profil
+                            {t("profile")}
                           </Link>
                         </div>
                       </div>
@@ -333,7 +333,7 @@ function Header(props) {
                         setShowMobileLogin(false);
                       }}
                     >
-                      Profil
+                      {t("profile")}
                     </button>
                     <button
                       type="button"
@@ -344,7 +344,7 @@ function Header(props) {
                         setShowMobileLogin(false);
                       }}
                     >
-                      Odhlásiť sa
+                      {t("logout")}
                     </button>
                   </div>
                 </div>

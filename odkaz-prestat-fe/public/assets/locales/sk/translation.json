@@ -3,5 +3,15 @@
   "test_version": "APLIKÁCIA VO VÝVOJI",
   "log_in": "Prihlásiť sa",
   "log_in_with_google": "Prihlásiť sa účtom Google",
-  "register": "Zaregistrovať sa"
+  "register": "Zaregistrovať sa",
+  "logout": "Odhlásiť",
+  "profile": "Profil",
+  "header-c-1": "Táto stránka slúži ako koncept.",
+  "header-c-2": "Viac o našich cieľoch:",
+  "header-c-3": "O projekte:",
+  "header-c-4": "Našim cieľom je sprostredkovať spätnú väzbu pre verejnú správu.",
+  "header-c-5": "Chceme aby sa orgány verejnej moci dozvedeli ako sú občania spokojní so službami, ktoré poskytujú a mohli na základe spätnej väzby zlepšovať svoje fungovanie.",
+  "header-c-6": "Chceme aby občania mali možnosť zmeniť fungovanie verejnej správy k lepšiemu.",
+  "header-c-7": "Cieľom je primäť orgány verejnej moci aby sa spätnou väzbou od občanou reálne zaoberali a odovzdané podnenty riešili.",
+  "header-c-8": "Menej o našich cieľoch:"
 }
