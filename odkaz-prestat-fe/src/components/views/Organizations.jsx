@@ -4,12 +4,15 @@ import { useLocation, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../../styles/organizations.css";
 import ResultLink from "../search/ResultLink";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 function Organizations(props) {
   const { region, numberOfCenters } = useLocation().state;
   const { district } = useParams();
   // console.log("params: ", district);
   const [clientCentersinDistrict, setClientCentersinDistrict] = useState(null);
+  const { t } = useTranslation();
   const URL = process.env.BE_DEV_URL;
 
   useEffect(() => {
@@ -51,7 +54,7 @@ function Organizations(props) {
         <div className="govuk-grid-row ">
           <div className="govuk-grid-column-one-third">
             <h2 className="gem-c-heading gem-c-heading--font-size-27" id="bb">
-              Klienstké centrá v {region} kraji
+              {t("Organizations-1")} {region} {t("Organizations-2")}
             </h2>
             <div
               className="gem-c-big-number govuk-!-margin-bottom-3"

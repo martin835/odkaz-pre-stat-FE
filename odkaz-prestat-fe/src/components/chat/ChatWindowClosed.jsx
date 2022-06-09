@@ -2,9 +2,12 @@ import { useState } from "react";
 import { CloseButton } from "react-bootstrap";
 import { FaChevronUp, FaTimes, FaRegCommentDots } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 function ChatWindowClosed(props) {
   const loggedUser = useSelector((state) => state.loggedUser);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -24,7 +27,7 @@ function ChatWindowClosed(props) {
           />{" "}
           <strong>
             <span>
-              Chat s adminom <FaRegCommentDots />
+              {t("Chat-1")} <FaRegCommentDots />
             </span>
           </strong>
         </div>

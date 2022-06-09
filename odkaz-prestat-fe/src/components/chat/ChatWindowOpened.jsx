@@ -137,7 +137,7 @@ function ChatWindowOpened(props) {
               className="card-img-user-comment mr-1"
             />{" "}
             <strong>
-              Chat s adminom <FaRegCommentDots />
+              {t("Chat-1")} <FaRegCommentDots />
             </strong>
           </div>
           <div className="">
@@ -196,12 +196,14 @@ function ChatWindowOpened(props) {
                         src={admin.avatar}
                         alt="profile imange"
                       />{" "}
-                      <span>🟢 {admin.name} is online</span>
+                      <span>
+                        🟢 {admin.name} {t("Chat-2")}
+                      </span>
                     </ListGroup.Item>
                   ))}
 
               {adminsOnline.length === 0 && (
-                <div className="p-4 mt-5">Žiadny admin nie je online 🤷‍♀️</div>
+                <h5 className="p-4 mt-5">{t("Chat-3")} 🤷‍♀️</h5>
               )}
             </ListGroup>
           )}

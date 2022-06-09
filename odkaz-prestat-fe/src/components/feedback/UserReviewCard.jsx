@@ -2,6 +2,8 @@ import { format, parseISO } from "date-fns";
 import { useEffect, useState } from "react";
 import { BsStar, BsStarFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 import "../../styles/userReviewCard.css";
 import Likes from "./comments/Likes";
 import Comments from "./comments/CommentsBtn";
@@ -11,6 +13,7 @@ import { Toast } from "react-bootstrap";
 function UserReviewCard(props) {
   const [service, setservice] = useState(null);
   const [showLogInInfo, setShowLogInInfo] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchProvider();
@@ -101,7 +104,8 @@ function UserReviewCard(props) {
               </strong>
             </span>{" "}
             <span className="idsk-card-meta  idsk-card-meta-date ">
-              {format(parseISO(props.review.createdAt), "PP")} hodnotil
+              {format(parseISO(props.review.createdAt), "PP")}{" "}
+              {t("UserReviewCard-1")}
             </span>
             <span className="idsk-card-meta ">
               <Link
@@ -110,16 +114,17 @@ function UserReviewCard(props) {
               >
                 <strong>{service?.provider.name}</strong>
               </Link>{" "}
-              službu <strong>{props.review.service.type}</strong>
+              {t("UserReviewCard-2")}{" "}
+              <strong>{props.review.service.type}</strong>
             </span>
           </div>
           <h3 className="govuk-heading-s">
             {" "}
-            {props.review.rating === 1 && "Veľmi nespokojný"}
-            {props.review.rating === 2 && "Nespokojný"}
-            {props.review.rating === 3 && "Ani spokojný ani nespokojný"}
-            {props.review.rating === 4 && "Spokojný"}
-            {props.review.rating === 5 && "Veľmi spokojný"}
+            {props.review.rating === 1 && t("UserReviewCard-5")}
+            {props.review.rating === 2 && t("UserReviewCard-6")}
+            {props.review.rating === 3 && t("UserReviewCard-7")}
+            {props.review.rating === 4 && t("UserReviewCard-8")}
+            {props.review.rating === 5 && t("UserReviewCard-9")}
           </h3>
           <p className="idsk-body idsk-body-secondary">
             {props.review.review && '"'}
@@ -133,12 +138,9 @@ function UserReviewCard(props) {
         >
           <Toast show={showLogInInfo} onClose={toggleShowLogInInfo}>
             <Toast.Header>
-              <strong className="mr-auto">Musíte sa prihlásiť</strong>
+              <strong className="mr-auto">{t("UserReviewCard-3")}</strong>
             </Toast.Header>
-            <Toast.Body>
-              Aby ste mohhli pridávať páčiky, komentáre a hodnotenia, musíte sa
-              prihlásiť.
-            </Toast.Body>
+            <Toast.Body>{t("UserReviewCard-4")}</Toast.Body>
           </Toast>
         </div>
 

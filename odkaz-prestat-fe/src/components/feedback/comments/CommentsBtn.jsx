@@ -1,7 +1,10 @@
 import { Button } from "react-bootstrap";
 import { BiCommentDots } from "react-icons/bi";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const CommentsBtn = (props) => {
+  const { t } = useTranslation();
   return (
     <div>
       <Button
@@ -13,7 +16,7 @@ const CommentsBtn = (props) => {
         }}
       >
         <BiCommentDots className="mr-2" />
-        Komentáre
+        {t("CommentsBtn-1")}
       </Button>
     </div>
   );

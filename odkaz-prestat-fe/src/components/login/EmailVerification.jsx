@@ -1,9 +1,11 @@
 import "./checkBox.css";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
+
 import { useEffect } from "react";
 import { Spinner } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 import { setLoggedUserAction } from "../../redux/actions";
 
 function EmailVerification() {
@@ -60,14 +62,16 @@ function EmailVerification() {
       <div className="govuk-width-container">
         <div className="govuk-grid-row ">
           <div className="govuk-grid-column-two-thirds">
-            <h1 className=" govuk-heading-l">Potvrdenie emailu</h1>
+            <h1 className=" govuk-heading-l">{t("EmailVerification-1")}</h1>
 
             {regSuccess === null && (
               <Spinner animation="border" variant="primary" />
             )}
             {regSuccess === true && (
               <div className="govuk-panel govuk-panel--confirmation">
-                <h1 className="govuk-panel__title">Registrácia dokončená.</h1>
+                <h1 className="govuk-panel__title">
+                  {t("EmailVerification-2")}
+                </h1>
               </div>
             )}
 
@@ -83,7 +87,7 @@ function EmailVerification() {
                     className="govuk-error-summary__title"
                     id="error-summary-title"
                   >
-                    Registrácia neúspešná.
+                    {t("EmailVerification-3")}
                   </h2>
                 </div>
               </div>

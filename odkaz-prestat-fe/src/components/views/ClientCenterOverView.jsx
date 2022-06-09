@@ -8,6 +8,8 @@ import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
 import useDidUpdateEffect from "../../utils/useDidUpdateEffect";
 import UsersReviewRow3 from "../feedback/UsersReviewRow3";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 function ClientCenterOverView() {
   const { id } = useParams();
@@ -17,6 +19,7 @@ function ClientCenterOverView() {
   const [reviewsCount, setreviewsCount] = useState(null);
   const [weights, setWeights] = useState(null);
   const [arrOfRows, setArrOfRows] = useState(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchClientCenter();
@@ -94,7 +97,7 @@ function ClientCenterOverView() {
       <div className="govuk-grid-row ">
         <div className="govuk-grid-column-full">
           <h1 className=" govuk-heading-l govuk-!-margin-bottom-8 ">
-            Prehľad hodnotenia pre {clientCenter?.name}
+            {t("ClientCenterOverView-1")} {clientCenter?.name}
           </h1>
         </div>
       </div>
@@ -178,7 +181,9 @@ function ClientCenterOverView() {
                   </>
                 )}
               </div>
-              <div>{reviewsCount && reviewsCount} hodnotení</div>
+              <div>
+                {reviewsCount && reviewsCount} {t("ClientCenterOverView-2")}{" "}
+              </div>
             </div>
           </Col>
           <Col xs={12} md={10}>
@@ -247,7 +252,7 @@ function ClientCenterOverView() {
       </Container>
 
       <h2 className=" govuk-heading-m govuk-!-margin-bottom-8 govuk-!-margin-top-8 ">
-        Posledné hodnotenia:
+        {t("ClientCenterOverView-3")}
       </h2>
 
       {arrOfRows &&

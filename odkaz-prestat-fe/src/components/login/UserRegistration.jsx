@@ -43,11 +43,11 @@ function UserRegistration() {
       <div className="govuk-width-container">
         <div className="govuk-grid-row ">
           <div className="govuk-grid-column-two-thirds">
-            <h1 className=" govuk-heading-l">Registrácia</h1>
+            <h1 className=" govuk-heading-l">{t("UserRegistration-1")}</h1>
             <form onSubmit={(e) => register(e)}>
               <div className="govuk-form-group">
                 <label className="govuk-label" htmlFor="meno">
-                  Meno:
+                  {t("UserRegistration-2")}
                 </label>
                 <input
                   className="govuk-input"
@@ -66,7 +66,7 @@ function UserRegistration() {
               </div>
               <div className="govuk-form-group">
                 <label className="govuk-label" htmlFor="priezvisko">
-                  Priezvisko:
+                  {t("UserRegistration-3")}
                 </label>
                 <input
                   className="govuk-input"
@@ -106,7 +106,7 @@ function UserRegistration() {
                   className="govuk-label"
                   htmlFor="input-example-4-surname"
                 >
-                  Heslo:
+                  {t("UserRegistration-4")}
                 </label>
                 <input
                   className="govuk-input"
@@ -139,7 +139,7 @@ function UserRegistration() {
                       className="govuk-label govuk-checkboxes__label"
                       htmlFor="suhlas"
                     >
-                      Súhlas so spracovaním osobných údajov
+                      {t("UserRegistration-5")}
                     </label>
                   </div>
                 </div>
@@ -154,11 +154,11 @@ function UserRegistration() {
             </form>
             {registrationSent && (
               <div className="govuk-panel govuk-panel--confirmation">
-                <h1 className="govuk-panel__title">Registrácia odoslaná</h1>
+                <h1 className="govuk-panel__title">
+                  {t("UserRegistration-6")}
+                </h1>
                 <div className="govuk-panel__body">
-                  Pre dokončenie registrácie musíte na kliknúť na aktivačný
-                  odkaz, ktorý sme Vám poslali na e-mail:{" "}
-                  {registrationReq.email}.
+                  {t("UserRegistration-7")} {registrationReq.email}.
                 </div>
               </div>
             )}

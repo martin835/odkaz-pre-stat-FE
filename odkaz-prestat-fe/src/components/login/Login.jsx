@@ -79,19 +79,15 @@ function Login() {
     <div className="govuk-width-container">
       <div className="govuk-grid-row ">
         <div className="govuk-grid-column-two-thirds">
-          <h1 className=" govuk-heading-l">
-            Prihlásiť sa alebo sa zaregistrovať
-          </h1>
+          <h1 className=" govuk-heading-l">{t("Login-1")}</h1>
 
-          <h2 className="govuk-heading-m">
-            Prihláste sa alebo sa zaregistrujte pomocou Vášho Google účtu:
-          </h2>
+          <h2 className="govuk-heading-m">{t("Login-2")}</h2>
           <div className="mb-4">
             <a href={`${process.env.REACT_APP_BE_URL}/users/googleLogin`}>
               <GoogleLoginButton />
             </a>
           </div>
-          <h2 className="govuk-heading-m">Prihláste sa e-mailom a heslom:</h2>
+          <h2 className="govuk-heading-m">{t("Login-3")}</h2>
 
           <form onSubmit={(e) => login(e)}>
             <div className="govuk-form-group">
@@ -112,7 +108,7 @@ function Login() {
 
             <div className="govuk-form-group">
               <label className="govuk-label" htmlFor="input-example-4-surname">
-                Heslo:
+                {t("Login-4")}
               </label>
               <input
                 className="govuk-input"
@@ -133,9 +129,9 @@ function Login() {
               {t("log_in")}
             </button>
           </form>
-          <h2 className="govuk-heading-m">Nie ste ešte zaregistrovaný?</h2>
+          <h2 className="govuk-heading-m">{t("Login-5")}</h2>
           <Link to="/user-registration" className="govuk-link">
-            Zaregistrujte sa tu.{" "}
+            {t("Login-6")}{" "}
           </Link>
         </div>
       </div>
