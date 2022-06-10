@@ -30,7 +30,7 @@ function ChatActive(props) {
     props.socket.emit("outgoingMessage", { data, chat });
 
     console.log({ data, chat });
-    //setMessages((m) => [...m, data]);
+    //props.setChatMessages((chatMessages) => [...chatMessages, newMessage]);
 
     setText("");
   };

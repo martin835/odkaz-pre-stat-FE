@@ -153,6 +153,7 @@ function ChatWindow() {
             chat={chat}
             setChatRecipient={setChatRecipient}
             chatMessages={chatMessages}
+            setChatMessages={setChatMessages}
             chatMembers={chatMembers}
           />
         )}
