@@ -1,4 +1,5 @@
 import briskLogo from "../../assets/images/brisk-logo.png";
+import mirriLogoFooter from "../../assets/images/footer-extended-logo.svg";
 
 //used this article to make footer sticked to the bottom:
 //https://radu.link/make-footer-stay-bottom-page-bootstrap/
@@ -66,11 +67,11 @@ function Footer() {
                     informatizácie SR.
                   </p>
                 </div>
-                <div className="govuk-grid-column-one-third idsk-footer-extended-logo-box">
+                <div className="govuk-grid-column-one-third idsk-footer-extended-logo-box govuk-!-margin-bottom-9">
                   <a href="https://www.lepsiesluzby.digital/" title="domov">
                     <img
-                      className="idsk-footer-extended-logo"
-                      src={briskLogo}
+                      className="idsk-footer-extended-logo "
+                      src={mirriLogoFooter}
                       alt="Ministerstvo investícií, regionálneho rozvoja a informatizácie Slovenskej republiky"
                     />
                   </a>
