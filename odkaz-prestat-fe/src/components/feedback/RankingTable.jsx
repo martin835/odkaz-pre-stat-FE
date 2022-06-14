@@ -49,7 +49,7 @@ function RankingTable() {
             <thead className="idsk-table__head">
               <tr className="idsk-table__row">
                 <th scope="col" className="idsk-table__header">
-                  <span className="th-span"> {t("RankingTable-2")}</span>
+                  <span className="th-span"> Poskytovateľ služby</span>
                 </th>
                 <th scope="col" className="idsk-table__header">
                   <span className="th-span"> {t("RankingTable-3")}</span>
