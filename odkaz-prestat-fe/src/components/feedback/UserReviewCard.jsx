@@ -116,7 +116,7 @@ function UserReviewCard(props) {
                 <strong>{service?.provider.name}</strong>
               </Link>{" "}
               {t("UserReviewCard-2")}{" "}
-              <strong>{props.review.service.type}</strong>
+              <strong>{props.review.service?.type}</strong>
             </span>
           </div>
           <h3 className="govuk-heading-s">

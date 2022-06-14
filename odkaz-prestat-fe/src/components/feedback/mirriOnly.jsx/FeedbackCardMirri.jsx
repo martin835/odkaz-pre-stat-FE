@@ -1,32 +1,71 @@
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import { ImHeart } from "react-icons/im";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 
-function FeedbackCard() {
+function FeedbackCardMirri() {
   const [showTextArea, setShowTextArea] = useState(false);
   const [feedbackText, setFeedbackText] = useState("");
   const [charsLeft, setCharsLeft] = useState(200);
   const [showThankYou, setShowThankYou] = useState(false);
+  const { serviceId } = useLocation().state;
   const [reqObj, setReqObj] = useState({
     rating: null,
     review: "",
-    service: "",
+    service: serviceId,
   });
-  const { clientCenter } = useLocation().state;
+  const [mirriObj, setMirriObj] = useState(null);
+  const { orgId } = useParams();
+
   const { t } = useTranslation();
-  console.log(" CLIENT CENTER:  ", clientCenter);
+  console.log(" CLIENT CENTER:  ", orgId);
   const computeCharsLeft = (chars) => {
     let left = 200 - parseInt(chars.length);
     setCharsLeft(left);
+  };
+
+  useEffect(() => {
+    loadMirriInfo();
+  }, []);
+
+  //clientCenter === MIRRI
+  const loadMirriInfo = async () => {
+    try {
+      let response = await fetch(
+        `${process.env.REACT_APP_BE_URL}/clientCenters/${orgId}`,
+        {
+          method: "GET",
+          //credentials: "include",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        }
+      );
+      if (response.ok) {
+        let data = await response.json();
+        console.log(data);
+        setMirriObj(data);
+      } else {
+        console.log("login failed");
+        if (response.status === 400) {
+          console.log("bad request");
+        }
+        if (response.status === 404) {
+          console.log("page not found");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const postReview = async () => {
     try {
       let response = await fetch(`${process.env.REACT_APP_BE_URL}/reviews`, {
         method: "POST",
-        body: JSON.stringify({ ...reqObj, provider: clientCenter._id }),
+        body: JSON.stringify({ ...reqObj, provider: orgId }),
         //credentials: "include",
         headers: {
           "Content-type": "application/json",
@@ -63,12 +102,14 @@ function FeedbackCard() {
       <div className="govuk-width-container">
         <div id="idsk-feedback__content">
           <h2 className="govuk-heading-l">
-            {t("FeedbackCard-2")} {clientCenter.name}
+            {t("FeedbackCard-2")} {mirriObj?.name}
           </h2>
-          <h3 className="govuk-heading-m idsk-feedback__subtitle">
+          {/*    <h3 className="govuk-heading-m idsk-feedback__subtitle">
             {t("FeedbackCard-3")}
-          </h3>
-          <div className="govuk-form-group">
+          </h3> */}
+
+          {/* Výber služby tu nie je potrebný, služba prichádza z Radio buttons z HOME View => MirriServiceSelector.jsx */}
+          {/*           <div className="govuk-form-group">
             <label className="govuk-label" htmlFor="select-dd1">
               {t("FeedbackCard-4")}
             </label>
@@ -87,9 +128,9 @@ function FeedbackCard() {
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
           <h3 className="govuk-heading-m idsk-feedback__subtitle">
-            {t("FeedbackCard-5")}
+            Ako ste spokojný so službou ... ?
           </h3>
 
           <div
@@ -299,4 +340,4 @@ function FeedbackCard() {
   );
 }
 
-export default FeedbackCard;
+export default FeedbackCardMirri;

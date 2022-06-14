@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import "../../../styles/organizations.css";
+import { useState } from "react";
 
 function MirriServiceSelector() {
   const { t } = useTranslation();
+  const [serviceSelected, setsServiceSelected] = useState(null);
 
   return (
     <div className="govuk-width-container">
@@ -20,15 +22,17 @@ function MirriServiceSelector() {
       <div className="govuk-grid-row ">
         <div className="govuk-grid-column-full ">
           <form>
-            <div className="govuk-radios" onChange={(e) => console.log("ping")}>
+            <div
+              className="govuk-radios"
+              onChange={(e) => setsServiceSelected(e.target.value)}
+            >
               <div className="govuk-radios__item">
                 <input
                   className="govuk-radios__input idsk-feedback__radio-button "
                   id="1"
                   name="basicFeedback"
                   type="radio"
-                  value="1"
-                  onChange={() => console.log("ping")}
+                  value="62a891ceb3f79421f9ab2719"
                 />
                 <label className="govuk-label govuk-radios__label" htmlFor="1">
                   Slovensko v mobile
@@ -40,8 +44,7 @@ function MirriServiceSelector() {
                   id="2"
                   name="basicFeedback"
                   type="radio"
-                  value="2"
-                  onChange={() => console.log("ping")}
+                  value="62a891d8b3f79421f9ab271c"
                 />
                 <label className="govuk-label govuk-radios__label" htmlFor="2">
                   slovensko.sk
@@ -53,21 +56,25 @@ function MirriServiceSelector() {
                   id="3"
                   name="basicFeedback"
                   type="radio"
-                  value="3"
-                  onChange={() => console.log("ping")}
+                  value="62a891e4b3f79421f9ab271f"
                 />
                 <label className="govuk-label govuk-radios__label" htmlFor="3">
                   Portál Moje slovensko
                 </label>
               </div>
             </div>
-            <button
-              type="submit"
-              class="idsk-button govuk-!-margin-top-7"
-              data-module="idsk-button"
+            <Link
+              to="/feedback/62a89194b3f79421f9ab2717"
+              state={{ serviceId: serviceSelected }}
             >
-              Pokračovať
-            </button>
+              <button
+                type="reset"
+                class="idsk-button govuk-!-margin-top-7"
+                data-module="idsk-button"
+              >
+                Pokračovať
+              </button>
+            </Link>
           </form>
         </div>
       </div>

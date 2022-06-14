@@ -18,6 +18,7 @@ import useDidUpdateEffect from "./utils/useDidUpdateEffect";
 import UserRegistration from "./components/login/UserRegistration";
 import EmailVerification from "./components/login/EmailVerification";
 import Organizations from "./components/search/Organizations";
+import FeedbackCardMirri from "./components/feedback/mirriOnly.jsx/FeedbackCardMirri";
 
 function App() {
   const dispatch = useDispatch();
@@ -95,10 +96,20 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/verify-email" element={<EmailVerification />} />
           <Route path="/organizations/:district" element={<Organizations />} />
-          <Route
+          {/*   <Route
             path="/feedback/:orgId"
             element={
               localStorage.getItem("accessToken") ? <FeedbackCard /> : <Login />
+            }
+          /> */}
+          <Route
+            path="/feedback/:orgId"
+            element={
+              localStorage.getItem("accessToken") ? (
+                <FeedbackCardMirri />
+              ) : (
+                <Login />
+              )
             }
           />
           <Route path="/provider/:id" element={<ClientCenterOverView />} />
