@@ -10,13 +10,14 @@ import Header from "./components/header/Header";
 import ClientCenterOverView from "./components/views/ClientCenterOverView";
 import Home from "./components/views/Home";
 import Login from "./components/login/Login";
-import Organizations from "./components/views/Organizations";
+
 import UserProfile from "./components/views/UserProfile";
 import { setLoggedUserAction } from "./redux/actions";
 import ScrollToTop from "./utils/ScrollToTop";
 import useDidUpdateEffect from "./utils/useDidUpdateEffect";
 import UserRegistration from "./components/login/UserRegistration";
 import EmailVerification from "./components/login/EmailVerification";
+import Organizations from "./components/search/Organizations";
 
 function App() {
   const dispatch = useDispatch();

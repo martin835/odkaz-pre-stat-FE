@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../../styles/organizations.css";
-import ResultLink from "../search/ResultLink";
+import ResultLink from "./ResultLink";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 
@@ -81,3 +81,8 @@ function Organizations(props) {
 }
 
 export default Organizations;
+
+/* 
+
+
+*/
