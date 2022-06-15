@@ -54,7 +54,7 @@ function UserReviewCard(props) {
             <img
               className="card-img-user"
               width="100%"
-              src={props.review.user.avatar}
+              src={props.review.user?.avatar}
               alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do"
               aria-hidden="true"
               referrerPolicy="no-referrer"
