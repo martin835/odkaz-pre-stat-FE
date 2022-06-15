@@ -69,7 +69,7 @@ function MirriServiceSelector() {
             >
               <button
                 type="reset"
-                class="idsk-button govuk-!-margin-top-7"
+                className="idsk-button govuk-!-margin-top-7"
                 data-module="idsk-button"
               >
                 Pokračovať

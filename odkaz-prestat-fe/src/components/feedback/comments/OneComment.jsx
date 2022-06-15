@@ -46,7 +46,7 @@ const OneComment = (props) => {
             src={commentAuthor?.avatar}
             alt=""
             className="card-img-user-comment"
-            referrerpolicy="no-referrer"
+            referrerPolicy="no-referrer"
           />{" "}
         </Col>
 

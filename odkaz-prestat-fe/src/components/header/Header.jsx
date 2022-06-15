@@ -177,7 +177,7 @@ function Header(props) {
                       src={loggedUser ? loggedUser.avatar : profilePic}
                       alt="Electronic service menu icon"
                       className="header-profile-pic"
-                      referrerpolicy="no-referrer"
+                      referrerPolicy="no-referrer"
                     />
                     <div className="idsk-header-web__menu-close"></div>
                   </button>
@@ -210,7 +210,7 @@ function Header(props) {
                           className="header-profile-pic"
                           src={loggedUser?.avatar}
                           alt="Profile image"
-                          referrerpolicy="no-referrer"
+                          referrerPolicy="no-referrer"
                         />
                         <div className="idsk-header-web__main--login-action-text">
                           <span className="govuk-body-s idsk-header-web__main--login-action-text-user-name">
@@ -302,7 +302,7 @@ function Header(props) {
                         className="header-profile-pic"
                         src={loggedUser?.avatar}
                         alt="Profile image"
-                        referrerpolicy="no-referrer"
+                        referrerPolicy="no-referrer"
                       />
                       <div className="idsk-header-web__main--login-action-text">
                         <span className="govuk-body-s idsk-header-web__main--login-action-text-user-name">

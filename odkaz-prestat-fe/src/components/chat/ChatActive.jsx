@@ -50,7 +50,7 @@ function ChatActive(props) {
                 }
                 alt=""
                 className="card-img-user-comment mr-1"
-                referrerpolicy="no-referrer"
+                referrerPolicy="no-referrer"
               />{" "}
               <strong>
                 {

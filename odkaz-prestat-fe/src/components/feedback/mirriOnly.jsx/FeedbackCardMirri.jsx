@@ -9,7 +9,9 @@ function FeedbackCardMirri() {
   const [feedbackText, setFeedbackText] = useState("");
   const [charsLeft, setCharsLeft] = useState(200);
   const [showThankYou, setShowThankYou] = useState(false);
+  //Temporary fix / hardcoded  from MirriServiceSelector.jsx
   const { serviceId } = useLocation().state;
+  const [serviceInfo, setServiceInfo] = useState(null);
   const [reqObj, setReqObj] = useState({
     rating: null,
     review: "",
@@ -27,6 +29,7 @@ function FeedbackCardMirri() {
 
   useEffect(() => {
     loadMirriInfo();
+    loadServiceInfo();
   }, []);
 
   //clientCenter === MIRRI
@@ -47,6 +50,37 @@ function FeedbackCardMirri() {
         let data = await response.json();
         console.log(data);
         setMirriObj(data);
+      } else {
+        console.log("login failed");
+        if (response.status === 400) {
+          console.log("bad request");
+        }
+        if (response.status === 404) {
+          console.log("page not found");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const loadServiceInfo = async () => {
+    try {
+      let response = await fetch(
+        `${process.env.REACT_APP_BE_URL}/services/${serviceId}`,
+        {
+          method: "GET",
+          //credentials: "include",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        }
+      );
+      if (response.ok) {
+        let data = await response.json();
+        console.log(data);
+        setServiceInfo(data);
       } else {
         console.log("login failed");
         if (response.status === 400) {
@@ -130,7 +164,7 @@ function FeedbackCardMirri() {
             </select>
           </div> */}
           <h3 className="govuk-heading-m idsk-feedback__subtitle">
-            Ako ste spokojný so službou ... ?
+            Ako ste spokojný so službou {serviceInfo?.type} ?
           </h3>
 
           <div
