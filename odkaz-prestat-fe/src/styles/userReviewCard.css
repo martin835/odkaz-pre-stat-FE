@@ -18,3 +18,11 @@
   max-width: 215px;
   overflow-wrap: break-word;
 }
+
+/* How to break long words and URLs https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/ */
+.break-long-word {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-all;
+  word-break: break-word;
+}

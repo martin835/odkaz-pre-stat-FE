@@ -57,7 +57,7 @@ function UserProfile(props) {
                   src={loggedUser.avatar}
                   className="header-profile-pic"
                   alt="avatar"
-                  referrerpolicy="no-referrer"
+                  referrerPolicy="no-referrer"
                 ></img>
               </dd>
               <dd className="govuk-summary-list__actions">

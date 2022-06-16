@@ -4,6 +4,7 @@ import { FaChevronUp, FaTimes, FaRegCommentDots } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import userPlaceholer from "../../../src/assets/images/person-circle.svg";
 
 function ChatWindowClosed(props) {
   const loggedUser = useSelector((state) => state.loggedUser);
@@ -21,10 +22,10 @@ function ChatWindowClosed(props) {
         <div>
           {" "}
           <img
-            src={loggedUser?.avatar}
-            alt=""
+            src={loggedUser ? loggedUser?.avatar : userPlaceholer}
+            alt="avatar"
             className="card-img-user-comment mr-1"
-            referrerpolicy="no-referrer"
+            referrerPolicy="no-referrer"
           />{" "}
           <strong>
             <span>

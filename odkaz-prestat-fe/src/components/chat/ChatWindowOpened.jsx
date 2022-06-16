@@ -9,6 +9,7 @@ import { FiSend } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./chat.css";
+import userPlaceholer from "../../../src/assets/images/person-circle.svg";
 
 function ChatWindowOpened(props) {
   const navigate = useNavigate();
@@ -132,10 +133,10 @@ function ChatWindowOpened(props) {
           <div>
             {" "}
             <img
-              src={loggedUser?.avatar}
-              alt=""
+              src={loggedUser ? loggedUser?.avatar : userPlaceholer}
+              alt="avatar"
               className="card-img-user-comment mr-1"
-              referrerpolicy="no-referrer"
+              referrerPolicy="no-referrer"
             />{" "}
             <strong>
               {t("Chat-1")} <FaRegCommentDots />
@@ -196,7 +197,7 @@ function ChatWindowOpened(props) {
                         className="card-img-user-comment"
                         src={admin.avatar}
                         alt="profile imange"
-                        referrerpolicy="no-referrer"
+                        referrerPolicy="no-referrer"
                       />{" "}
                       <span>
                         🟢 {admin.name} {t("Chat-2")}
@@ -226,7 +227,7 @@ function ChatWindowOpened(props) {
                   <img
                     className="card-img-user-comment"
                     //Because of not uploading images from google oatuh: https://stackoverflow.com/questions/40570117/http403-forbidden-error-when-trying-to-load-img-src-with-google-profile-pic
-                    referrerpolicy="no-referrer"
+                    referrerPolicy="no-referrer"
                     src={
                       chat.members.filter(
                         (member) => member._id !== loggedUser._id

@@ -57,7 +57,7 @@ function UserReviewCard(props) {
               src={props.review.user.avatar}
               alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do"
               aria-hidden="true"
-              referrerpolicy="no-referrer"
+              referrerPolicy="no-referrer"
             />
           </div>
           <div className="d-flex w-50 justify-content-around">
@@ -127,7 +127,7 @@ function UserReviewCard(props) {
             {props.review.rating === 4 && t("UserReviewCard-8")}
             {props.review.rating === 5 && t("UserReviewCard-9")}
           </h3>
-          <p className="idsk-body idsk-body-secondary">
+          <p className="idsk-body idsk-body-secondary break-long-word">
             {props.review.review && '"'}
             {props.review.review}
             {props.review.review && '"'}
