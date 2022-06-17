@@ -8,10 +8,11 @@ function UserProfile(props) {
   const { t } = useTranslation();
   const [showUploadImage, setShowUploadImage] = useState(false);
 
-  const formData = new FormData();
+  let formData = new FormData();
   const getImg = (e) => {
+    console.log(e.target.files[0]);
     formData.append("avatar", e.target.files[0]);
-    console.log("IMAGE: ", formData);
+    console.log("IMAGE: ", formData.get("avatar"));
   };
 
   const uploadAvatar = async () => {
@@ -26,13 +27,13 @@ function UserProfile(props) {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("accessToken"),
           },
-          data: formData,
+          body: formData,
         }
       );
       if (response.ok) {
         //console.log(response);
       } else {
-        console.log("login failed");
+        console.log("upload failed");
         if (response.status === 400) {
           console.log("bad request");
         }

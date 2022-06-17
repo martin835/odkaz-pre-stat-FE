@@ -48,7 +48,7 @@ function ChatWindow() {
   useEffect(() => {
     console.log("🎬 USE EFFECT!");
     console.log("Logged user/admin: ", loggedUser);
-    console.log("Socket ID: ", socket.id);
+
     if (loggedUser && socket) {
       socket.on("connect", () => {
         console.log(" 🔛 connected with socket id", socket.id);
