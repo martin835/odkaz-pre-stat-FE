@@ -61,6 +61,9 @@ function Login() {
         //console.log(data);
         localStorage.setItem("accessToken", data.accessToken);
         loadLoggedUser();
+        console.log(process.env.REACT_APP_FE_URL);
+        //This is a force reload to homepage, so the chat is working correctly after user logs in with credentials -> it is different then OAuth login, because OAuth does reload automatically.
+        window.location.href = `${process.env.REACT_APP_FE_URL}/`;
       } else {
         console.log("login failed");
         if (response.status === 400) {
