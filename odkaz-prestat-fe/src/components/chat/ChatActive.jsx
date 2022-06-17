@@ -45,7 +45,7 @@ function ChatActive(props) {
               <img
                 src={
                   props.chatMembers.filter(
-                    (member) => member._id !== loggedUser._id
+                    (member) => member?._id !== loggedUser?._id
                   )[0]?.avatar
                 }
                 alt=""
@@ -55,7 +55,7 @@ function ChatActive(props) {
               <strong>
                 {
                   props.chatMembers.filter(
-                    (member) => member._id !== loggedUser._id
+                    (member) => member?._id !== loggedUser?._id
                   )[0]?.name
                 }{" "}
                 <FaRegCommentDots className="ml-2" />
@@ -94,7 +94,7 @@ function ChatActive(props) {
                     index === self.findIndex((m) => m._id === message._id)
                 )
                 .map((message) =>
-                  message.sender === loggedUser._id ? (
+                  message.sender === loggedUser?._id ? (
                     //this is me so text right
                     <div
                       key={message._id}
@@ -114,7 +114,7 @@ function ChatActive(props) {
                       className="balon2 p-2 m-0 position-relative"
                       data-is={`${
                         props.chatMembers.filter(
-                          (member) => member._id !== loggedUser._id
+                          (member) => member?._id !== loggedUser?._id
                         )[0]?.name
                       } - ${format(new Date(message.createdAt), "p")} `}
                     >

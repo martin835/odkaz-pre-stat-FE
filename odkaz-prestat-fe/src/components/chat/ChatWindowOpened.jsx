@@ -189,7 +189,7 @@ function ChatWindowOpened(props) {
                       onClick={(e) => {
                         props.setChatActive(true);
                         props.setChatOpened(false);
-                        props.setChatRecipient(admin._id);
+                        /* props.setChatRecipient(admin._id); */
                         createChat(e, admin._id);
                       }}
                     >

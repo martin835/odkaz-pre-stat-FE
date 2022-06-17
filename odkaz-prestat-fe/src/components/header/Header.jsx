@@ -37,12 +37,14 @@ function Header(props) {
       dispatch(removeSocket());
       dispatch(removeLoggedUserAction());
       localStorage.removeItem("accessToken");
+      navigate("/");
     } else if (loggedUser.role === "basicUser") {
       socket.emit("updatedOnlineUsers", 0, loggedUser._id);
       dispatch(removeLoggedUserAction());
       localStorage.removeItem("accessToken");
       socket.disconnect();
       dispatch(removeSocket());
+      navigate("/");
     }
   };
 

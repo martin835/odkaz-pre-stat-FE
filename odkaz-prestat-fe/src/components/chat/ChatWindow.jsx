@@ -29,7 +29,7 @@ function ChatWindow() {
   // 👇👇👇chatRecipient => the one who is supposed to received the message => admin in our case.
   //chatRecipient is set onClick and used in ChatWindowOpened.jsx and used in ChatActive.jsx
   // On the other end chatInitiatior  initiates the chat =>  basicUser.
-  const [chatRecipient, setChatRecipient] = useState(null);
+  //const [chatRecipient, setChatRecipient] = useState(null);
   const [chat, setChat] = useState("");
   const [chatMembers, setChatMembers] = useState([]);
   const [chatMessages, setChatMessages] = useState([]);
@@ -47,7 +47,7 @@ function ChatWindow() {
 
   useEffect(() => {
     console.log("🎬 USE EFFECT!");
-    console.log("Logged user: ", loggedUser);
+    console.log("Logged user/admin: ", loggedUser);
     console.log("Socket ID: ", socket.id);
     if (loggedUser && socket) {
       socket.on("connect", () => {
@@ -125,8 +125,8 @@ function ChatWindow() {
           chatActive={chatActive}
           chat={chat}
           setChat={setChat}
-          setChatRecipient={setChatRecipient}
-          chatRecipient={chatRecipient}
+          /*  setChatRecipient={setChatRecipient}
+          chatRecipient={chatRecipient} */
           setChatMessages={setChatMessages}
           setChatMembers={setChatMembers}
         />
@@ -151,7 +151,7 @@ function ChatWindow() {
             chatActive={chatActive}
             socket={socket}
             chat={chat}
-            setChatRecipient={setChatRecipient}
+            /* setChatRecipient={setChatRecipient} */
             chatMessages={chatMessages}
             setChatMessages={setChatMessages}
             chatMembers={chatMembers}
