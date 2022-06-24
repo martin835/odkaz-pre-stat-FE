@@ -49,6 +49,7 @@ function ChatWindowOpened(props) {
           loadMessages(data[0]._id);
         } else {
           props.setChat(data._id);
+          loadMessages(data._id);
         }
       } else {
         console.log("login failed");

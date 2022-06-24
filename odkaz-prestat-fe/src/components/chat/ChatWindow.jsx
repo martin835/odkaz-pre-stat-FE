@@ -129,6 +129,7 @@ function ChatWindow() {
           chatRecipient={chatRecipient} */
           setChatMessages={setChatMessages}
           setChatMembers={setChatMembers}
+          socket={socket}
         />
       ) : (
         <ChatWindowClosed
