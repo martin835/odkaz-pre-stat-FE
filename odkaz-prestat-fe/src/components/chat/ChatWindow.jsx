@@ -29,7 +29,8 @@ function ChatWindow() {
   // 👇👇👇chatRecipient => the one who is supposed to received the message => admin in our case.
   //chatRecipient is set onClick and used in ChatWindowOpened.jsx and used in ChatActive.jsx
   // On the other end chatInitiatior  initiates the chat =>  basicUser.
-  //const [chatRecipient, setChatRecipient] = useState(null);
+  // #fixing first time create chat 👇👇👇
+  const [chatRecipient, setChatRecipient] = useState(null);
   const [chat, setChat] = useState("");
   const [chatMembers, setChatMembers] = useState([]);
   const [chatMessages, setChatMessages] = useState([]);
@@ -125,8 +126,7 @@ function ChatWindow() {
           chatActive={chatActive}
           chat={chat}
           setChat={setChat}
-          /*  setChatRecipient={setChatRecipient}
-          chatRecipient={chatRecipient} */
+          setChatRecipient={setChatRecipient}
           setChatMessages={setChatMessages}
           setChatMembers={setChatMembers}
           socket={socket}
@@ -152,7 +152,7 @@ function ChatWindow() {
             chatActive={chatActive}
             socket={socket}
             chat={chat}
-            /* setChatRecipient={setChatRecipient} */
+            chatRecipient={chatRecipient}
             chatMessages={chatMessages}
             setChatMessages={setChatMessages}
             chatMembers={chatMembers}

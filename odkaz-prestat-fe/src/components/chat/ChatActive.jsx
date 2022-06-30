@@ -15,7 +15,7 @@ function ChatActive(props) {
   const [media, setMedia] = useState("");
 
   const chat = props.chat; //props.chat wouldn't work in socket.emit()
-
+  const recipient = props.chatRecipient; // same problem as above
   const handleMessage = (e) => {
     e.preventDefault();
     // console.log("handleMessage", text);
@@ -27,9 +27,9 @@ function ChatActive(props) {
       //not sending "sender" at all - this will be retrieved at the backend from cookie
     };
 
-    props.socket.emit("outgoingMessage", { data, chat });
+    props.socket.emit("outgoingMessage", { data, chat, recipient });
 
-    console.log({ data, chat });
+    console.log({ data, chat, recipient });
     //props.setChatMessages((chatMessages) => [...chatMessages, newMessage]);
 
     setText("");
