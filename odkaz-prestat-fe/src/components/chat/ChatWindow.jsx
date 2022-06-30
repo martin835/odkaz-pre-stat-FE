@@ -56,15 +56,15 @@ function ChatWindow() {
         dispatch(setSocket(socket));
 
         socket.on("onlineAdmins", (onlineAdmins) => {
-          console.log("ADMINS ONLINE: ");
-          console.table(onlineAdmins);
+          //console.log("ADMINS ONLINE: ");
+          //console.table(onlineAdmins);
           //setAdminsOnline(onlineAdmins);
           dispatch(setOnlineAdmins(onlineAdmins));
         });
 
         socket.on("onlineUsers", (onlineUsers) => {
-          console.log("USERS ONLINE: ");
-          console.table(onlineUsers);
+          //console.log("USERS ONLINE: ");
+          //console.table(onlineUsers);
           dispatch(setOnlineUsers(onlineUsers));
         });
 

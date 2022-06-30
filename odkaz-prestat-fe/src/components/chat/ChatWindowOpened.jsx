@@ -50,6 +50,10 @@ function ChatWindowOpened(props) {
         } else {
           props.setChat(data._id);
           loadMessages(data._id);
+          //This is when a new chat is created, socket on server is not joined to this chat id (room)
+          //👇👇👇So this event should be intercepted in the BE and on joinNewChat, socket should join this chat.
+          console.log("THIS SHOULD BE EMITTED:", data._id);
+          props.socket.emit("joinNewChat", data._id);
         }
       } else {
         console.log("login failed");
