@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { ImHeart } from "react-icons/im";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 function FeedbackCard() {
   const [showTextArea, setShowTextArea] = useState(false);
@@ -13,6 +15,7 @@ function FeedbackCard() {
     service: "",
   });
   const { clientCenter } = useLocation().state;
+  const { t } = useTranslation();
   console.log(" CLIENT CENTER:  ", clientCenter);
   const computeCharsLeft = (chars) => {
     let left = 200 - parseInt(chars.length);
@@ -50,7 +53,7 @@ function FeedbackCard() {
     <div className="govuk-width-container">
       <div id="idsk-feedback__thanks" className="">
         <h2 className="govuk-heading-l">
-          Ďakujeme za spätnú väzbu. <ImHeart />
+          {t("FeedbackCard-1")} <ImHeart />
         </h2>
       </div>
       {/*Conditional rendering*/}
@@ -60,14 +63,14 @@ function FeedbackCard() {
       <div className="govuk-width-container">
         <div id="idsk-feedback__content">
           <h2 className="govuk-heading-l">
-            Spätná väzba pre {clientCenter.name}
+            {t("FeedbackCard-2")} {clientCenter.name}
           </h2>
           <h3 className="govuk-heading-m idsk-feedback__subtitle">
-            Ktorú službu klientského centra chcete ohodnotiť ?
+            {t("FeedbackCard-3")}
           </h3>
           <div className="govuk-form-group">
             <label className="govuk-label" htmlFor="select-dd1">
-              Vyberte službu:
+              {t("FeedbackCard-4")}
             </label>
             <select
               className="govuk-select"
@@ -86,7 +89,7 @@ function FeedbackCard() {
             </select>
           </div>
           <h3 className="govuk-heading-m idsk-feedback__subtitle">
-            Ako ste spokojný so službami klientského centra ?
+            {t("FeedbackCard-5")}
           </h3>
 
           <div
@@ -105,7 +108,7 @@ function FeedbackCard() {
                 onChange={() => setShowTextArea(true)}
               />
               <label className="govuk-label govuk-radios__label" htmlFor="1">
-                Veľmi nespokojný
+                {t("FeedbackCard-6")}
               </label>
             </div>
             <div className="govuk-radios__item">
@@ -118,7 +121,7 @@ function FeedbackCard() {
                 onChange={() => setShowTextArea(true)}
               />
               <label className="govuk-label govuk-radios__label" htmlFor="2">
-                Nespokojný
+                {t("FeedbackCard-7")}
               </label>
             </div>
             <div className="govuk-radios__item">
@@ -131,7 +134,7 @@ function FeedbackCard() {
                 onChange={() => setShowTextArea(true)}
               />
               <label className="govuk-label govuk-radios__label" htmlFor="3">
-                Ani spokojný ani nespokojný
+                {t("FeedbackCard-8")}
               </label>
             </div>
             <div className="govuk-radios__item">
@@ -144,7 +147,7 @@ function FeedbackCard() {
                 onChange={() => setShowTextArea(false)}
               />
               <label className="govuk-label govuk-radios__label" htmlFor="4">
-                Spokojný
+                {t("FeedbackCard-9")}
               </label>
             </div>
             <div className="govuk-radios__item">
@@ -157,7 +160,7 @@ function FeedbackCard() {
                 onChange={() => setShowTextArea(false)}
               />
               <label className="govuk-label govuk-radios__label" htmlFor="5">
-                Veľmi spokojný
+                {t("FeedbackCard-10")}
               </label>
             </div>{" "}
             <br />
@@ -171,9 +174,7 @@ function FeedbackCard() {
                 : `idsk-feedback--animation idsk-feedback--invisible`
             }
           >
-            <h3 className="govuk-heading-m">
-              Ako by sme mohli túto službu zlepšiť?
-            </h3>
+            <h3 className="govuk-heading-m">{t("FeedbackCard-11")}</h3>
             <div>
               <br />
 
@@ -214,8 +215,10 @@ function FeedbackCard() {
                   >
                     {/*Conditional rendering*/}
                     {charsLeft < 0
-                      ? `Prekročili ste maximálny počet znakov`
-                      : ` Zostáva Vám ${charsLeft} znakov`}
+                      ? `${t("FeedbackCard-14")}`
+                      : ` ${t("FeedbackCard-15")} ${charsLeft} ${t(
+                          "FeedbackCard-16"
+                        )}`}
                   </span>
                 </div>
               </div>
@@ -229,7 +232,7 @@ function FeedbackCard() {
                 className="govuk-button"
                 disabled
               >
-                Odoslať
+                {t("FeedbackCard-12")}
                 <svg
                   width="15"
                   height="15"
@@ -262,7 +265,7 @@ function FeedbackCard() {
                   setShowThankYou(true);
                 }}
               >
-                Odoslať
+                {t("FeedbackCard-12")}
                 <svg
                   width="15"
                   height="15"
@@ -287,7 +290,7 @@ function FeedbackCard() {
               </button>
             )}
             <button className="govuk-button govuk-button--secondary">
-              Odísť
+              {t("FeedbackCard-13")}
             </button>
           </div>
         </div>

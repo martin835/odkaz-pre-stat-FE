@@ -8,6 +8,8 @@ import OneComment from "./OneComment";
 import { Container } from "react-bootstrap";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 function CommentsList(props) {
   const [showAddComment, setShowAddComment] = useState(false);
@@ -17,6 +19,8 @@ function CommentsList(props) {
     userId: loggedUser?._id,
     commentDate: new Date(),
   });
+  const { t } = useTranslation();
+
   const postComment = async (e) => {
     e.preventDefault();
     console.log("I post");
@@ -85,8 +89,7 @@ function CommentsList(props) {
           {props.reviewComments == 0 ? (
             <Row>
               <Col>
-                Žiadne komentáre pre toto hodnotenie{" "}
-                <MdOutlineSentimentDissatisfied />{" "}
+                {t("CommentsList-5")} <MdOutlineSentimentDissatisfied />{" "}
               </Col>
             </Row>
           ) : (
@@ -104,7 +107,7 @@ function CommentsList(props) {
                     : setShowAddComment(true)
                 }
               >
-                <BiCommentAdd className="mr-2" /> Pridať komentár
+                <BiCommentAdd className="mr-2" /> {t("CommentsList-1")}
               </Button>
             </Col>
           </Row>
@@ -112,7 +115,7 @@ function CommentsList(props) {
             <div className="px-0">
               <Form onSubmit={postComment}>
                 <Form.Group className="mb-3 px-2" controlId="commentValue">
-                  <Form.Label>Napíšte komentár: </Form.Label>
+                  <Form.Label> {t("CommentsList-2")} </Form.Label>
                   <Form.Control
                     as="textarea"
                     rows={3}
@@ -124,7 +127,7 @@ function CommentsList(props) {
                 </Form.Group>
                 <Button variant="link" type="submit">
                   <RiMailSendLine className="mr-2" />
-                  Publikovať komentár
+                  {t("CommentsList-3")}
                 </Button>
               </Form>
             </div>

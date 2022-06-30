@@ -1,0 +1,121 @@
+.chat-closed {
+  width: 20rem;
+  background-color: #f3f2f1;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  border-radius: 5px;
+}
+
+.chat-opened {
+  width: 20rem;
+  background-color: #f3f2f1;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  border-radius: 5px;
+}
+
+.chat-opened-body {
+  height: 25rem;
+  background-color: white;
+  overflow-y: scroll;
+}
+
+.chat-active-body {
+  height: 25rem;
+  background-color: white;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-opened-footer {
+  width: 20rem;
+  bottom: 0;
+  right: 0;
+}
+
+.chat-active-footer {
+  width: 20rem;
+  bottom: 0;
+  right: 0;
+
+  margin-top: auto;
+}
+
+.chat-contact-card:hover {
+  cursor: pointer;
+}
+
+.chat-button,
+.chat-input[type="submit"],
+.chat-input[type="reset"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  width: 28px;
+  height: 28px;
+  font-size: 1.3rem;
+}
+
+.chat-button:hover {
+  background-color: #bfc1c3;
+  border-radius: 14px;
+}
+/* CSS INSPIRATION FOR CHAT BUBBLES: https://codepen.io/StevenDark/pen/qpgxwv */
+.balon1,
+.balon2 {
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+
+.balon1 span {
+  background: #42a5f5;
+  color: #fff !important;
+  border-radius: 20px 20px 3px 20px;
+  display: block;
+  max-width: 75%;
+  padding: 7px 13px 7px 13px;
+}
+
+.balon1:before {
+  content: attr(data-is);
+  position: absolute;
+  right: 15px;
+  bottom: -0.8em;
+  display: block;
+  font-size: 0.75rem;
+  color: rgba(84, 110, 122, 1);
+}
+
+.balon2 span {
+  background: #f1f1f1;
+  color: #000 !important;
+  border-radius: 20px 20px 20px 3px;
+  display: block;
+  max-width: 75%;
+  padding: 7px 13px 7px 13px;
+}
+
+.balon2:before {
+  content: attr(data-is);
+  position: absolute;
+  left: 13px;
+  bottom: -0.8em;
+  display: block;
+  font-size: 0.75rem;
+  color: rgba(84, 110, 122, 1);
+}
+
+@media screen and (min-width: 1650px) {
+  .chat-closed,
+  .chat-opened,
+  .chat-opened-footer {
+    right: 3rem;
+  }
+}

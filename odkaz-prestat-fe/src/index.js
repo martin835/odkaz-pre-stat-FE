@@ -19,6 +19,21 @@ root.render(
   </React.StrictMode>
 );
 
+//USED THIS WHEN TRYING TO DOWNGRADE TO REACT 17, BUT IT CAUSED TOO MANY ERRORS.
+
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <Provider store={configureStore}>
+//       <Router>
+//         <App />
+//       </Router>
+//     </Provider>
+//   </React.StrictMode>,
+//   document.getElementById("root")
+// );
+
+// END - USED THIS WHEN TRYING TO DOWNGRADE TO REACT 17, BUT IT CAUSED TOO MANY ERRORS.
+
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

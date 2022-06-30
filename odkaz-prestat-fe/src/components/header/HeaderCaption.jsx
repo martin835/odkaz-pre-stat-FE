@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 function HeaderCaption() {
   //header Caption is the blue, expandable area of the header
   const [headerCaption, setHeaderCaption] = useState(true);
+  const { t } = useTranslation();
   return (
     <>
       {headerCaption ? (
@@ -10,7 +13,7 @@ function HeaderCaption() {
           {" "}
           <div className="idsk-header-web__brand-gestor">
             <span className="govuk-body-s idsk-header-web__brand-gestor-text">
-              Táto stránka slúži ako koncept. &nbsp;
+              {t("header-c-1")} &nbsp;
               <button
                 className="idsk-header-web__brand-gestor-button"
                 aria-label="Zobraziť informácie o stránke"
@@ -19,7 +22,7 @@ function HeaderCaption() {
                 data-text-for-show="Zobraziť informácie o stránke"
                 onClick={() => setHeaderCaption(!headerCaption)}
               >
-                Viac o našich cieľoch:
+                {t("header-c-2")}
                 <span className="idsk-header-web__link-arrow"></span>
               </button>
             </span>
@@ -32,7 +35,7 @@ function HeaderCaption() {
                 data-text-for-show="Zobraziť informácie o stránke"
                 onClick={() => setHeaderCaption(!headerCaption)}
               >
-                O projekte:
+                {t("header-c-3")}
                 <span className="idsk-header-web__link-arrow"></span>
               </button>
             </span>
@@ -41,26 +44,12 @@ function HeaderCaption() {
               <div className="govuk-width-container">
                 <div className="govuk-grid-row">
                   <div className="govuk-grid-column-one-half">
-                    <h3 className="govuk-body-s">
-                      Našim cieľom je sprostredkovať spätnú väzbu pre verejnú
-                      správu.
-                    </h3>
-                    <p className="govuk-body-s">
-                      Chceme aby sa orgány verejnej moci dozvedeli ako sú
-                      občania spokojní so službami, ktoré poskytujú a mohli na
-                      základe spätnej väzby zlepšovať svoje fungovanie.
-                    </p>
+                    <h3 className="govuk-body-s">{t("header-c-4")}</h3>
+                    <p className="govuk-body-s">{t("header-c-5")}</p>
                   </div>
                   <div className="govuk-grid-column-one-half">
-                    <h3 className="govuk-body-s">
-                      Chceme aby občania mali možnosť zmeniť fungovanie verejnej
-                      správy k lepšiemu.
-                    </h3>
-                    <p className="govuk-body-s">
-                      Cieľom je primäť orgány verejnej moci aby sa spätnou
-                      väzbou od občanou reálne zaoberali a odovzdané podnenty
-                      riešili.
-                    </p>
+                    <h3 className="govuk-body-s">{t("header-c-6")}</h3>
+                    <p className="govuk-body-s">{t("header-c-7")}</p>
                   </div>
                 </div>
               </div>
@@ -73,7 +62,7 @@ function HeaderCaption() {
           {" "}
           <div className="idsk-header-web__brand-gestor">
             <span className="govuk-body-s idsk-header-web__brand-gestor-text">
-              Táto stránka slúži ako koncept. &nbsp;
+              {t("header-c-1")} &nbsp;
               <button
                 className="idsk-header-web__brand-gestor-button idsk-header-web__brand-gestor-button--active"
                 aria-label="Skryť informácie o stránke"
@@ -82,7 +71,7 @@ function HeaderCaption() {
                 data-text-for-show="Zobraziť informácie o stránke"
                 onClick={() => setHeaderCaption(!headerCaption)}
               >
-                Menej o našich cieľoch:
+                {t("header-c-8")}
                 <span className="idsk-header-web__link-arrow"></span>
               </button>
             </span>
@@ -95,7 +84,7 @@ function HeaderCaption() {
                 data-text-for-show="Zobraziť informácie o stránke"
                 onClick={() => setHeaderCaption(!headerCaption)}
               >
-                O projekte:
+                {t("header-c-3")}
                 <span className="idsk-header-web__link-arrow"></span>
               </button>
             </span>
@@ -104,26 +93,12 @@ function HeaderCaption() {
               <div className="govuk-width-container">
                 <div className="govuk-grid-row">
                   <div className="govuk-grid-column-one-half">
-                    <h3 className="govuk-body-s">
-                      Našim cieľom je sprostredkovať spätnú väzbu pre verejnú
-                      správu.
-                    </h3>
-                    <p className="govuk-body-s">
-                      Chceme aby sa orgány verejnej moci dozvedeli ako sú
-                      občania spokojní so službami, ktoré poskytujú a mohli na
-                      základe spätnej väzby zlepšovať svoje fungovanie.
-                    </p>
+                    <h3 className="govuk-body-s">{t("header-c-4")}</h3>
+                    <p className="govuk-body-s">{t("header-c-5")}</p>
                   </div>
                   <div className="govuk-grid-column-one-half">
-                    <h3 className="govuk-body-s">
-                      Chceme aby občania mali možnosť zmeniť fungovanie verejnej
-                      správy k lepšiemu.
-                    </h3>
-                    <p className="govuk-body-s">
-                      Cieľom je primäť orgány verejnej moci aby sa spätnou
-                      väzbou od občanou reálne zaoberali a odovzdané podnenty
-                      riešili.
-                    </p>
+                    <h3 className="govuk-body-s">{t("header-c-6")}</h3>
+                    <p className="govuk-body-s">{t("header-c-7")}</p>
                   </div>
                 </div>
               </div>

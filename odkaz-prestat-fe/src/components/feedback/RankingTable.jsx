@@ -2,9 +2,12 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { BsLadder } from "react-icons/bs";
 import RankingRow from "./RankingRow";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 function RankingTable() {
   const [rankings, setRankings] = useState(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     loadRankings();
@@ -39,20 +42,20 @@ function RankingTable() {
       <div className="govuk-grid-row ">
         <div className="govuk-grid-column-full">
           <h2 className="govuk-heading-m govuk-!-margin-bottom-7">
-            Rebríček hodnotení <BsLadder />
+            {t("RankingTable-1")} <BsLadder />
           </h2>
 
           <table className="idsk-table">
             <thead className="idsk-table__head">
               <tr className="idsk-table__row">
                 <th scope="col" className="idsk-table__header">
-                  <span className="th-span"> Klientské centrum</span>
+                  <span className="th-span"> {t("RankingTable-2")}</span>
                 </th>
                 <th scope="col" className="idsk-table__header">
-                  <span className="th-span">Priemerne hodnotenie</span>
+                  <span className="th-span"> {t("RankingTable-3")}</span>
                 </th>
                 <th scope="col" className="idsk-table__header">
-                  <span className="th-span">Počet hodnotení</span>
+                  <span className="th-span"> {t("RankingTable-4")}</span>
                 </th>
               </tr>
             </thead>

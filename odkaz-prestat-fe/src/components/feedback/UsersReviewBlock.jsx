@@ -1,12 +1,15 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { GrValidate } from "react-icons/gr";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 import useDidUpdateEffect from "../../utils/useDidUpdateEffect";
 import UsersReviewRow3 from "./UsersReviewRow3";
 
 function UsersReviewBlock() {
   const [reviews, setreviews] = useState(null);
   const [arrOfRows, setArrOfRows] = useState(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchReviews(6, 0);
@@ -61,7 +64,7 @@ function UsersReviewBlock() {
       <div className="govuk-grid-row ">
         <div className="govuk-grid-column-full">
           <h2 className="govuk-heading-m govuk-!-margin-bottom-7">
-            Naposledy hodnotili <GrValidate />
+            {t("UsersReviewBlock-1")} <GrValidate />
           </h2>
         </div>
       </div>
@@ -76,7 +79,7 @@ function UsersReviewBlock() {
         data-module="govuk-button"
         onClick={() => fetchReviews(3, reviews.length)}
       >
-        Načítať viac hodnotení...
+        {t("UsersReviewBlock-2")}
       </button>
     </div>
   );
