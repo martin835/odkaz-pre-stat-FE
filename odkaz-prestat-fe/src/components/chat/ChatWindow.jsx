@@ -14,7 +14,7 @@ import {
   setSocket,
 } from "../../redux/actions";
 
-const ADDRESS = process.env.REACT_APP_BE_ADDRESS || "http://localhost:3001";
+const ADDRESS = process.env.REACT_APP_BE_URL || "http://localhost:3001";
 
 function ChatWindow() {
   const [chatOpened, setChatOpened] = useState(false);
