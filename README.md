@@ -1,4 +1,4 @@
-ABOUT THE APP
+#ABOUT THE APP
 
 This app is for collecting feedback from the users on public service digital services in Slovakia. Asking for a review or feedback is an integral part of most of the commecrial services, but in public sector (at least in Slovakia) this is not the case. This simple web-app is meant to fill this gap. 
 
