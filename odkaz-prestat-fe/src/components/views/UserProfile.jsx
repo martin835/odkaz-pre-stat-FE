@@ -16,33 +16,35 @@ function UserProfile(props) {
   };
 
   const uploadAvatar = async () => {
-    console.log(formData);
-    try {
-      let response = await fetch(
-        `${process.env.REACT_APP_BE_URL}/users/me/avatar`,
-        {
-          method: "POST",
+    // console.log(formData.get("avatar"));
+    if (formData.get("avatar")) {
+      try {
+        let response = await fetch(
+          `${process.env.REACT_APP_BE_URL}/users/me/avatar`,
+          {
+            method: "POST",
 
-          //credentials: "include",
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("accessToken"),
-          },
-          body: formData,
+            //credentials: "include",
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("accessToken"),
+            },
+            body: formData,
+          }
+        );
+        if (response.ok) {
+          //console.log(response);
+        } else {
+          console.log("upload failed");
+          if (response.status === 400) {
+            console.log("bad request");
+          }
+          if (response.status === 404) {
+            console.log("page not found");
+          }
         }
-      );
-      if (response.ok) {
-        //console.log(response);
-      } else {
-        console.log("upload failed");
-        if (response.status === 400) {
-          console.log("bad request");
-        }
-        if (response.status === 404) {
-          console.log("page not found");
-        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -123,11 +125,11 @@ function UserProfile(props) {
                   : `govuk-summary-list__row d-none`
               }
             >
-              <dt className="govuk-summary-list__key">Upload new image</dt>
+              <dt className="govuk-summary-list__key">{t("UserProfile-5")}</dt>
               <dd className="govuk-summary-list__value">
                 <div className="govuk-form-group">
                   <label className="govuk-label" htmlFor="file-upload-avatar">
-                    Upload a file
+                    {t("UserProfile-6")}
                   </label>
                   <input
                     className="govuk-file-upload"
@@ -144,7 +146,7 @@ function UserProfile(props) {
                   data-module="govuk-button"
                   onClick={() => uploadAvatar()}
                 >
-                  Upload
+                  {t("UserProfile-7")}
                 </button>
               </dd>
             </div>
