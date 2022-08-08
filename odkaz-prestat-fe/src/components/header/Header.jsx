@@ -21,29 +21,29 @@ function Header(props) {
   const [langSelected, setLangSelected] = useState("Slovenčina");
   const [showMobileLogin, setShowMobileLogin] = useState(false);
   const loggedUser = useSelector((state) => state.loggedUser);
-  const adminsOnline = useSelector((state) => state.adminsOnline);
+  //const adminsOnline = useSelector((state) => state.adminsOnline);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const socket = useSelector((state) => state.socket);
+  // const socket = useSelector((state) => state.socket);
 
   const onLogout = () => {
     console.log("👋 Logging out...");
     if (loggedUser.role === "admin") {
       //0 = removing online admin , 1 = adding online admin
-      socket.emit("updatedOnlineAdmins", 0, loggedUser._id);
+      //socket.emit("updatedOnlineAdmins", 0, loggedUser._id);
       //dispatch(removeOnlineAdmin(loggedUser._id));
-      socket.disconnect();
-      dispatch(removeSocket());
+      // socket.disconnect();
+      //dispatch(removeSocket());
       dispatch(removeLoggedUserAction());
       localStorage.removeItem("accessToken");
       navigate("/");
     } else if (loggedUser.role === "basicUser") {
-      socket.emit("updatedOnlineUsers", 0, loggedUser._id);
+      //socket.emit("updatedOnlineUsers", 0, loggedUser._id);
       dispatch(removeLoggedUserAction());
       localStorage.removeItem("accessToken");
-      socket.disconnect();
-      dispatch(removeSocket());
+      //socket.disconnect();
+      //dispatch(removeSocket());
       navigate("/");
     }
   };

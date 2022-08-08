@@ -22,41 +22,27 @@ const mainReducer = (state = initialState, action) => {
         loggedUser: null,
       };
 
-    case SET_SOCKET:
-      return {
-        ...state,
-        socket: action.payload,
-      };
-
-    case REMOVE_SOCKET:
-      return {
-        ...state,
-        socket: null,
-      };
-
-    case SET_ADMINS:
-      return {
-        ...state,
-        adminsOnline: action.payload,
-      };
-    case SET_USERS:
-      return {
-        ...state,
-        usersOnline: action.payload,
-      };
-
-    //Probably not needed:
-    // case REMOVE_ADMIN:
+    // case SET_SOCKET:
     //   return {
     //     ...state,
-    //     adminsOnline: state.adminsOnline.filter(
-    //       (admin) => admin._id !== action.payload
-    //     ),
+    //     socket: action.payload,
     //   };
-    // case ADD_ADMIN:
+
+    // case REMOVE_SOCKET:
     //   return {
     //     ...state,
-    //     adminsOnline: state.adminsOnline.concat(action.payload),
+    //     socket: null,
+    //   };
+
+    // case SET_ADMINS:
+    //   return {
+    //     ...state,
+    //     adminsOnline: action.payload,
+    //   };
+    // case SET_USERS:
+    //   return {
+    //     ...state,
+    //     usersOnline: action.payload,
     //   };
 
     default:

@@ -7,9 +7,9 @@ const composeFunctionThatAlwaysWorks =
 
 export const initialState = {
   loggedUser: null,
-  socket: null,
-  adminsOnline: [],
-  usersOnline: [],
+  //socket: null,
+  // adminsOnline: [],
+  // usersOnline: [],
 };
 
 /* const persistConfig = {

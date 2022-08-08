@@ -102,7 +102,6 @@ function App() {
           />
           <Route path="/provider/:id" element={<ClientCenterOverView />} />
         </Routes>
-        <ChatWindow />
       </ScrollToTop>
       <Footer />
     </>
