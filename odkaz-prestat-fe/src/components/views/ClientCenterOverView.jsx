@@ -35,7 +35,7 @@ function ClientCenterOverView() {
   const fetchClientCenter = async () => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BE_URL}/clientCenters/${id}`,
+        `${process.env.REACT_APP_BE_URL}/providers/${id}`,
         {
           method: "GET",
           //   headers: {
@@ -59,7 +59,7 @@ function ClientCenterOverView() {
   const fetchReviewsForClientCenter = async (limit, offset) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BE_URL}/reviews/?clientCenterId=${id}&limit=${limit}&offset=${offset}`,
+        `${process.env.REACT_APP_BE_URL}/reviews/?providerId=${id}&limit=${limit}&offset=${offset}`,
         {
           method: "GET",
           //   headers: {

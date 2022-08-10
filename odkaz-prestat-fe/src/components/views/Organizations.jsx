@@ -22,7 +22,7 @@ function Organizations(props) {
   const getclientCentersinDistrict = async (event) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BE_URL}/clientCenters`
+        `${process.env.REACT_APP_BE_URL}/providers`
         // {
         //   credentials: "include",
         // }

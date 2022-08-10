@@ -1,11 +1,11 @@
 import RankingTable from "../feedback/RankingTable";
 import UsersReviewBlock from "../feedback/UsersReviewBlock";
-import SearchBlock from "../search/SearchBlock";
+import ServiceSelector from "../search/ServiceSelector";
 
 function Home() {
   return (
     <>
-      <SearchBlock />
+      <ServiceSelector />
       <RankingTable />
       <UsersReviewBlock />
     </>
