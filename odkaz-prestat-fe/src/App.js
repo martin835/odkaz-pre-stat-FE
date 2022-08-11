@@ -73,7 +73,7 @@ function App() {
         const data = await response.json();
         console.log("loadLoggedUser data: ", data);
         // 🤙🤙🤙 HERE EMIT CHANGE IN LOGGED ADMINS
-        socket?.emit("updatedOnlineAdmins", 1, data._id);
+        // socket?.emit("updatedOnlineAdmins", 1, data._id);
         dispatch(setLoggedUserAction(data));
       } else {
         console.log("error on fetching users");

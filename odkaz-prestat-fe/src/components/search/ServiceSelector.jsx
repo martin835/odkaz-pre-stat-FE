@@ -3,11 +3,38 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import "../../styles/organizations.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function ServiceSelector() {
   const { t } = useTranslation();
   const [serviceSelected, setsServiceSelected] = useState(null);
+  const [providerOfServiceSelected, setProviderOfServiceSelected] =
+    useState(null);
+  const [services, setServices] = useState(null);
+
+  useEffect(() => {
+    getServices();
+  }, []);
+
+  const getServices = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BE_URL}/services`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log("services: ", data);
+        setServices(data);
+      } else {
+        console.log("error on fetching users");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="govuk-width-container">
@@ -24,9 +51,31 @@ function ServiceSelector() {
           <form>
             <div
               className="govuk-radios"
-              onChange={(e) => setsServiceSelected(e.target.value)}
+              onChange={(e) => (
+                setsServiceSelected(e.target.id),
+                setProviderOfServiceSelected(e.target.value)
+              )}
             >
-              <div className="govuk-radios__item">
+              {services?.map((service) => (
+                <div className="govuk-radios__item" key={service._id}>
+                  <input
+                    className="govuk-radios__input idsk-feedback__radio-button "
+                    //id is service id
+                    id={`${service._id}`}
+                    name="basicFeedback"
+                    type="radio"
+                    //value is provider id
+                    value={`${service.provider?._id}`}
+                  />
+                  <label
+                    className="govuk-label govuk-radios__label"
+                    htmlFor={`${service._id}`}
+                  >
+                    {`${service.name}`}
+                  </label>
+                </div>
+              ))}
+              {/* <div className="govuk-radios__item">
                 <input
                   className="govuk-radios__input idsk-feedback__radio-button "
                   id="1"
@@ -61,10 +110,10 @@ function ServiceSelector() {
                 <label className="govuk-label govuk-radios__label" htmlFor="3">
                   Portál Moje slovensko
                 </label>
-              </div>
+              </div> */}
             </div>
             <Link
-              to="/feedback/62f2ad614c531b3396c940b0"
+              to={`/feedback/${providerOfServiceSelected}`}
               state={{ serviceId: serviceSelected }}
             >
               <button
