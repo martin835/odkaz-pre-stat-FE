@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { ImHeart } from "react-icons/im";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
@@ -14,9 +14,11 @@ function FeedbackCard() {
     review: "",
     service: "",
   });
-  const { clientCenter } = useLocation().state;
+  //const { clientCenter } = useLocation().state;
+  const serviceProviderId = useParams().orgId;
+  //console.log("serviceProviderId: ", serviceProviderId);
   const { t } = useTranslation();
-  console.log(" CLIENT CENTER:  ", clientCenter);
+  //console.log(" USE LOCATION:  ", useLocation().state);
   const computeCharsLeft = (chars) => {
     let left = 200 - parseInt(chars.length);
     setCharsLeft(left);
@@ -26,7 +28,7 @@ function FeedbackCard() {
     try {
       let response = await fetch(`${process.env.REACT_APP_BE_URL}/reviews`, {
         method: "POST",
-        body: JSON.stringify({ ...reqObj, provider: clientCenter._id }),
+        body: JSON.stringify({ ...reqObj, provider: serviceProviderId }),
         //credentials: "include",
         headers: {
           "Content-type": "application/json",
@@ -62,13 +64,11 @@ function FeedbackCard() {
     <div data-module="idsk-feedback">
       <div className="govuk-width-container">
         <div id="idsk-feedback__content">
-          <h2 className="govuk-heading-l">
-            {t("FeedbackCard-2")} {clientCenter.name}
-          </h2>
+          <h2 className="govuk-heading-l">{t("FeedbackCard-2")}</h2>
           <h3 className="govuk-heading-m idsk-feedback__subtitle">
             {t("FeedbackCard-3")}
           </h3>
-          <div className="govuk-form-group">
+          {/* <div className="govuk-form-group">
             <label className="govuk-label" htmlFor="select-dd1">
               {t("FeedbackCard-4")}
             </label>
@@ -87,7 +87,7 @@ function FeedbackCard() {
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
           <h3 className="govuk-heading-m idsk-feedback__subtitle">
             {t("FeedbackCard-5")}
           </h3>
