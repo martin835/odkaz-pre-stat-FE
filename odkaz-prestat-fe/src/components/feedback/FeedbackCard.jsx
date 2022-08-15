@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { ImHeart } from "react-icons/im";
 import { useTranslation } from "react-i18next";
@@ -14,21 +14,30 @@ function FeedbackCard() {
     review: "",
     service: "",
   });
-  //const { clientCenter } = useLocation().state;
+  const [service, setService] = useState(null);
+  const { serviceId } = useLocation().state;
   const serviceProviderId = useParams().orgId;
   //console.log("serviceProviderId: ", serviceProviderId);
   const { t } = useTranslation();
-  //console.log(" USE LOCATION:  ", useLocation().state);
+  console.log(" USE LOCATION:  ", serviceId);
   const computeCharsLeft = (chars) => {
     let left = 200 - parseInt(chars.length);
     setCharsLeft(left);
   };
 
+  useEffect(() => {
+    getService();
+  }, []);
+
   const postReview = async () => {
     try {
       let response = await fetch(`${process.env.REACT_APP_BE_URL}/reviews`, {
         method: "POST",
-        body: JSON.stringify({ ...reqObj, provider: serviceProviderId }),
+        body: JSON.stringify({
+          ...reqObj,
+          service: serviceId,
+          provider: serviceProviderId,
+        }),
         //credentials: "include",
         headers: {
           "Content-type": "application/json",
@@ -51,6 +60,29 @@ function FeedbackCard() {
     }
   };
 
+  const getService = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BE_URL}/services/${serviceId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        console.log("services: ", data);
+        setService(data);
+      } else {
+        console.log("error on fetching users");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return showThankYou ? (
     <div className="govuk-width-container">
       <div id="idsk-feedback__thanks" className="">
@@ -64,10 +96,12 @@ function FeedbackCard() {
     <div data-module="idsk-feedback">
       <div className="govuk-width-container">
         <div id="idsk-feedback__content">
-          <h2 className="govuk-heading-l">{t("FeedbackCard-2")}</h2>
-          <h3 className="govuk-heading-m idsk-feedback__subtitle">
+          <h2 className="govuk-heading-l">
+            {t("FeedbackCard-2")} {service?.name}
+          </h2>
+          {/* <h3 className="govuk-heading-m idsk-feedback__subtitle">
             {t("FeedbackCard-3")}
-          </h3>
+          </h3> */}
           {/* <div className="govuk-form-group">
             <label className="govuk-label" htmlFor="select-dd1">
               {t("FeedbackCard-4")}

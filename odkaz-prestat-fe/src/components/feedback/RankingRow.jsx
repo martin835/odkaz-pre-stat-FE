@@ -11,8 +11,8 @@ function RankingRow(props) {
           {props.rank}
           {"."}
         </Badge>
-        <Link to={`/provider/${props.ranking._id}`}>
-          {props.ranking.Provider[0].name}
+        <Link to={`/provider/${props.ranking?._id}`}>
+          {props.ranking.Provider[0]?.name}
         </Link>
       </td>
       <td className="idsk-table__cell">
