@@ -2,7 +2,7 @@ import { Badge } from "react-bootstrap";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-function RankingRow(props) {
+function RankingRowProvider(props) {
   return (
     <tr className="idsk-table__row">
       <td className="idsk-table__cell">
@@ -98,4 +98,4 @@ function RankingRow(props) {
   );
 }
 
-export default RankingRow;
+export default RankingRowProvider;

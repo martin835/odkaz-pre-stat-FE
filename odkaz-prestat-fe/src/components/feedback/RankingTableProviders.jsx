@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { BsLadder } from "react-icons/bs";
-import RankingRow from "./RankingRow";
+import RankingRowProvider from "./RankingRowProvider";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 
-function RankingTable() {
+function RankingTableProviders() {
   const [rankings, setRankings] = useState(null);
   const { t } = useTranslation();
 
@@ -16,7 +16,7 @@ function RankingTable() {
   const loadRankings = async () => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BE_URL}/reviews/stats?limit=10`, //limit of 10 is also set as default at the back-end
+        `${process.env.REACT_APP_BE_URL}/reviews/stats-providers?limit=10`, //limit of 10 is also set as default at the back-end
         {
           method: "GET",
           // headers: {
@@ -62,7 +62,7 @@ function RankingTable() {
             <tbody className="idsk-table__body">
               {rankings &&
                 rankings.map((ranking, i) => (
-                  <RankingRow
+                  <RankingRowProvider
                     ranking={ranking}
                     rank={i + 1}
                     key={`RankingRow-${i}`}
@@ -76,4 +76,4 @@ function RankingTable() {
   );
 }
 
-export default RankingTable;
+export default RankingTableProviders;
