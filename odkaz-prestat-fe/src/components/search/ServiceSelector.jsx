@@ -117,9 +117,10 @@ function ServiceSelector() {
               state={{ serviceId: serviceSelected }}
             >
               <button
-                type="reset"
+                type="submit"
                 className="idsk-button govuk-!-margin-top-7"
                 data-module="idsk-button"
+                disabled={serviceSelected ? "" : "disabled"}
               >
                 Pokračovať
               </button>

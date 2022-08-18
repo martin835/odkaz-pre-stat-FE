@@ -17,6 +17,7 @@ import ScrollToTop from "./utils/ScrollToTop";
 import useDidUpdateEffect from "./utils/useDidUpdateEffect";
 import UserRegistration from "./components/login/UserRegistration";
 import EmailVerification from "./components/login/EmailVerification";
+import ServiceOverView from "./components/views/ServiceOverView";
 
 function App() {
   const dispatch = useDispatch();
@@ -101,6 +102,7 @@ function App() {
             }
           />
           <Route path="/provider/:id" element={<ClientCenterOverView />} />
+          <Route path="/service/:id" element={<ServiceOverView />} />
         </Routes>
       </ScrollToTop>
       <Footer />

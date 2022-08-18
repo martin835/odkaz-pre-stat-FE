@@ -11,7 +11,7 @@ function RankingRowServices(props) {
           {props.rank}
           {"."}
         </Badge>
-        <Link to={`/provider/${props.ranking?._id}`}>
+        <Link to={`/service/${props.ranking?._id}`}>
           {props.ranking.Service[0]?.name}
         </Link>
       </td>
