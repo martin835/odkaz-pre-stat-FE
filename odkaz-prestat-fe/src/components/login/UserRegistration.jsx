@@ -1,6 +1,8 @@
 import "./checkBox.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import ReCAPTCHA from "react-google-recaptcha";
+//Settig up google ReCAPTCHA guide: https://www.youtube.com/watch?v=vrbyaOoZ-4Q&ab_channel=LeighHalliday
 
 function UserRegistration() {
   const { t } = useTranslation();
@@ -11,15 +13,23 @@ function UserRegistration() {
     password: "",
   });
   const [registrationSent, setRegistrationSent] = useState(false);
+  const reRef = useRef(null);
 
   const register = async (e) => {
     e.preventDefault();
+
+    //ReCAPTCHA set-up start
+    const token = await reRef.current.executeAsync();
+    reRef.current.reset();
+    console.log(token);
+    //ReCAPTCHA set-up end
+
     try {
       let response = await fetch(
         `${process.env.REACT_APP_BE_URL}/users/register`,
         {
           method: "POST",
-          body: JSON.stringify(registrationReq),
+          body: JSON.stringify({ ...registrationReq, token }),
           //credentials: "include",
           headers: {
             "Content-type": "application/json",
@@ -40,6 +50,11 @@ function UserRegistration() {
 
   return (
     <>
+      <ReCAPTCHA
+        sitekey={process.env.REACT_APP_SITE_KEY_RECAPTCHA}
+        size="invisible"
+        ref={reRef}
+      />
       <div className="govuk-width-container">
         <div className="govuk-grid-row ">
           <div className="govuk-grid-column-two-thirds">
